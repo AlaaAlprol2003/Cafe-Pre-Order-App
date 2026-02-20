@@ -1,5 +1,3 @@
-// ignore_for_file: unused_element, curly_braces_in_flow_control_structures
-
 import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/validators.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
@@ -8,40 +6,33 @@ import 'package:dash_cup/core/widgets/custom_text_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
+import 'package:dash_cup/features/auth/presentation/widgets/custom_animated_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  late TextEditingController _nameController;
+class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  late TextEditingController _phoneController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _phoneController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _phoneController.dispose();
-
     super.dispose();
   }
 
@@ -49,30 +40,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<AuthCubit>(context);
     return GestureDetector(
-      onTap: () {
+      onTap:(){
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: REdgeInsets.only(top: 150),
+            padding: REdgeInsets.only(top: 170.0),
             child: Column(
               children: [
-                Image.asset(ImageAssets.logo, height: 145.h),
+                Image.asset(
+                  ImageAssets.logo,
+                  height: 135.h,
+                  width: double.infinity,
+                ),
                 SizedBox(height: 50.h),
                 Form(
                   key: _formKey,
                   child: Padding(
-                    padding: REdgeInsets.only(left: 16.0, right: 16),
+                    padding: REdgeInsets.only(right: 16.0, left: 16),
                     child: Column(
                       children: [
-                        CustomTextFormField(
-                          labelText: "Name",
-                          preIcon: Icon(Icons.person),
-                          controller: _nameController,
-                          validator: Validator.name,
-                        ),
-                        SizedBox(height: 24.h),
                         CustomTextFormField(
                           labelText: "Email",
                           preIcon: Icon(Icons.email),
@@ -85,14 +73,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           builder: (context, state) {
                             return CustomTextFormField(
                               labelText: "Password",
-                              isSecured: cubit.isSecuredField,
+                              isSecured: cubit.isSecuredFieldLog,
                               preIcon: Icon(Icons.password),
                               postIcon: IconButton(
                                 onPressed: () {
-                                  cubit.changeVisibilityState();
+                                  cubit.changeVisibilityStateLog();
                                 },
                                 icon: Icon(
-                                  cubit.isSecuredField
+                                  cubit.isSecuredFieldLog
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                 ),
@@ -104,38 +92,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         SizedBox(height: 24.h),
-                        CustomTextFormField(
-                          labelText: "Phone Number",
-                          preIcon: Icon(Icons.phone),
-                          keyboardType: TextInputType.phone,
-                          controller: _phoneController,
-                          validator: Validator.phone,
-                        ),
-                        SizedBox(height: 50.h),
-
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: CustomTextButton(onPressed: (){}, text: "Forget Password")),
+                        SizedBox(height: 24.h),
                         CustomElevatedButton(
-                          text: "Register",
                           onPressed: () {
                             if (_formKey.currentState?.validate() == false)
                               return;
                           },
+                          text: "Login",
                         ),
-                        SizedBox(height: 24.h,),
+                        SizedBox(height: 24.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Already Have Account? ",
+                              "Don't Have Account? ",
                               style: Theme.of(context).textTheme.displayMedium,
                             ),
                             CustomTextButton(
-                              text: "Login",
+                              text: "Create One",
                               onPressed: () {
-                                Navigator.pushNamed(context, AppRoutes.login);
+                                Navigator.pushNamed(context, AppRoutes.register);
                               },
                             ),
                           ],
                         ),
+                        
+                        Padding(
+                          padding:  REdgeInsets.only(top: 60.0),
+                          child: CustomAnimatedToggle(),
+                        )
                       ],
                     ),
                   ),

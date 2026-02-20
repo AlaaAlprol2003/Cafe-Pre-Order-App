@@ -1,7 +1,7 @@
 import 'package:dash_cup/config/theme/theme_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_router.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
-import 'package:dash_cup/features/auth/presentation/screens/register/cubit/auth_cubit.dart';
+import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +26,7 @@ class DashCupApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.register,
+        initialRoute: AppRoutes.login,
         onGenerateRoute: AppRouter.router,
         theme: ThemeManager.lightTheme,
         darkTheme: ThemeManager.darkTheme,

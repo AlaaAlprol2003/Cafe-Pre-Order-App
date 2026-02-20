@@ -11,7 +11,8 @@ class CustomTextFormField extends StatelessWidget {
     this.postIcon,
     this.keyboardType = TextInputType.text,
     required this.controller,
-    this.validator, this.isSecured = false,
+    this.validator,
+    this.isSecured = false,
   });
   final String labelText;
   final Widget? preIcon;
@@ -29,6 +30,10 @@ class CustomTextFormField extends StatelessWidget {
         color: ColorsManager.white,
       ),
       cursorColor: ColorsManager.burntOrange,
+      obscuringCharacter: "*",
+      onFieldSubmitted: (_) {
+        FocusScope.of(context).nextFocus();
+      },
       keyboardType: keyboardType,
       obscureText: isSecured,
       controller: controller,
