@@ -1,11 +1,14 @@
-// ignore_for_file: unused_element, curly_braces_in_flow_control_structures
+// ignore_for_file: unused_element, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'package:dash_cup/core/resources/assets_manager.dart';
+import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/resources/validators.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
+import 'package:dash_cup/features/auth/data/models/register_request.dart';
+import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
 import 'package:flutter/material.dart';
@@ -113,14 +116,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 50.h),
 
-                        CustomElevatedButton(
-                          text: "Register",
-                          onPressed: () {
-                            if (_formKey.currentState?.validate() == false)
-                              return;
+                        BlocListener<AuthCubit, AuthState>(
+                          listener: (context, state)  {
+                            if (state is RegisterLoading) {
+                              UiUtils.showLoading(context: context);
+                            } else if (state is RegisterFailure) {
+                              UiUtils.hideLoading(context: context);
+                              UiUtils.showMessage(
+                                context: context,
+                                message: state.message,
+                                bgColor: Colors.red,
+                                icon: Icons.error,
+                              );
+                            } else if (state is RegisterSuccess) {
+                              UiUtils.hideLoading(context: context);
+                              UiUtils.showMessage(
+                                context: context,
+                                message: "Account created successfully!",
+                              );
+                              Navigator.pushReplacementNamed(
+                                context,
+                                AppRoutes.login,
+                              );
+                            }
                           },
+                          child: CustomElevatedButton(
+                            text: "Register",
+                            onPressed: () async {
+                              if (_formKey.currentState?.validate() == false)
+                                return;
+                              await cubit.register(
+                                request: RegisterRequest(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                              cubit.addUserToFirestore(
+                                user: UserModel(
+                                  id: cubit.userCredential!.user!.uid,
+                                  name: _nameController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                  phone: _phoneController.text,
+                                  favoriteItems: [],
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                        SizedBox(height: 24.h,),
+                        SizedBox(height: 24.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

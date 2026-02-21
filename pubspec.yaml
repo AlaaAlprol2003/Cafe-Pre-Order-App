@@ -39,11 +39,20 @@ dependencies:
   flutter_bloc: ^9.1.1
   provider: ^6.1.5+1
   animated_toggle_switch: ^0.8.7
+  firebase_auth: ^6.1.4
+  firebase_core: ^4.4.0
+  dart_either: ^2.0.0
+  toastification: ^3.0.3
+  get_it: ^9.2.1
+  injectable: ^2.7.1+4
+  cloud_firestore: ^6.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  injectable_generator:
+  # add build runner if not already added  
+  build_runner:  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

@@ -1,15 +1,20 @@
 import 'package:dash_cup/config/theme/theme_manager.dart';
+import 'package:dash_cup/core/di/service_locator.dart';
 import 'package:dash_cup/core/routes_manager/app_router.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:firebase_core/firebase_core.dart' ;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+   configureDependencies(); 
   runApp(
     BlocProvider<AuthCubit>(
-      create: (context) => AuthCubit(),
+      create: (context) => serviceLocator.get<AuthCubit>(),
       child: DashCupApp(),
     ),
   );

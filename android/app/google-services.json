@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22200825820",
+    "project_id": "cafe-pre-order-app",
+    "storage_bucket": "cafe-pre-order-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22200825820:android:85b90dca6fca14d3fe4119",
+        "android_client_info": {
+          "package_name": "com.example.dash_cup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2EpF8gKl668ouzKatpZyUh0JSu5pBvD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
