@@ -58,11 +58,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: REdgeInsets.only(top: 150),
+            padding: REdgeInsets.only(top: 130),
             child: Column(
               children: [
                 Image.asset(ImageAssets.logo, height: 145.h),
-                SizedBox(height: 50.h),
+                SizedBox(height: 30.h),
                 Form(
                   key: _formKey,
                   child: Padding(

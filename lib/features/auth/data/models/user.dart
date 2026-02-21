@@ -1,4 +1,5 @@
 class UserModel {
+  static UserModel? currentUser;
   String id;
   String name;
   String email;

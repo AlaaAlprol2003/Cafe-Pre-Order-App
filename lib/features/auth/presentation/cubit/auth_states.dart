@@ -25,3 +25,21 @@ class AddUserToFirestoreFailure extends AuthState {
   String message;
   AddUserToFirestoreFailure({required this.message});
 }
+
+class LoginLoading extends AuthState {}
+
+class LoginFailure extends AuthState {
+  String message;
+  LoginFailure({required this.message});
+}
+
+class LoginSuccess extends AuthState {}
+
+class GetUserFromFirestoreLoading extends AuthState {}
+
+class GetUserFromFirestoreFailure extends AuthState {
+  String message;
+  GetUserFromFirestoreFailure({required this.message});
+}
+
+class GetUserFromFirestoreSuccess extends AuthState {}

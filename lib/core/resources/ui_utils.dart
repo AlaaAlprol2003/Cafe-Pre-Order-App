@@ -1,5 +1,7 @@
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';
 
 class UiUtils {
@@ -41,7 +43,10 @@ class UiUtils {
       type: type,
       style: ToastificationStyle.flat,
       autoCloseDuration: const Duration(seconds: 5),
-      title: Text(message),
+      title: Text(
+        message,
+        style: GoogleFonts.roboto(fontSize: 16.sp, color: ColorsManager.white),
+      ),
 
       alignment: Alignment.topCenter,
       direction: TextDirection.ltr,
@@ -77,6 +82,7 @@ class UiUtils {
 
       dragToClose: true,
       applyBlurEffect: true,
+      borderSide: BorderSide(color: ColorsManager.burntOrange),
     );
   }
 }

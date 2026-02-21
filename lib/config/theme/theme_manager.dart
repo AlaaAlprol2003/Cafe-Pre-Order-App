@@ -34,7 +34,7 @@ class ThemeManager {
       labelStyle: GoogleFonts.roboto(
         fontSize: 20.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.lightBlueGrey,
+        color: ColorsManager.lightBlueGrey.withValues(alpha: .9),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -57,7 +57,7 @@ class ThemeManager {
 
         decoration: TextDecoration.underline,
         decorationColor: ColorsManager.burntOrange,
-        decorationThickness: 2
+        decorationThickness: 1
       ),
       displayMedium: GoogleFonts.roboto(
         fontSize: 20.sp,

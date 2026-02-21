@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_cup/core/errors/app_exceptions.dart';
 import 'package:dash_cup/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:dash_cup/features/auth/data/models/login_request.dart';
 import 'package:dash_cup/features/auth/data/models/register_request.dart';
 import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +39,35 @@ class AuthFirebaseRemoteDataSource implements AuthRemoteDataSsource {
 
       await userDocument.set(user.toJson());
     } catch (exception) {
+      throw RemoteException(message: exception.toString());
+    }
+  }
 
+  @override
+  Future<void> login({required LoginRequest request}) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: request.email,
+        password: request.password,
+      );
+    } catch (exception) {
+      throw RemoteException(message: exception.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> getUserFromFirestore({required String userId}) async {
+    try {
+      FirebaseFirestore dataBase = FirebaseFirestore.instance;
+      CollectionReference<Map<String, dynamic>> userscollection = dataBase
+          .collection("Users");
+      DocumentReference<Map<String, dynamic>> userDocument = userscollection
+          .doc(userId);
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await userDocument
+          .get();
+      var json = snapshot.data();
+      return UserModel.fromJson(json!);
+    } catch (exception) {
       print(exception);
       throw RemoteException(message: exception.toString());
     }

@@ -1,6 +1,7 @@
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/auth/presentation/screens/login_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/register/register_screen.dart';
+import 'package:dash_cup/features/main_layout/main_layout.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppRouter {
@@ -13,6 +14,10 @@ class AppRouter {
       case AppRoutes.login:
         {
           return CupertinoPageRoute(builder: (context) => LoginScreen());
+        }
+      case AppRoutes.mainLayout:
+        {
+          return CupertinoPageRoute(builder: (context) => MainLayout());
         }
     }
     return null;
