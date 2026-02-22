@@ -1,6 +1,7 @@
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/auth/presentation/screens/login_screen.dart';
-import 'package:dash_cup/features/auth/presentation/screens/register/register_screen.dart';
+import 'package:dash_cup/features/auth/presentation/screens/privacy_screen.dart';
+import 'package:dash_cup/features/auth/presentation/screens/register_screen.dart';
 import 'package:dash_cup/features/main_layout/main_layout.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,6 +19,10 @@ class AppRouter {
       case AppRoutes.mainLayout:
         {
           return CupertinoPageRoute(builder: (context) => MainLayout());
+        }
+      case AppRoutes.privacy:
+        {
+          return CupertinoPageRoute(builder: (context) => PrivacyScreen());
         }
     }
     return null;

@@ -59,16 +59,14 @@ class AuthFirebaseRemoteDataSource implements AuthRemoteDataSsource {
   Future<UserModel> getUserFromFirestore({required String userId}) async {
     try {
       FirebaseFirestore dataBase = FirebaseFirestore.instance;
-      CollectionReference<Map<String, dynamic>> userscollection = dataBase
-          .collection("Users");
-      DocumentReference<Map<String, dynamic>> userDocument = userscollection
-          .doc(userId);
-      DocumentSnapshot<Map<String, dynamic>> snapshot = await userDocument
-          .get();
-      var json = snapshot.data();
-      return UserModel.fromJson(json!);
+      final snapshot = await dataBase.collection("Users").doc(userId).get();
+
+      if (!snapshot.exists || snapshot.data() == null) {
+        throw RemoteException(message: "User data not found in Firestore");
+      }
+
+      return UserModel.fromJson(snapshot.data()!);
     } catch (exception) {
-      print(exception);
       throw RemoteException(message: exception.toString());
     }
   }

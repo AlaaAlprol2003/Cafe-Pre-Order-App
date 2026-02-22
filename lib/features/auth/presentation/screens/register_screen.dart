@@ -8,9 +8,9 @@ import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/features/auth/data/models/register_request.dart';
-import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
+import 'package:dash_cup/features/auth/presentation/widgets/custom_privacy_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -114,10 +114,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           controller: _phoneController,
                           validator: Validator.phone,
                         ),
-                        SizedBox(height: 50.h),
-
+                        SizedBox(height: 30.h),
+                        CustomPrivacyText(),
+                        SizedBox(height: 16.h),
                         BlocListener<AuthCubit, AuthState>(
-                          listener: (context, state)  {
+                          listenWhen: (previous, current) {
+                            if (current is RegisterLoading ||
+                                current is RegisterFailure) {
+                              return true;
+                            }
+                            if (current is RegisterSuccess &&
+                                previous is! RegisterSuccess) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          listener: (context, state) {
                             if (state is RegisterLoading) {
                               UiUtils.showLoading(context: context);
                             } else if (state is RegisterFailure) {
@@ -134,32 +146,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context: context,
                                 message: "Account created successfully!",
                               );
-                              Navigator.pushReplacementNamed(
-                                context,
-                                AppRoutes.login,
+                              Future.delayed(
+                                const Duration(milliseconds: 200),
+                                () {
+                                  if (mounted) {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      AppRoutes.login,
+                                      (route) => false,
+                                    );
+                                  }
+                                },
                               );
                             }
                           },
+
                           child: CustomElevatedButton(
                             text: "Register",
                             onPressed: () async {
                               if (_formKey.currentState?.validate() == false)
                                 return;
-                              await cubit.register(
+                              cubit.register(
                                 request: RegisterRequest(
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 ),
-                              );
-                              cubit.addUserToFirestore(
-                                user: UserModel(
-                                  id: cubit.userCredential!.user!.uid,
-                                  name: _nameController.text,
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                  phone: _phoneController.text,
-                                  favoriteItems: [],
-                                ),
+                                name: _nameController.text,
+                                phone: _phoneController.text,
                               );
                             },
                           ),

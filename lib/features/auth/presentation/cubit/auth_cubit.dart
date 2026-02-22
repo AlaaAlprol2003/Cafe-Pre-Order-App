@@ -47,31 +47,42 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AnimatedToggleState());
   }
 
-  Future<void> register({required RegisterRequest request}) async {
+  Future<void> register({
+    required RegisterRequest request,
+    required String name,
+    required String phone
+  }) async {
     emit(RegisterLoading());
+
     final response = await registerUseCase(request: request);
-    response.fold(
-      ifLeft: (failure) {
+
+    await response.fold(
+      ifLeft: (failure) async {
         emit(RegisterFailure(message: failure.message));
       },
-      ifRight: (credential) {
+      ifRight: (credential) async {
         userCredential = credential;
-        emit(RegisterSuccess());
+
+        final userModel = UserModel(
+          id: credential.user!.uid,
+          name: name,
+          email: request.email,
+          password: request.password,
+          phone: phone,
+          favoriteItems: [],
+        );
+
+        final result = await addUserToFirestoreUseCase(user: userModel);
+
+        result.fold(
+          ifLeft: (failure) => emit(RegisterFailure(message: failure.message)),
+          ifRight: (_) => emit(RegisterSuccess()),
+        );
       },
     );
   }
 
-  void addUserToFirestore({required UserModel user}) async {
-    final result = await addUserToFirestoreUseCase(user: user);
-    result.fold(
-      ifLeft: (failure) {
-        emit(AddUserToFirestoreFailure(message: failure.message));
-      },
-      ifRight: (_) {
-        emit(AddUserToFirestoreSuccess());
-      },
-    );
-  }
+  
 
   Future<void> login({required LoginRequest request}) async {
     emit(LoginLoading());
