@@ -8,4 +8,5 @@ abstract class AuthRemoteDataSsource {
   Future<void> addUserToFirestore({required UserModel user});
   Future<void> login({required LoginRequest request});
   Future<UserModel> getUserFromFirestore({required String userId});
+  Future<void> resetPassword({required String email});
 }

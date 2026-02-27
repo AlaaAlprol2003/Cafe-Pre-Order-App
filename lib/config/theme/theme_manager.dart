@@ -47,6 +47,15 @@ class ThemeManager {
         padding: REdgeInsets.symmetric(vertical: 18),
       ),
     ),
+    appBarTheme: AppBarThemeData(
+      titleTextStyle: GoogleFonts.roboto(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w400,
+        color: ColorsManager.burntOrange,
+      ),
+      centerTitle: true,
+      backgroundColor: ColorsManager.darkNavyBlue,
+    ),
 
     textTheme: TextTheme(
       displayLarge: GoogleFonts.roboto(
@@ -57,7 +66,7 @@ class ThemeManager {
 
         decoration: TextDecoration.underline,
         decorationColor: ColorsManager.burntOrange,
-        decorationThickness: 1
+        decorationThickness: 1,
       ),
       displayMedium: GoogleFonts.roboto(
         fontSize: 20.sp,

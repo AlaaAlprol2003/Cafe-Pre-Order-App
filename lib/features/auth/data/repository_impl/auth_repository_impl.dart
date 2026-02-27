@@ -59,4 +59,14 @@ class AuthRepositoriesImpl implements AuthRepository {
       return Left(Failure(message: "Failed to get user"));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      await remoteDataSsource.resetPassword(email: email);
+      return Right(null);
+    } on RemoteException catch (_) {
+      return Left(Failure(message: "Failed to send link"));
+    }
+  }
 }

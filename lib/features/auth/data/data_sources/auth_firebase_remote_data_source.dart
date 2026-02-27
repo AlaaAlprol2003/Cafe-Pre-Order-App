@@ -70,4 +70,13 @@ class AuthFirebaseRemoteDataSource implements AuthRemoteDataSsource {
       throw RemoteException(message: exception.toString());
     }
   }
+
+  @override
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (exception) {
+      throw RemoteException(message: exception.toString());
+    }
+  }
 }

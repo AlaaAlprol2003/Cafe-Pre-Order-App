@@ -25,6 +25,8 @@ import '../../features/auth/domain/use_cases/get_user_from_firestore_use_case.da
     as _i557;
 import '../../features/auth/domain/use_cases/login_use_case.dart' as _i1038;
 import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
+import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
+    as _i169;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -58,12 +60,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1010.RegisterUseCase>(
       () => _i1010.RegisterUseCase(authRepository: gh<_i961.AuthRepository>()),
     );
+    gh.singleton<_i169.ResetPasswordUseCase>(
+      () => _i169.ResetPasswordUseCase(
+        authRepository: gh<_i961.AuthRepository>(),
+      ),
+    );
     gh.factory<_i117.AuthCubit>(
       () => _i117.AuthCubit(
         registerUseCase: gh<_i1010.RegisterUseCase>(),
         addUserToFirestoreUseCase: gh<_i431.AddUserToFirestoreUseCase>(),
         loginUseCase: gh<_i1038.LoginUseCase>(),
         getUserFromfirestoreUseCase: gh<_i557.GetUserFromfirestoreUseCase>(),
+        resetPasswordUseCase: gh<_i169.ResetPasswordUseCase>(),
       ),
     );
     return this;

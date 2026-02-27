@@ -68,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         ),
 
-        
         BlocListener<AuthCubit, AuthState>(
           listenWhen: (prev, curr) =>
               curr is GetUserFromFirestoreSuccess ||
@@ -149,7 +148,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: CustomTextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.resetPassword,
+                                );
+                              },
                               text: "Forget Password",
                             ),
                           ),
@@ -164,9 +168,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   password: _passwordController.text,
                                 ),
                               );
-                              // cubit.getUserFromFirestore(
-                              //   userId: FirebaseAuth.instance.currentUser!.uid,
-                              // );
                             },
                             text: "Login",
                           ),

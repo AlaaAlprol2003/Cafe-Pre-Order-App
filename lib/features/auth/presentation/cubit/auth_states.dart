@@ -43,3 +43,12 @@ class GetUserFromFirestoreFailure extends AuthState {
 }
 
 class GetUserFromFirestoreSuccess extends AuthState {}
+
+class ResetPasswordloading extends AuthState {}
+
+class ResetPasswordFailure extends AuthState {
+  String message;
+  ResetPasswordFailure({required this.message});
+}
+
+class ResetPasswordSuccess extends AuthState {}

@@ -14,4 +14,5 @@ abstract class AuthRepository {
   Future<Either<Failure, UserModel>> getUserFromFirestore({
     required String userId,
   });
+  Future<Either<Failure,void>> resetPassword({required String email});
 }
