@@ -1,0 +1,49 @@
+import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/features/main_layout/cubit/main_layout_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class CustomBottomNavBar extends StatelessWidget {
+  CustomBottomNavBar({super.key});
+
+  final List<IconData> icons = [
+    Icons.home,
+    Icons.table_bar,
+    Icons.favorite,
+    Icons.person,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<MainLayoutCubit>(context);
+    return Container(
+      width: double.infinity,
+      height: 80.h,
+      margin: REdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        color: ColorsManager.darkBrown,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ...List.generate(
+            4,
+            (icon) => InkWell(
+              onTap: () {
+                cubit.changeTab(index: icon);
+              },
+              child: Icon(
+                icons[icon],
+                color: cubit.selectedTab == icon
+                    ? const Color.fromARGB(255, 198, 180, 16)
+                    : const Color.fromARGB(255, 219, 193, 127),
+                size: cubit.selectedTab == icon ? 30 : 25,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

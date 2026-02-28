@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeManager {
   static ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: ColorsManager.darkNavyBlue,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 254, 251, 210),
     inputDecorationTheme: InputDecorationThemeData(
       fillColor: ColorsManager.charcoalBlue,
       filled: true,

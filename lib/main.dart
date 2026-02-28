@@ -3,6 +3,7 @@ import 'package:dash_cup/core/di/service_locator.dart';
 import 'package:dash_cup/core/routes_manager/app_router.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:dash_cup/features/main_layout/cubit/main_layout_cubit.dart';
 import 'package:firebase_core/firebase_core.dart' ;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +14,12 @@ void main() async{
   await Firebase.initializeApp();
    configureDependencies(); 
   runApp(
-    BlocProvider<AuthCubit>(
-      create: (context) => serviceLocator.get<AuthCubit>(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => serviceLocator.get<AuthCubit>()),
+        BlocProvider(create: (context)=> MainLayoutCubit())
+      ],
+      
       child: DashCupApp(),
     ),
   );
@@ -31,7 +36,7 @@ class DashCupApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.login,
+        initialRoute: AppRoutes.mainLayout,
         onGenerateRoute: AppRouter.router,
         theme: ThemeManager.lightTheme,
         darkTheme: ThemeManager.darkTheme,
