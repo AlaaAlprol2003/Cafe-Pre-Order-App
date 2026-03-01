@@ -78,6 +78,16 @@ class ThemeManager {
         fontWeight: FontWeight.w500,
         color: ColorsManager.white,
       ),
+      labelMedium: GoogleFonts.roboto(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManager.charcoalBlue,
+      ),
+      titleSmall: GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: ColorsManager.darkBrown,
+      ),
     ),
   );
   static ThemeData lightTheme = ThemeData();
