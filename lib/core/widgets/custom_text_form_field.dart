@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool isSecured;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
         FocusScope.of(context).nextFocus();
       },
       keyboardType: keyboardType,
+
       obscureText: isSecured,
       controller: controller,
       validator: validator,

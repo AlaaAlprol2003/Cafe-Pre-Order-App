@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
+import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/core/widgets/product_item.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
@@ -64,7 +67,7 @@ class HomeTab extends StatelessWidget {
                         ),
                       ),
 
-                      ///Spacer(),
+                      
                       CircleAvatar(
                         backgroundColor: ColorsManager.burntOrange,
                         child: IconButton(
@@ -116,9 +119,25 @@ class HomeTab extends StatelessWidget {
                 SizedBox(
                   height: 200.h,
                   child: ListView.separated(
-                    itemBuilder: (context, index) => CategoryItem(),
+                    itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        var category = Data.categosies[index];
+                        List<Products> filteredList = Data.allProducts
+                            .where(
+                              (product) =>
+                                  product.category.categoryid ==
+                                  category.categoryid,
+                            )
+                            .toList();
+                        Navigator.pushNamed(context, AppRoutes.productScreen,arguments:  filteredList,);
+                      },
+                      child: CategoryItem(
+                        imagePath: Data.categosies[index].image,
+                        categoryName: Data.categosies[index].name,
+                      ),
+                    ),
                     separatorBuilder: (context, index) => SizedBox(width: 12.w),
-                    itemCount: 10,
+                    itemCount: Data.categosies.length,
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
@@ -129,18 +148,18 @@ class HomeTab extends StatelessWidget {
                     color: ColorsManager.darkNavyBlue,
                   ),
                 ),
-                
+
                 GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 7 / 10,
+                    childAspectRatio: 7/11,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                   ),
-                  itemBuilder: (context, index) => ProductItem(),
-                  itemCount:4,
+                  itemBuilder: (context, index) => ProductItem(product: Data.popularProducts[index],),
+                  itemCount: 4,
                 ),
               ],
             ),

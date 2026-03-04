@@ -88,6 +88,11 @@ class ThemeManager {
         fontWeight: FontWeight.w400,
         color: ColorsManager.darkBrown,
       ),
+      headlineLarge: GoogleFonts.roboto(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.burntOrange,
+      ),
     ),
   );
   static ThemeData lightTheme = ThemeData();
