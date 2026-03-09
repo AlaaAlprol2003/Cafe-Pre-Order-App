@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/graduation_project_model.dart';
@@ -6,8 +8,10 @@ import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/core/widgets/product_item.dart';
+import 'package:dash_cup/core/widgets/text_animations.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/category_item.dart';
+import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/mood_sheet.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/offer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,16 +62,19 @@ class HomeTab extends StatelessWidget {
                               style: Theme.of(context).textTheme.displayMedium,
                             ),
                             SizedBox(height: 12.h),
-                            Text(
-                              "Let's start your day\nwith a perfect cup.",
-                              style: Theme.of(context).textTheme.displayMedium!
-                                  .copyWith(fontSize: 16.sp),
+                            TextAnimations.colorizeAnimatedText(
+                              text: "Let's start your day\nwith a perfect cup.",
+                              context: context,
                             ),
+                            // Text(
+                            //   "Let's start your day\nwith a perfect cup.",
+                            //   style: Theme.of(context).textTheme.displayMedium!
+                            //       .copyWith(fontSize: 16.sp),
+                            // ),
                           ],
                         ),
                       ),
 
-                      
                       CircleAvatar(
                         backgroundColor: ColorsManager.burntOrange,
                         child: IconButton(
@@ -81,13 +88,24 @@ class HomeTab extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: REdgeInsets.only(left: 20.0, right: 20),
-                  child: CustomTextFormField(
-                    labelText: "What are you looking for today?",
-                    controller: _searchController,
-                    preIcon: Icon(Icons.search),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: REdgeInsets.symmetric(horizontal: 16),
+                        child: CustomTextFormField(
+                          labelText: "What are you looking for today?",
+                          controller: _searchController,
+                          preIcon: Icon(Icons.search),
+                        ),
+                      ),
+                    ),
+                   
+                    IconButton(
+                      onPressed: () => showMoodSheet(context),
+                      icon: Icon(Icons.auto_fix_high,color: ColorsManager.burntOrange,size: 30,),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -118,28 +136,84 @@ class HomeTab extends StatelessWidget {
                 SizedBox(height: 16.h),
                 SizedBox(
                   height: 200.h,
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        var category = Data.categosies[index];
-                        List<Products> filteredList = Data.allProducts
-                            .where(
-                              (product) =>
-                                  product.category.categoryid ==
-                                  category.categoryid,
-                            )
-                            .toList();
-                        Navigator.pushNamed(context, AppRoutes.productScreen,arguments:  filteredList,);
-                      },
-                      child: CategoryItem(
-                        imagePath: Data.categosies[index].image,
-                        categoryName: Data.categosies[index].name,
+                  width: double.infinity,
+                  child: CarouselSlider(
+                    items: Data.categosies
+                        .map(
+                          (category) => InkWell(
+                            onTap: () {
+                              List<Products> filteredList = Data.allProducts
+                                  .where(
+                                    (product) =>
+                                        product.category.categoryid ==
+                                        category.categoryid,
+                                  )
+                                  .toList();
+
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutes.productScreen,
+                                arguments: filteredList,
+                              );
+                            },
+                            child: CategoryItem(
+                              imagePath: category.image,
+                              categoryName: category.name,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(
+                        milliseconds: 800,
                       ),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      viewportFraction: 0.45,
+                      scrollDirection: Axis.horizontal,
                     ),
-                    separatorBuilder: (context, index) => SizedBox(width: 12.w),
-                    itemCount: Data.categosies.length,
-                    scrollDirection: Axis.horizontal,
                   ),
+
+                  // ListView.separated(
+                  //   itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
+                  //     position: index,
+                  //       duration: const Duration(seconds: 1),
+                  //       delay: const Duration(milliseconds: 500),
+                  //     child: SlideAnimation(
+                  //       horizontalOffset: 50.0,
+                  //       child: FadeInAnimation(
+                  //         child: InkWell(
+
+                  //           onTap: ()  {
+                  //             var category = Data.categosies[index];
+                  //             List<Products> filteredList = Data.allProducts
+                  //                 .where(
+                  //                   (product) =>
+                  //                       product.category.categoryid ==
+                  //                       category.categoryid,
+                  //                 )
+                  //                 .toList();
+
+                  //             Navigator.pushNamed(
+                  //               context,
+                  //               AppRoutes.productScreen,
+                  //               arguments: filteredList,
+                  //             );
+                  //           },
+                  //           child: CategoryItem(
+                  //             imagePath: Data.categosies[index].image,
+                  //             categoryName: Data.categosies[index].name,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   separatorBuilder: (context, index) => SizedBox(width: 12.w),
+                  //   itemCount: Data.categosies.length,
+                  //   scrollDirection: Axis.horizontal,
+                  // ),
                 ),
 
                 Text(
@@ -154,11 +228,12 @@ class HomeTab extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 7/11,
+                    childAspectRatio: 7 / 11,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                   ),
-                  itemBuilder: (context, index) => ProductItem(product: Data.popularProducts[index],),
+                  itemBuilder: (context, index) =>
+                      ProductItem(product: Data.popularProducts[index]),
                   itemCount: 4,
                 ),
               ],

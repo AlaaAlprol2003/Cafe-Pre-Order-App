@@ -4,7 +4,7 @@ import 'graduation_project_model.dart';
 
 final Category Tea_Herbal_Drinks = Category(
   categoryid: "C1",
-  name: "Tea&Herbal Drinks",
+  name: "Botanicals",
   image: "assets/images/teaandherbaldrinks.png",
 );
 final Category HotCoffee = Category(
@@ -39,7 +39,7 @@ final Category FreshJuices = Category(
 );
 final Category Smoothies_Milkshakes = Category(
   categoryid: "C8",
-  name: "Smoothies&\nMilkshakes",
+  name: "Shakes & Co",
   image: "assets/images/smoothie and shakes logo.png",
 );
 
@@ -47,7 +47,7 @@ class Data {
   static List<Category> categosies = [
     Category(
       categoryid: "C1",
-      name: "Tea&Herbal Drinks",
+      name: "Botanicals",
       image: "assets/images/teaandherbaldrinks.png",
     ),
     Category(
@@ -82,7 +82,7 @@ class Data {
     ),
     Category(
       categoryid: "C8",
-      name: "Smoothies&Milkshakes",
+      name: "Shakes & Co",
       image: "assets/images/smoothie and shakes logo.png",
     ),
   ];
@@ -136,7 +136,7 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/chamomile tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Relaxing chamomile herbal tea.",
+      description: "Relaxing chamomile herbal tea.Chill",
     ),
     Products(
       productid: "THD6",
@@ -156,7 +156,7 @@ class Data {
       pretime: "4–6 min",
       image: "assets/images/anise.png",
       category: Tea_Herbal_Drinks,
-      description: "Warm anise herbal drink.",
+      description: "Warm anise herbal drink.Chill",
     ),
     Products(
       productid: "THD8",
@@ -200,7 +200,7 @@ class Data {
       image: 'assets/images/Espresso Coffee.png',
       category: HotCoffee,
       description:
-          'Strong concentrated coffee shot with rich flavor and crema on top.',
+          'Strong concentrated coffee shot with rich flavor and crema on top.Sleepy',
     ),
     Products(
       productid: "HC2",
@@ -211,7 +211,7 @@ class Data {
       image: 'assets/images/double espresso.png',
       category: HotCoffee,
       description:
-          'Two shots of espresso for a stronger and bolder coffee experience.',
+          'Two shots of espresso for a stronger and bolder coffee experience.Sleepy',
     ),
     Products(
       productid: "HC3",
@@ -441,7 +441,7 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/nutella waffle.png',
       category: Dessert_Snacks,
-      description: 'Golden waffle covered with creamy Nutella spread.',
+      description: 'Golden waffle covered with creamy Nutella spread.Sweet',
     ),
     Products(
       productid: "DS4",
@@ -531,7 +531,7 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/Molten Chocolate.png',
       category: Dessert_Snacks,
-      description: 'Warm chocolate cake with a rich molten center.',
+      description: 'Warm chocolate cake with a rich molten center.Sweet',
     ),
     Products(
       productid: "DS13",
@@ -861,7 +861,7 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/Red Bull.png',
       category: SoftDrinks,
-      description: 'Energy drink that boosts focus and performance.',
+      description: 'Energy drink that boosts focus and performance.Active',
     ),
     Products(
       productid: "SD10",
@@ -954,7 +954,7 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/lemon ment.png',
       category: FreshJuices,
-      description: 'Fresh lemon juice blended with mint for a cooling effect.',
+      description: 'Fresh lemon juice blended with mint for a cooling effect.Active',
     ),
     Products(
       productid: "FJ9",

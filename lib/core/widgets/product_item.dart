@@ -1,5 +1,4 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
-import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
