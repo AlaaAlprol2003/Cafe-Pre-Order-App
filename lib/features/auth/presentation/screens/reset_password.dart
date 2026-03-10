@@ -2,7 +2,6 @@ import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/resources/validators.dart';
-import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -48,7 +50,7 @@ class _BookingPageState extends State<BookingPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/blur cafe background.png"),
+                    image: AssetImage("assets/images/abstract-blur-coffee-shop-cafe-interior.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),

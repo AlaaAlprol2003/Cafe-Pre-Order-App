@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'booking_page.dart';
 
 class ReservationsPage extends StatefulWidget {
@@ -23,10 +22,10 @@ class _ReservationsPageState extends State<ReservationsPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 250,
-                    child: Lottie.asset("assets/animation/nothing.json"),
-                  ),
+                  // Container(
+                  //   height: 250,
+                  //   child: Lottie.asset("assets/animation/nothing.json"),
+                  // ),
 
                   const Text(
                     "No Reservations Yet",
