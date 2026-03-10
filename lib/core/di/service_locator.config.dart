@@ -29,6 +29,7 @@ import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
     as _i169;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
 
+
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
@@ -39,11 +40,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i25.AuthRemoteDataSsource>(
       () => _i293.AuthFirebaseRemoteDataSource(),
     );
+
     gh.singleton<_i961.AuthRepository>(
       () => _i954.AuthRepositoriesImpl(
         remoteDataSsource: gh<_i25.AuthRemoteDataSsource>(),
       ),
     );
+
     gh.singleton<_i431.AddUserToFirestoreUseCase>(
       () => _i431.AddUserToFirestoreUseCase(
         authRepository: gh<_i961.AuthRepository>(),
