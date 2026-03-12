@@ -48,7 +48,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: ColorsManager.burntOrange,
+              color: ColorsManager.darkOrange,
               size: 25,
             ),
           ),

@@ -12,18 +12,18 @@ class PrivacyScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Privacy & Terms"),
         titleTextStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
-          color: ColorsManager.burntOrange,
+          color: ColorsManager.creamyWhite,
           fontWeight: FontWeight.w400,
         ),
         centerTitle: true,
-        backgroundColor: ColorsManager.darkNavyBlue,
+        backgroundColor: ColorsManager.darkChocolate,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back,
-            color: ColorsManager.burntOrange,
+            color: ColorsManager.darkOrange,
             size: 25,
           ),
         ),
@@ -97,7 +97,7 @@ support@DashCupTeam.com
             style: GoogleFonts.roboto(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
-              color: ColorsManager.white,
+              color: ColorsManager.russet,
             ),
           ),
         ),

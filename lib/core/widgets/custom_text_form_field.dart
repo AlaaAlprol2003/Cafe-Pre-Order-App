@@ -27,11 +27,12 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       style: GoogleFonts.roboto(
         fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
-        color: ColorsManager.white,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.darkHoney,
       ),
-      cursorColor: ColorsManager.burntOrange,
+      cursorColor: ColorsManager.darkOrange,
       obscuringCharacter: "*",
+      
       onFieldSubmitted: (_) {
         FocusScope.of(context).nextFocus();
       },

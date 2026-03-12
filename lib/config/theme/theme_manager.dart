@@ -5,21 +5,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeManager {
   static ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: const Color.fromARGB(255, 254, 251, 210),
+    scaffoldBackgroundColor:  ColorsManager.warmBeige,
     inputDecorationTheme: InputDecorationThemeData(
-      fillColor: ColorsManager.charcoalBlue,
+      fillColor: ColorsManager.creamyWhite,
       filled: true,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: ColorsManager.blueGrey),
+        borderSide: BorderSide(color: ColorsManager.goldenBrown,width: 2.w),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: ColorsManager.blueGrey),
+        borderSide: BorderSide(color: ColorsManager.goldenBrown,width: 2.w),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: ColorsManager.burntOrange),
+        borderSide: BorderSide(color: ColorsManager.darkOrange,width: 2.w),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
@@ -29,22 +29,24 @@ class ThemeManager {
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: ColorsManager.lightRed),
       ),
-      prefixIconColor: ColorsManager.burntOrange,
-      suffixIconColor: ColorsManager.lightBlueGrey,
+      prefixIconColor: ColorsManager.darkChocolate,
+      
+      suffixIconColor:  ColorsManager.darkChocolate53,
       labelStyle: GoogleFonts.roboto(
-        fontSize: 20.sp,
+        fontSize: 18.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.lightBlueGrey.withValues(alpha: .9),
+        color:  ColorsManager.mediumBrown,
       ),
     ),
+    
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorsManager.burntOrange,
+        backgroundColor:  ColorsManager.darkChocolate,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.r),
         ),
         elevation: 5,
-        padding: REdgeInsets.symmetric(vertical: 18),
+        padding: REdgeInsets.symmetric(vertical: 14),
       ),
     ),
     appBarTheme: AppBarThemeData(
@@ -54,29 +56,29 @@ class ThemeManager {
         color: ColorsManager.burntOrange,
       ),
       centerTitle: true,
-      backgroundColor: ColorsManager.darkNavyBlue,
+      backgroundColor: ColorsManager.darkChocolate,
     ),
 
     textTheme: TextTheme(
       displayLarge: GoogleFonts.roboto(
-        fontSize: 28.sp,
+        fontSize: 20.sp,
         fontWeight: FontWeight.bold,
-        color: ColorsManager.burntOrange,
+        color:  ColorsManager.darkChocolate,
         fontStyle: FontStyle.italic,
 
         decoration: TextDecoration.underline,
-        decorationColor: ColorsManager.burntOrange,
+        decorationColor:  ColorsManager.darkChocolate,
         decorationThickness: 1,
       ),
       displayMedium: GoogleFonts.roboto(
-        fontSize: 20.sp,
+        fontSize:18.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.white,
+        color: ColorsManager.russet,
       ),
       headlineMedium: GoogleFonts.roboto(
-        fontSize: 24.sp,
+        fontSize: 22.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.white,
+        color: ColorsManager.eggshell,
       ),
       labelMedium: GoogleFonts.roboto(
         fontSize: 20.sp,

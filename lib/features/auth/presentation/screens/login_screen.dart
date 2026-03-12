@@ -99,19 +99,19 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
-              padding: REdgeInsets.only(top: 170.0),
+              padding: REdgeInsets.only(top: 130.0),
               child: Column(
                 children: [
                   Image.asset(
                     ImageAssets.logo,
-                    height: 135.h,
+                    height: 200.h,
                     width: double.infinity,
                   ),
                   SizedBox(height: 30.h),
                   Form(
                     key: _formKey,
                     child: Padding(
-                      padding: REdgeInsets.only(right: 16.0, left: 16),
+                      padding: REdgeInsets.only(right: 25.0, left: 25),
                       child: Column(
                         children: [
                           CustomTextFormField(
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   AppRoutes.resetPassword,
                                 );
                               },
-                              text: "Forget Password",
+                              text: "Forget Password ?",
                             ),
                           ),
                           SizedBox(height: 24.h),
@@ -193,10 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
 
-                          Padding(
-                            padding: REdgeInsets.only(top: 60.0),
-                            child: CustomAnimatedToggle(),
-                          ),
+                          // Padding(
+                          //   padding: REdgeInsets.only(top: 60.0),
+                          //   child: CustomAnimatedToggle(),
+                          // ),
                         ],
                       ),
                     ),
