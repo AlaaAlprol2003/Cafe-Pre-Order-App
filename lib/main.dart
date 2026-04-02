@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_cup/config/theme/theme_manager.dart';
 import 'package:dash_cup/core/di/service_locator.dart';
 import 'package:dash_cup/core/routes_manager/app_router.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:dash_cup/features/booking/domain/repository/booking_repo.dart';
+import 'package:dash_cup/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:dash_cup/features/main_layout/cubit/main_layout_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/booking/data/datasource/booking_remote_datasource.dart';
+import 'features/booking/data/repository/booking_repository_impl.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +26,18 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => serviceLocator.get<AuthCubit>()),
         BlocProvider(create: (context) => MainLayoutCubit()),
+        BlocProvider(
+          create: (context) => BookingCubit(
+            BookingRepositoryImpl(
+              BookingRemoteDataSource(FirebaseFirestore.instance),
+            ),
+          ),
+        ),
+
       ],
 
       child: DashCupApp(),
+
     ),
   );
 }

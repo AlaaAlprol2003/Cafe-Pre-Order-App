@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -28,7 +29,12 @@ import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
     as _i169;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
-
+import '../../features/booking/data/datasource/booking_remote_datasource.dart'
+    as _i569;
+import '../../features/booking/data/repository/booking_repository_impl.dart'
+    as _i472;
+import '../../features/booking/domain/repository/booking_repo.dart' as _i1040;
+import '../../features/booking/presentation/cubit/booking_cubit.dart' as _i329;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -40,13 +46,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i25.AuthRemoteDataSsource>(
       () => _i293.AuthFirebaseRemoteDataSource(),
     );
-
+    gh.lazySingleton<_i569.BookingRemoteDataSource>(
+      () => _i569.BookingRemoteDataSource(gh<_i974.FirebaseFirestore>()),
+    );
     gh.singleton<_i961.AuthRepository>(
       () => _i954.AuthRepositoriesImpl(
         remoteDataSsource: gh<_i25.AuthRemoteDataSsource>(),
       ),
     );
-
     gh.singleton<_i431.AddUserToFirestoreUseCase>(
       () => _i431.AddUserToFirestoreUseCase(
         authRepository: gh<_i961.AuthRepository>(),
@@ -76,6 +83,12 @@ extension GetItInjectableX on _i174.GetIt {
         getUserFromfirestoreUseCase: gh<_i557.GetUserFromfirestoreUseCase>(),
         resetPasswordUseCase: gh<_i169.ResetPasswordUseCase>(),
       ),
+    );
+    gh.lazySingleton<_i1040.BookingRepo>(
+      () => _i472.BookingRepositoryImpl(gh<_i569.BookingRemoteDataSource>()),
+    );
+    gh.factory<_i329.BookingCubit>(
+      () => _i329.BookingCubit(gh<_i1040.BookingRepo>()),
     );
     return this;
   }
