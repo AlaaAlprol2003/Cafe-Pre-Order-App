@@ -2,14 +2,24 @@ import '../../domain/entities/booking_entity.dart';
 
 class BookingModel extends BookingEntity {
   BookingModel({
-    required super.name,
-    required super.guests,
-    required super.tableType,
-    required super.date,
-    required super.time,
-    required super.occasion,
-    required super.price,
-  });
+    required String id,
+    required String name,
+    required int guests,
+    required String tableType,
+    required String date,
+    required String time,
+    required String occasion,
+    required double price,
+  }) : super(
+    id: id, // 🔥 مهم
+    name: name,
+    guests: guests,
+    tableType: tableType,
+    date: date,
+    time: time,
+    occasion: occasion,
+    price: price,
+  );
 
   Map<String, dynamic> toMap() {
     return {
@@ -23,8 +33,9 @@ class BookingModel extends BookingEntity {
     };
   }
 
-  factory BookingModel.fromMap(Map<String, dynamic> map) {
+  factory BookingModel.fromMap(Map<String, dynamic> map, String id) {
     return BookingModel(
+      id: id,
       name: map["name"],
       guests: map["guests"],
       tableType: map["tableType"],

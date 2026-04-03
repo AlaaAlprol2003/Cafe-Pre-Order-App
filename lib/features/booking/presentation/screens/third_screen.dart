@@ -96,7 +96,7 @@ class ThirdScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(width: 100.w),
+                    SizedBox(width: 55.w),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.w),

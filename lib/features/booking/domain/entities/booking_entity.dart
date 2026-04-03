@@ -1,4 +1,6 @@
 class BookingEntity {
+  final String id;
+
   final String name;
   final int guests;
   final String tableType;
@@ -8,6 +10,7 @@ class BookingEntity {
   final double price;
 
   BookingEntity({
+    required this.id,
     required this.name,
     required this.guests,
     required this.tableType,

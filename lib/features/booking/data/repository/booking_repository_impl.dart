@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/booking_entity.dart';
@@ -20,12 +21,16 @@ class BookingRepositoryImpl implements BookingRepo {
       date: booking.date,
       time: booking.time,
       occasion: booking.occasion,
-      price: booking.price,
+      price: booking.price, id: FirebaseAuth.instance.currentUser!.uid,
     ));
   }
 
   @override
   Stream<List<BookingEntity>> getBookings() {
     return remote.getBookings();
+  }
+  @override
+  Future<void> deleteBooking(String id) {
+    return remote.deleteBooking(id);
   }
 }

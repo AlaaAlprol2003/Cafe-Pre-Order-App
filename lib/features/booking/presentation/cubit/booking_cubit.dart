@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/utils/price_calculator.dart';
@@ -54,7 +55,11 @@ class BookingCubit extends Cubit<BookingState> {
   }
 
   Future<void> confirmBooking(String name) async {
-    emit(BookingLoading());
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      throw Exception("User not logged in");
+    }
 
     final booking = BookingEntity(
       name: name,
@@ -63,11 +68,28 @@ class BookingCubit extends Cubit<BookingState> {
       date: date,
       time: time,
       occasion: occasion,
-      price: price,
+      price: price, id: user.uid,
     );
 
     await repo.addBooking(booking);
+    reset();
+
 
     emit(BookingLoaded());
+  }
+
+  Future<void> deleteBooking(String id) async {
+    await repo.deleteBooking(id);
+  }
+
+  void reset() {
+    guests = 1;
+    tableType = "Indoor";
+    date = "";
+    time = "";
+    occasion = "Birthday";
+    price = 0;
+
+    emit(BookingInitial());
   }
 }
