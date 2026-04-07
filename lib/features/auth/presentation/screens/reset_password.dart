@@ -9,6 +9,7 @@ import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -56,7 +57,13 @@ class _ResetPasswordState extends State<ResetPassword> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset(ImageAssets.reset),
+
+              SizedBox(height: 30.h,),
+
+              Lottie.asset(LottieAssets.password),
+
+              SizedBox(height: 30.h,),
+
 
               Padding(
                 padding: REdgeInsets.only(left: 12, right: 12),

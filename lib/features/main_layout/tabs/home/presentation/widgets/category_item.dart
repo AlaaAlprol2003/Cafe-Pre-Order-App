@@ -7,9 +7,11 @@ class CategoryItem extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.categoryName,
+    required this.icon
   });
   final String imagePath;
   final String categoryName;
+  final Widget icon;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,32 +19,45 @@ class CategoryItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(100.r),
-            child: CircleAvatar(
+            child: 
+            
+            CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: 65.r,
+              radius: 45.r,
               child: Container(
+                width: 100.w,
+                height: 100.h,
+                alignment: Alignment.center,
+                padding: REdgeInsets.symmetric(vertical: 16,horizontal: 16),
                 decoration: BoxDecoration(
+                  gradient: RadialGradient(colors: [
+                    const Color.fromARGB(255, 254, 243, 203),
+                      const Color.fromARGB(255, 216, 171, 108),
+
+                  ]),
                   border: Border.all(
-                    color: ColorsManager.burntOrange,
+                    color: Color.fromARGB(255, 216, 171, 108),
                     width: 3,
                   ),
+                  borderRadius: BorderRadius.circular(50.r)
                 ),
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: 200.h,
-                ),
+                 child: icon
+                // Image.asset(
+                //   imagePath,
+                //   fit: BoxFit.fill,
+                //   width: double.infinity,
+                //   height: 150.h,
+                // ),
               ),
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 16.h),
           Expanded(
             child: Text(
               categoryName,
               textAlign: TextAlign.center,
               maxLines: 2,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 14.sp,fontWeight: FontWeight.bold),
             ),
           ),
         ],

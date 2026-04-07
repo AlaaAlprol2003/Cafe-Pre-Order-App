@@ -1,90 +1,95 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:ui';
+
+import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'graduation_project_model.dart';
 
 final Category Tea_Herbal_Drinks = Category(
-  categoryid: "C1",
-  name: "Botanicals",
-  image: "assets/images/teaandherbaldrinks.png",
-);
+    categoryid: "C1",
+    name: "Botanicals",
+    image: "assets/images/teaandherbaldrinks.png",
+    icon: FaIcon(FontAwesomeIcons.mugSaucer,color: ColorsManager.darkBrown,));
 final Category HotCoffee = Category(
-  categoryid: "C2",
-  name: "Hot Coffee",
-  image: "assets/images/hot coffee.png",
-);
+    categoryid: "C2",
+    name: "Hot Coffee",
+    image: "assets/images/hot coffee.png",
+    icon: FaIcon(FontAwesomeIcons.mugHot,color: ColorsManager.darkBrown));
 final Category IcedCoffee = Category(
-  categoryid: "C3",
-  name: "IcedCoffee",
-  image: "assets/images/iced coffee category.png",
-);
+    categoryid: "C3",
+    name: "IcedCoffee",
+    image: "assets/images/iced coffee category.png",
+    icon: FaIcon(FontAwesomeIcons.glassWater,color: ColorsManager.darkBrown));
 final Category Dessert_Snacks = Category(
-  categoryid: "C4",
-  name: "Dessert&Snacks",
-  image: "assets/images/dessert and snacks logo.png",
-);
+    categoryid: "C4",
+    name: "Dessert&Snacks",
+    image: "assets/images/dessert and snacks logo.png",
+    icon: FaIcon(FontAwesomeIcons.cakeCandles,color: ColorsManager.darkBrown));
 final Category LightBites = Category(
-  categoryid: "C5",
-  name: "Light Bites",
-  image: "assets/images/chicken panini logo.png",
-);
+    categoryid: "C5",
+    name: "Light Bites",
+    image: "assets/images/chicken panini logo.png",
+    icon: FaIcon(FontAwesomeIcons.breadSlice,color: ColorsManager.darkBrown));
 final Category SoftDrinks = Category(
-  categoryid: "C6",
-  name: "Soft Drinks",
-  image: "assets/images/soft drinks logo.png",
-);
+    categoryid: "C6",
+    name: "Soft Drinks",
+    image: "assets/images/soft drinks logo.png",
+    icon: FaIcon(FontAwesomeIcons.bottleWater,color: ColorsManager.darkBrown));
 final Category FreshJuices = Category(
-  categoryid: "C7",
-  name: "Fresh Juices",
-  image: "assets/images/fresh juice logo.png",
-);
+    categoryid: "C7",
+    name: "Fresh Juices",
+    image: "assets/images/fresh juice logo.png",
+    icon: FaIcon(FontAwesomeIcons.wineGlass,color: ColorsManager.darkBrown));
 final Category Smoothies_Milkshakes = Category(
-  categoryid: "C8",
-  name: "Shakes & Co",
-  image: "assets/images/smoothie and shakes logo.png",
-);
+    categoryid: "C8",
+    name: "Shakes & Co",
+    image: "assets/images/smoothie and shakes logo.png",
+    icon: FaIcon(FontAwesomeIcons.blender,color: ColorsManager.darkBrown));
 
 class Data {
   static List<Category> categosies = [
     Category(
-      categoryid: "C1",
-      name: "Botanicals",
-      image: "assets/images/teaandherbaldrinks.png",
-    ),
+        categoryid: "C1",
+        name: "Botanicals",
+        image: "assets/images/teaandherbaldrinks.png",
+        icon: FaIcon(FontAwesomeIcons.mugSaucer,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C2",
-      name: "Hot Coffee",
-      image: "assets/images/hot coffee.png",
-    ),
+        categoryid: "C2",
+        name: "Hot Coffee",
+        image: "assets/images/hot coffee.png",
+        icon: FaIcon(FontAwesomeIcons.mugHot,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C3",
-      name: "IcedCoffee",
-      image: "assets/images/iced coffee category.png",
-    ),
+        categoryid: "C3",
+        name: "IcedCoffee",
+        image: "assets/images/iced coffee category.png",
+        icon: FaIcon(FontAwesomeIcons.glassWater,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C4",
-      name: "Dessert&Snacks",
-      image: "assets/images/dessert and snacks logo.png",
-    ),
+        categoryid: "C4",
+        name: "Dessert&Snacks",
+        image: "assets/images/dessert and snacks logo.png",
+        icon: FaIcon(FontAwesomeIcons.cakeCandles,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C5",
-      name: "Light Bites",
-      image: "assets/images/chicken panini logo.png",
-    ),
+        categoryid: "C5",
+        name: "Light Bites",
+        image: "assets/images/chicken panini logo.png",
+        icon: FaIcon(FontAwesomeIcons.breadSlice,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C6",
-      name: "Soft Drinks",
-      image: "assets/images/soft drinks logo.png",
-    ),
+        categoryid: "C6",
+        name: "Soft Drinks",
+        image: "assets/images/soft drinks logo.png",
+        icon: FaIcon(FontAwesomeIcons.bottleWater,color: ColorsManager.darkBrown)),
     Category(
-      categoryid: "C7",
-      name: "Fresh Juices",
-      image: "assets/images/fresh juice logo.png",
-    ),
+        categoryid: "C7",
+        name: "Fresh Juices",
+        image: "assets/images/fresh juice logo.png",
+        icon: FaIcon(FontAwesomeIcons.wineGlass,color: const Color.fromARGB(255, 71, 35, 29))),
     Category(
-      categoryid: "C8",
-      name: "Shakes & Co",
-      image: "assets/images/smoothie and shakes logo.png",
-    ),
+        categoryid: "C8",
+        name: "Shakes & Co",
+        image: "assets/images/smoothie and shakes logo.png",
+        icon: FaIcon(FontAwesomeIcons.blender,color: const Color.fromARGB(255, 68, 26, 2))),
   ];
 
   static List<Products> teaProducts = [
@@ -954,7 +959,8 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/lemon ment.png',
       category: FreshJuices,
-      description: 'Fresh lemon juice blended with mint for a cooling effect.Active',
+      description:
+          'Fresh lemon juice blended with mint for a cooling effect.Active',
     ),
     Products(
       productid: "FJ9",

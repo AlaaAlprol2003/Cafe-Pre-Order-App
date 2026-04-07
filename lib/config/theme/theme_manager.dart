@@ -86,7 +86,7 @@ class ThemeManager {
         color: ColorsManager.charcoalBlue,
       ),
       titleSmall: GoogleFonts.roboto(
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.darkBrown,
       ),
@@ -94,6 +94,11 @@ class ThemeManager {
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: ColorsManager.burntOrange,
+      ),
+      bodyMedium:  GoogleFonts.roboto(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.darkChocolate,
       ),
     ),
   );

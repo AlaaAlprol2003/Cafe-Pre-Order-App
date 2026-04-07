@@ -11,7 +11,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorsManager.burntOrange,
+        color: ColorsManager.darkChocolate,
         borderRadius: BorderRadius.circular(16.r),
       ),
 
@@ -20,13 +20,21 @@ class ProductItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-                child: Image.asset(
-                  product.image,
-                  height: 200.h,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              Container(
+                
+                decoration: BoxDecoration(
+                  color: ColorsManager.darkBrown,
+
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                  child: Image.asset(
+                    product.image,
+                    height: 200.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
 
@@ -39,22 +47,14 @@ class ProductItem extends StatelessWidget {
                       product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
                     ),
                     SizedBox(height: 4.h),
-                    Row(
-                      children: [
-                        Text(
-                          "${product.rate}",
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        Icon(Icons.star, color: Colors.amber, size: 14.sp),
-                      ],
-                    ),
+                   
                     SizedBox(height: 8.h),
                     Text(
                       "EGP ${product.price}",
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
                     ),
                   ],
                 ),
@@ -70,7 +70,7 @@ class ProductItem extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(8.r),
                 decoration: BoxDecoration(
-                  color: ColorsManager.darkNavyBlue,
+                  color: ColorsManager.warmBeige,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16.r),
                     bottomRight: Radius.circular(16.r),
@@ -78,7 +78,7 @@ class ProductItem extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.add,
-                  color: ColorsManager.burntOrange,
+                  color: ColorsManager.darkChocolate,
                   size: 24.sp,
                 ),
               ),
@@ -98,6 +98,19 @@ class ProductItem extends StatelessWidget {
               ),
             ),
           ),
+           Positioned(
+            bottom: 5.h,
+            right: 50.w,
+             child: Row(
+                        children: [
+                          Text(
+                            "${product.rate}",
+                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.darkOrange,fontSize: 14.sp),
+                          ),
+                          Icon(Icons.star, color: Colors.amber, size: 16.sp),
+                        ],
+                      ),
+           ),
         ],
       ),
     );
