@@ -27,14 +27,11 @@ class HomeTab extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            height: 270.h,
-
-            padding: REdgeInsets.symmetric(vertical: 50,horizontal: 16),
+            height: 210.h,
+            padding: REdgeInsets.only(top: 80.h, left: 16.w, right: 16.w),
             decoration: BoxDecoration(
               color: ColorsManager.darkHoney,
-              gradient: LinearGradient(
-                
-                colors: [
+              gradient: LinearGradient(colors: [
                 const Color.fromARGB(255, 53, 29, 1),
                 const Color.fromARGB(255, 80, 45, 2),
               ]),
@@ -43,15 +40,16 @@ class HomeTab extends StatelessWidget {
                 bottomLeft: Radius.circular(25.r),
               ),
             ),
-            child: Column(
+            child: Stack(
+              clipBehavior: Clip.none,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 36, 19, 0),
-                        borderRadius: BorderRadius.circular(80.r)
-                      ),
+                          color: const Color.fromARGB(255, 36, 19, 0),
+                          borderRadius: BorderRadius.circular(80.r)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(80.r),
                         child: Image.asset(
@@ -64,19 +62,29 @@ class HomeTab extends StatelessWidget {
                     SizedBox(width: 16.w),
                     Expanded(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Hi, Alaa",
-                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: ColorsManager.creamyWhite,),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
+                                  color: ColorsManager.creamyWhite,
+                                ),
                           ),
                           SizedBox(height: 5.h),
-                          
-                             
                           Text(
                             "Let's start your day\nwith a perfect cup.",
-                            style: Theme.of(context).textTheme.titleSmall!
-                                .copyWith(fontWeight: FontWeight.w400,color: const Color.fromARGB(255, 251, 241, 205),fontSize: 14.sp),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color.fromARGB(
+                                        255, 251, 241, 205),
+                                    fontSize: 14.sp),
                           ),
                         ],
                       ),
@@ -93,36 +101,48 @@ class HomeTab extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 24.h,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: REdgeInsets.symmetric(horizontal: 16,),
-                        child: SizedBox(
-                          height: 50.h,
-                          child: CustomTextFormField(
-                            labelText: "What are you looking for?",
-                            controller: _searchController,
-                            preIcon: Icon(Icons.search,color: ColorsManager.darkOrange,),
+                SizedBox(
+                  height: 24.h,
+                ),
+                Positioned(
+                  bottom: -28.h,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: REdgeInsets.symmetric(
+                            horizontal: 16,
+                          ),
+                          child: SizedBox(
+                            height: 50.h,
+                            child: CustomTextFormField(
+                              labelText: "What are you looking for?",
+                              controller: _searchController,
+                              preIcon: Icon(
+                                Icons.search,
+                                color: ColorsManager.darkOrange,
+                              ),
+                              postIcon: IconButton(
+                                onPressed: () => showMoodSheet(context),
+                                icon: Icon(
+                                  Icons.auto_fix_high,
+                                  color: const Color.fromARGB(255, 149, 92, 11),
+                                  size: 25,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () => showMoodSheet(context),
-                      icon: Icon(
-                        Icons.auto_fix_high,
-                        color: const Color.fromARGB(255, 149, 92, 11),
-                        size: 30,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 60.h),
           Padding(
             padding: REdgeInsets.symmetric(horizontal: 12.0),
             child: Column(
@@ -145,64 +165,67 @@ class HomeTab extends StatelessWidget {
                 SizedBox(height: 24.h),
                 Text(
                   "Categories",
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(color: const Color.fromARGB(255, 64, 25, 1)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: const Color.fromARGB(255, 64, 25, 1)),
                 ),
                 SizedBox(height: 35.h),
                 SizedBox(
-                  height: 200.h,
+                  height: 150.h,
                   width: double.infinity,
-                  child: 
-                  
-                  // CarouselSlider(
-                  //   items: Data.categosies
-                  //       .map(
-                  //         (category) => InkWell(
-                  //           onTap: () {
-                  //             List<Products> filteredList = Data.allProducts
-                  //                 .where(
-                  //                   (product) =>
-                  //                       product.category.categoryid ==
-                  //                       category.categoryid,
-                  //                 )
-                  //                 .toList();
+                  child:
 
-                  //             Navigator.pushNamed(
-                  //               context,
-                  //               AppRoutes.productScreen,
-                  //               arguments: filteredList,
-                  //             );
-                  //           },
-                  //           child: CategoryItem(
-                  //             imagePath: category.image,
-                  //             categoryName: category.name,
-                  //           ),
-                  //         ),
-                  //       )
-                  //       .toList(),
-                  //   options: CarouselOptions(
-                  //     autoPlay: true,
-                  //     autoPlayInterval: const Duration(seconds: 3),
-                  //     autoPlayAnimationDuration: const Duration(
-                  //       milliseconds: 800,
-                  //     ),
-                  //     autoPlayCurve: Curves.fastOutSlowIn,
-                  //     enlargeCenterPage: true,
-                  //     viewportFraction: 0.45,
-                  //     scrollDirection: Axis.horizontal,
-                  //   ),
-                  // ),
+                      // CarouselSlider(
+                      //   items: Data.categosies
+                      //       .map(
+                      //         (category) => InkWell(
+                      //           onTap: () {
+                      //             List<Products> filteredList = Data.allProducts
+                      //                 .where(
+                      //                   (product) =>
+                      //                       product.category.categoryid ==
+                      //                       category.categoryid,
+                      //                 )
+                      //                 .toList();
 
-                  ListView.separated(
-                    itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
+                      //             Navigator.pushNamed(
+                      //               context,
+                      //               AppRoutes.productScreen,
+                      //               arguments: filteredList,
+                      //             );
+                      //           },
+                      //           child: CategoryItem(
+                      //             imagePath: category.image,
+                      //             categoryName: category.name,
+                      //           ),
+                      //         ),
+                      //       )
+                      //       .toList(),
+                      //   options: CarouselOptions(
+                      //     autoPlay: true,
+                      //     autoPlayInterval: const Duration(seconds: 3),
+                      //     autoPlayAnimationDuration: const Duration(
+                      //       milliseconds: 800,
+                      //     ),
+                      //     autoPlayCurve: Curves.fastOutSlowIn,
+                      //     enlargeCenterPage: true,
+                      //     viewportFraction: 0.45,
+                      //     scrollDirection: Axis.horizontal,
+                      //   ),
+                      // ),
+
+                      ListView.separated(
+                    itemBuilder: (context, index) =>
+                        AnimationConfiguration.staggeredList(
                       position: index,
-                        duration: const Duration(seconds: 1),
-                        delay: const Duration(milliseconds: 500),
+                      duration:  Duration(seconds: 1),
+                      delay:  Duration(milliseconds: 500),
                       child: SlideAnimation(
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: InkWell(
-
-                            onTap: ()  {
+                            onTap: () {
                               var category = Data.categosies[index];
                               List<Products> filteredList = Data.allProducts
                                   .where(
@@ -232,6 +255,7 @@ class HomeTab extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
+                SizedBox(height: 12.h,),
                 Text(
                   "Popular Items",
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(

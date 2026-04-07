@@ -14,92 +14,120 @@ class CustomAddressWidget extends StatelessWidget {
     var cubit = BlocProvider.of<PaymentCubit>(context);
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          height: 80.h,
-          margin: REdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          padding: REdgeInsets.symmetric(
-            horizontal: 12,
-          ),
-          decoration: BoxDecoration(
-            color: cubit.currentIndex == 1
-                ? ColorsManager.white
-                : ColorsManager.creamyWhite,
-            border: cubit.currentIndex == 1
-                ? Border.all(color: ColorsManager.darkChocolate, width: 1.5)
-                : null,
-            borderRadius:
-                BorderRadius.circular(cubit.currentIndex == 1 ? 16.r : 0.r),
-            boxShadow: cubit.currentIndex == 1
-                ? [
-                    BoxShadow(
-                      color:
-                          ColorsManager.darkChocolate.withValues(alpha: 0.17),
-                      blurRadius: 15,
-                      spreadRadius: 1,
-                      offset: Offset(0, 6),
+        InkWell(
+          onTap: () {
+            cubit.toggle(selectedIndex: 1);
+            cubit.calculateDistance();
+            cubit.openExternalMap();
+          },
+          child: Container(
+            width: double.infinity,
+
+            ///height: 90.h,
+            margin: REdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            padding: REdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            decoration: BoxDecoration(
+              color: cubit.currentIndex == 1
+                  ? ColorsManager.white
+                  : ColorsManager.creamyWhite,
+              border: cubit.currentIndex == 1
+                  ? Border.all(color: ColorsManager.darkChocolate, width: 1.5)
+                  : null,
+              borderRadius:
+                  BorderRadius.circular(cubit.currentIndex == 1 ? 16.r : 0.r),
+              boxShadow: cubit.currentIndex == 1
+                  ? [
+                      BoxShadow(
+                        color:
+                            ColorsManager.darkChocolate.withValues(alpha: 0.17),
+                        blurRadius: 15,
+                        spreadRadius: 1,
+                        offset: Offset(0, 6),
+                      )
+                    ]
+                  : [],
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.storefront_rounded,
+                  color: cubit.currentIndex == 1
+                      ? ColorsManager.darkHoney
+                      : ColorsManager.darkHoney.withValues(alpha: 0.3),
+                  size: 35.h,
+                ),
+                SizedBox(
+                  width: 16.w,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Pick Up at: ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  fontSize: 20.sp,
+                                  color: cubit.currentIndex == 1
+                                      ? ColorsManager.darkChocolate
+                                      : ColorsManager.darkChocolate53),
+                        ),
+                        Text(
+                          "Spectra Cafe",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(fontSize: 16.sp),
+                        ),
+                      ],
+                    ),
+                    // SizedBox(
+                    //   height: 3.h,
+                    // ),
+                    BlocBuilder<PaymentCubit, PaymentState>(
+                      builder: (context, state) {
+                        if (state is LocationLoadingState)
+                          return Text("Calculating distance...");
+                        return Text(
+                          cubit.distanceInKm != null
+                              ? "${cubit.distanceInKm!.toStringAsFixed(1)} KM away from you"
+                              : "Tap to see distance",
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: cubit.currentIndex == 1
+                                  ? ColorsManager.umber
+                                  : ColorsManager.darkChocolate
+                                      .withValues(alpha: .35)),
+                        );
+                      },
+                    ),
+                    Text(
+                      "Tanta, Gharbia",
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          fontSize: 16.sp,
+                          color: cubit.currentIndex == 1
+                              ? ColorsManager.umber
+                              : ColorsManager.darkChocolate
+                                  .withValues(alpha: .35)),
                     )
-                  ]
-                : [],
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.storefront_rounded,
-                color: cubit.currentIndex == 1
-                    ? ColorsManager.darkHoney
-                    : ColorsManager.darkHoney.withValues(alpha: 0.3),
-                size: 35.h,
-              ),
-              SizedBox(
-                width: 16.w,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Pick Up at: ",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 20.sp,
-                            color: cubit.currentIndex == 1
-                                ? ColorsManager.darkChocolate
-                                : ColorsManager.darkChocolate53),
-                      ),
-                      Text(
-                        "Alaa's Cafe",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(fontSize: 16.sp),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 3.h,),
-                  Text(
-                    "Nasr City, Cairo",
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontSize: 16.sp,
-                        color: cubit.currentIndex == 1
-                            ? ColorsManager.umber
-                            : ColorsManager.darkChocolate
-                                .withValues(alpha: .35)),
-                  )
-                ],
-              ),
-              Spacer(),
-              Icon(
-                cubit.currentIndex == 1
-                    ? Icons.check_circle
-                    : Icons.chevron_right,
-                color: cubit.currentIndex == 1
-                    ? ColorsManager.darkChocolate
-                    : ColorsManager.warmBeige,
-                size: 20.r,
-              ),
-            ],
+                  ],
+                ),
+                Spacer(),
+                Icon(
+                  Icons.chevron_right,
+                  color: cubit.currentIndex == 1
+                      ? ColorsManager.umber
+                      : ColorsManager.darkChocolate.withValues(alpha: .35),
+                  size: 30.r,
+                ),
+              ],
+            ),
           ),
         ),
         SizedBox(

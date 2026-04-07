@@ -1,5 +1,6 @@
 import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:dash_cup/features/payment/presentation/widgets/order_time_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,8 @@ class PaymentSuccessScreen extends StatelessWidget {
               if (paymentMethod == "Vodafone") _buildVodafoneDetails(),
               if (paymentMethod == "Visa") _buildVisaDetails(context),
               if (paymentMethod == "Points") _buildPointsDetails(context),
-              SizedBox(height: 70.h),
+              OrderTimerWidget(durationInMinutes: 7,),
+              SizedBox(height: 50.h),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsManager.darkBrown,

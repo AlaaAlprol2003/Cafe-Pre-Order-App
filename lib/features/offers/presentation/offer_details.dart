@@ -193,7 +193,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                                             .textTheme
                                             .titleSmall!
                                             .copyWith(
-                                                color: ColorsManager.creamyWhite,
+                                                color:
+                                                    ColorsManager.creamyWhite,
                                                 fontSize: 14.sp)),
                                   ))
                             ],
@@ -270,21 +271,26 @@ class _OfferDetailsState extends State<OfferDetails> {
                             padding: REdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
-                              color:
-                                  ColorsManager.darkOrange.withValues(alpha: .8),
+                              color: Colors.transparent,
+
+                              /// ColorsManager.darkOrange.withValues(alpha: .8),
                               borderRadius: BorderRadius.circular(13.r),
-                          
+
                               ///border: Border.all(color: ColorsManager.darkBrown)
                             ),
                             child: FadeInUp(
                               delay: Duration(seconds: 2),
-                              child: Text(
-                                widget.currentOffer.fullDescription,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(color: ColorsManager.creamyWhite),
+                              child: Padding(
+                                padding: REdgeInsets.only(top: 16.0),
+                                child: Text(
+                                  widget.currentOffer.fullDescription,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                          color: ColorsManager.darkChocolate),
+                                ),
                               ),
                             ),
                           ),

@@ -2,6 +2,8 @@ import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial()) {
@@ -21,6 +23,10 @@ class PaymentCubit extends Cubit<PaymentState> {
   double userPointsBalance = 6000.0;
   double pointExchangeRate = 0.10;
   double remainingPoints = 0.0;
+  double? distanceInKm;
+  final double cafeLat = 30.7876;
+  final double cafeLng = 30.9935;
+
   void toggle({required int selectedIndex}) {
     currentIndex = selectedIndex;
     emit(ChangeIndexState());
@@ -67,6 +73,59 @@ class PaymentCubit extends Cubit<PaymentState> {
 
     emit(PointsDeductedState());
   }
+
+  Future<void> calculateDistance() async {
+    emit(LocationLoadingState());
+    try {
+      // 1. التحقق من صلاحيات الموقع
+      LocationPermission permission = await Geolocator.checkPermission();
+
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          emit(LocationErrorState(message: "Location permissions are denied"));
+          return;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        emit(LocationErrorState(
+            message: "Location permissions are permanently denied"));
+        return;
+      }
+
+      // 2. لو الصلاحيات تمام، نجيب الموقع
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      double meters = Geolocator.distanceBetween(
+        position.latitude,
+        position.longitude,
+        cafeLat,
+        cafeLng,
+      );
+
+      distanceInKm = meters / 1000;
+
+      // بنبعت المسافة للـ State لو حابب تستخدمها مباشرة هناك
+      emit(LocationSuccessState(distanceInKm!));
+    } catch (e) {
+      // هنا بنبعت رسالة الخطأ العامة
+      emit(
+          LocationErrorState(message: "Something went wrong: ${e.toString()}"));
+    }
+  }
+
+  Future<void> openExternalMap() async {
+    final Uri googleMapsUrl =
+        Uri.parse("google.navigation:q=$cafeLat,$cafeLng");
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl);
+    } else {
+      await launchUrl(Uri.parse(
+          "https://www.google.com/maps/search/?api=1&query=$cafeLat,$cafeLng"));
+    }
+  }
 }
 
 class PaymentState {}
@@ -87,3 +146,15 @@ class SubtotalAmountState extends PaymentState {
 class CreditCardDataChangedState extends PaymentState {}
 
 class PointsDeductedState extends PaymentState {}
+
+class LocationLoadingState extends PaymentState {}
+
+class LocationSuccessState extends PaymentState {
+  final double distance;
+  LocationSuccessState(this.distance);
+}
+
+class LocationErrorState extends PaymentState {
+  final String? message;
+  LocationErrorState({this.message});
+}

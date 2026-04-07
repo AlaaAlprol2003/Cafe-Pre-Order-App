@@ -23,14 +23,14 @@ class PaymentElevatedButton extends StatelessWidget {
               Icon(
                 Icons.shopping_cart_checkout_rounded,
                 color: ColorsManager.darkChocolate,
-                size: 20.h,
+                size: 25.h,
               ),
               Text(
                 "Place Order",
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!
-                    .copyWith(color: ColorsManager.white,fontSize: 18.sp),
+                    .copyWith(color: ColorsManager.white,fontSize: 20.sp),
               ),
               Icon(
                   Icons.arrow_forward_rounded,
