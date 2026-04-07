@@ -14,7 +14,7 @@ class OrderTimerWidget extends StatelessWidget {
 
     return StreamBuilder<int>(
       stream: Stream.periodic(const Duration(seconds: 1), (i) => totalSeconds - i - 1)
-          .take(totalSeconds), // هيقف لما يخلص الثواني
+          .take(totalSeconds),
       builder: (context, snapshot) {
         int remainingSeconds = snapshot.data ?? totalSeconds;
 

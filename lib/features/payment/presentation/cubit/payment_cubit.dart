@@ -77,7 +77,6 @@ class PaymentCubit extends Cubit<PaymentState> {
   Future<void> calculateDistance() async {
     emit(LocationLoadingState());
     try {
-      // 1. التحقق من صلاحيات الموقع
       LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
@@ -94,7 +93,6 @@ class PaymentCubit extends Cubit<PaymentState> {
         return;
       }
 
-      // 2. لو الصلاحيات تمام، نجيب الموقع
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
@@ -107,10 +105,8 @@ class PaymentCubit extends Cubit<PaymentState> {
 
       distanceInKm = meters / 1000;
 
-      // بنبعت المسافة للـ State لو حابب تستخدمها مباشرة هناك
       emit(LocationSuccessState(distanceInKm!));
     } catch (e) {
-      // هنا بنبعت رسالة الخطأ العامة
       emit(
           LocationErrorState(message: "Something went wrong: ${e.toString()}"));
     }
