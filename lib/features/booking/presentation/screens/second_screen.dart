@@ -169,34 +169,23 @@ class SecondScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AnimatedToggleSwitch<String>.rolling(
-                        animationCurve: Curves.easeInOut,
-                        textDirection: TextDirection.ltr,
-                        indicatorSize: Size(100.w, 50.h),
-                        padding: EdgeInsets.symmetric(vertical: 6.h),
-
-                        current: cubit.occasion,
-                        values:  [
+                      DropdownButton<String>(
+                        value: cubit.occasion,
+                        onChanged: (val) {
+                          cubit.setOccasion(val!);
+                        },
+                        items: [
                           "Birthday",
                           "Engagement",
                           "Graduation",
                           "Meeting",
-                          "Football match",
-                        ],
-                        onChanged: (value) {
-                          cubit.setOccasion(value);
-                        },
-                        iconBuilder: (value, isSelected) => Text(
-                          value,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: isSelected
-                                ? ColorsManager.white
-                                : ColorsManager.darkBrown,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
+                          "Football match"
+                        ]
+                            .map((e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e),
+                        ))
+                            .toList(),
                       ),
                     ],
                   ),
