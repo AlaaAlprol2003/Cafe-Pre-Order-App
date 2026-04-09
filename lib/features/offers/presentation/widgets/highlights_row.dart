@@ -13,6 +13,7 @@ class HighlightsRow extends StatelessWidget {
         Icon(
           icon,
           color: ColorsManager.darkOrange,
+          size: 27,
         ),
         SizedBox(
           height: 8.h,
@@ -21,7 +22,7 @@ class HighlightsRow extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .labelMedium!
-                .copyWith(color: ColorsManager.goldenBrown))
+                .copyWith(color: ColorsManager.goldenBrown,fontSize:14.sp,fontWeight: FontWeight.bold))
       ],
     );
   }

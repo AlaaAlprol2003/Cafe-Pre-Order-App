@@ -32,7 +32,7 @@ class _OfferDetailsState extends State<OfferDetails> {
             padding: REdgeInsets.symmetric(horizontal: 12, vertical: 12),
             height: 90.h,
             decoration: BoxDecoration(
-              color: ColorsManager.darkOrange,
+              color: const Color.fromARGB(255, 148, 109, 55),
               borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
               boxShadow: [
                 BoxShadow(
@@ -68,15 +68,31 @@ class _OfferDetailsState extends State<OfferDetails> {
                 Spacer(),
                 SizedBox(
                     width: 250.w,
-                    child: CustomElevatedButton(
-                      onPressed: () {},
-                      text: "Add Bundle To Cart",
-                      icon: Icon(
-                        Icons.shopping_cart_rounded,
-                        size: 25,
-                        color: ColorsManager.creamyWhite,
-                      ),
-                    ))
+                    child: ElevatedButton.icon(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 84, 47, 1),
+                        ),
+                        iconAlignment: IconAlignment.end,
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: ColorsManager.creamyWhite,
+                          size: 25,
+                        ),
+                        label: Text(
+                          "Add Bundle To Cart",style: GoogleFonts.roboto(fontSize: 18.sp,color: ColorsManager.creamyWhite,fontWeight: FontWeight.bold),
+                        ))
+
+                    // CustomElevatedButton(
+                    //   onPressed: () {},
+                    //   text: "Add Bundle To Cart",
+                    //   icon: Icon(
+                    //     Icons.shopping_cart_rounded,
+                    //     size: 25,
+                    //     color: ColorsManager.creamyWhite,
+                    //   ),
+                    // )
+                    )
               ],
             ),
           ),
@@ -84,23 +100,37 @@ class _OfferDetailsState extends State<OfferDetails> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 300.h,
+              expandedHeight: 250.h,
               pinned: true,
               backgroundColor: ColorsManager.warmBeige,
               leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: ColorsManager.darkChocolate,
+                  icon: Container(
+                    alignment: Alignment.center,
+                    padding: REdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                        color: ColorsManager.creamyWhite,
+                        borderRadius: BorderRadius.circular(80.r)),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: ColorsManager.darkOrange,
+                    ),
                   )),
               actions: [
                 IconButton(
                     onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_border_outlined,
-                      color: ColorsManager.darkOrange,
+                    icon: Container(
+                      alignment: Alignment.center,
+                      padding: REdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                          color: ColorsManager.creamyWhite,
+                          borderRadius: BorderRadius.circular(80.r)),
+                      child: Icon(
+                        Icons.favorite_border_outlined,
+                        color: ColorsManager.darkOrange,
+                      ),
                     )),
               ],
               flexibleSpace: FlexibleSpaceBar(
@@ -125,8 +155,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                                     duration: Duration(seconds: 1),
                                     child: Image.asset(
                                       product.image,
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+
+                                      /// width: double.infinity,
                                       height: double.infinity,
                                     ),
                                   ),
@@ -145,7 +176,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: REdgeInsets.symmetric(horizontal: 8.0),
+                      padding: REdgeInsets.symmetric(
+                        horizontal: 14.0,
+                      ),
                       child: Row(
                         children: [
                           Column(
@@ -163,13 +196,17 @@ class _OfferDetailsState extends State<OfferDetails> {
                                           fontSize: 23.sp),
                                 ),
                               ),
-                              SizedBox(height: 12.h),
+                              SizedBox(height: 16.h),
                               FadeInRight(
                                 duration: Duration(seconds: 3),
                                 child: Text(widget.currentOffer.subTitle,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .displayMedium),
+                                        .displayMedium!
+                                        .copyWith(
+                                            color: const Color.fromARGB(
+                                                255, 135, 120, 102),
+                                            fontSize: 16.sp)),
                               ),
                             ],
                           ),
@@ -179,11 +216,11 @@ class _OfferDetailsState extends State<OfferDetails> {
                             children: [
                               Image.asset(
                                 ImageAssets.saveLogo,
-                                height: 130.h,
+                                height: 110.h,
                               ),
                               Positioned(
-                                  right: 37.w,
-                                  bottom: 25.h,
+                                  right: 30.w,
+                                  bottom: 20.h,
                                   child: FadeInUp(
                                     duration: Duration(seconds: 3),
                                     child: Text(
@@ -195,7 +232,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                                             .copyWith(
                                                 color:
                                                     ColorsManager.creamyWhite,
-                                                fontSize: 14.sp)),
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w900)),
                                   ))
                             ],
                           ),
@@ -205,97 +243,98 @@ class _OfferDetailsState extends State<OfferDetails> {
                     SizedBox(
                       height: 8.h,
                     ),
-                    Column(
-                      children: [
-                        SizedBox(
-                            height: 5.h,
-                            width: double.infinity,
-                            child: Divider(
-                              color: ColorsManager.darkBrown,
-                              thickness: .5,
-                              indent: 20.w,
-                              endIndent: 20.w,
-                            )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FadeInLeft(
-                              duration: Duration(seconds: 2),
-                              child: HighlightsRow(
-                                icon: Icons.timer_rounded,
-                                text:
-                                    "${widget.currentOffer.estimatedPrepTimeMinutes.toString()} Min",
-                              ),
-                            ),
-                            SizedBox(
-                                height: 60.h,
-                                child: VerticalDivider(
-                                  color: ColorsManager.darkBrown,
-                                  thickness: .5,
-                                )),
-                            FadeInLeft(
-                              delay: Duration(milliseconds: 400),
-                              duration: const Duration(seconds: 2),
-                              child: HighlightsRow(
-                                  icon: Icons.local_fire_department_rounded,
+                    Container(
+                      margin: REdgeInsets.symmetric(horizontal: 12),
+                      padding:
+                          REdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.r),
+                        border: BoxBorder.all(
+                            color: const Color.fromARGB(78, 115, 80, 21)),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              FadeInLeft(
+                                duration: Duration(seconds: 2),
+                                child: HighlightsRow(
+                                  icon: Icons.timer_rounded,
                                   text:
-                                      " ${widget.currentOffer.calories.toString()} Kcal"),
-                            ),
-                            SizedBox(
-                                height: 60.h,
-                                child: VerticalDivider(
-                                  color: ColorsManager.darkBrown,
-                                  thickness: .5,
-                                )),
-                            FadeInLeft(
-                              delay: Duration(milliseconds: 800),
-                              duration: Duration(seconds: 2),
-                              child: HighlightsRow(
-                                icon: Icons.star,
-                                text:
-                                    "${widget.currentOffer.rating.toString()} (${widget.currentOffer.reviewCount})",
-                              ),
-                            ),
-                          ],
-                        ),
-                        // SizedBox(
-                        // height: 5.h,
-                        // width: double.infinity,
-                        // child: Divider(color: ColorsManager.darkBrown,thickness: .5,indent: 20.w,endIndent: 20.w,)),
-                        FadeInUp(
-                          delay: Duration(seconds: 1),
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: REdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            padding: REdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-
-                              /// ColorsManager.darkOrange.withValues(alpha: .8),
-                              borderRadius: BorderRadius.circular(13.r),
-
-                              ///border: Border.all(color: ColorsManager.darkBrown)
-                            ),
-                            child: FadeInUp(
-                              delay: Duration(seconds: 2),
-                              child: Padding(
-                                padding: REdgeInsets.only(top: 16.0),
-                                child: Text(
-                                  widget.currentOffer.fullDescription,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium!
-                                      .copyWith(
-                                          color: ColorsManager.darkChocolate),
+                                      "${widget.currentOffer.estimatedPrepTimeMinutes.toString()} Min",
                                 ),
                               ),
+                              SizedBox(
+                                  height: 60.h,
+                                  child: VerticalDivider(
+                                    color: Color.fromARGB(78, 115, 80, 21),
+                                    thickness: 1.5,
+                                  )),
+                              FadeInLeft(
+                                delay: Duration(milliseconds: 400),
+                                duration: const Duration(seconds: 2),
+                                child: HighlightsRow(
+                                    icon: Icons.local_fire_department_rounded,
+                                    text:
+                                        " ${widget.currentOffer.calories.toString()} Kcal"),
+                              ),
+                              SizedBox(
+                                  height: 60.h,
+                                  child: VerticalDivider(
+                                    color: Color.fromARGB(78, 115, 80, 21),
+                                    thickness: 1.5,
+                                  )),
+                              FadeInLeft(
+                                delay: Duration(milliseconds: 800),
+                                duration: Duration(seconds: 2),
+                                child: HighlightsRow(
+                                  icon: Icons.star,
+                                  text:
+                                      "${widget.currentOffer.rating.toString()} (${widget.currentOffer.reviewCount})",
+                                ),
+                              ),
+                            ],
+                          ),
+                          // SizedBox(
+                          // height: 5.h,
+                          // width: double.infinity,
+                          // child: Divider(color: ColorsManager.darkBrown,thickness: .5,indent: 20.w,endIndent: 20.w,)),
+                        ],
+                      ),
+                    ),
+                    FadeInUp(
+                      delay: Duration(seconds: 1),
+                      child: Container(
+                        alignment: Alignment.center,
+                        margin:
+                            REdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding:
+                            REdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+
+                          /// ColorsManager.darkOrange.withValues(alpha: .8),
+                          borderRadius: BorderRadius.circular(13.r),
+
+                          ///border: Border.all(color: ColorsManager.darkBrown)
+                        ),
+                        child: FadeInUp(
+                          delay: Duration(seconds: 2),
+                          child: Padding(
+                            padding: REdgeInsets.only(top: 16.0),
+                            child: Text(
+                              widget.currentOffer.fullDescription,
+
+                              ///textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(color: ColorsManager.darkChocolate),
                             ),
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 16.h,
@@ -367,8 +406,8 @@ class _OfferDetailsState extends State<OfferDetails> {
                         height: 5.h,
                         width: double.infinity,
                         child: Divider(
-                          color: ColorsManager.darkBrown,
-                          thickness: .5,
+                          color: const Color.fromARGB(65, 180, 168, 152),
+                          thickness: 1.5,
                           indent: 20.w,
                           endIndent: 20.w,
                         )),
@@ -411,7 +450,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                       Text(customGroup.title,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleSmall),
+                                              .titleSmall!.copyWith(fontWeight: FontWeight.bold)),
                                       SizedBox(height: 12.h),
                                       Wrap(
                                         spacing: 10.w,
@@ -430,12 +469,12 @@ class _OfferDetailsState extends State<OfferDetails> {
                                             backgroundColor:
                                                 ColorsManager.creamyWhite,
                                             selectedColor:
-                                                ColorsManager.darkOrange,
+                                                const Color.fromARGB(255, 179, 139, 89),
                                             labelStyle: GoogleFonts.roboto(
                                               color: selectedOptions[
                                                           customGroup.title] ==
                                                       option
-                                                  ? Colors.white
+                                                  ? ColorsManager.white
                                                   : ColorsManager.darkChocolate,
                                               fontSize: 16.sp,
                                             ),
