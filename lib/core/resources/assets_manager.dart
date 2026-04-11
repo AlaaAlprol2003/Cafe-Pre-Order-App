@@ -25,4 +25,5 @@ class ImageAssets {
 class LottieAssets {
   static const String password = "assets/lottie/password.json";
   static const String success = "assets/lottie/Success.json";
+  static const String robotic = "assets/lottie/robotic.json";
 }

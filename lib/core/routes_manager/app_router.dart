@@ -1,5 +1,6 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
+import 'package:dash_cup/features/ai/chat_ai_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/login_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/privacy_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/register_screen.dart';
@@ -73,8 +74,7 @@ class AppRouter {
       case AppRoutes.paymentSuccess:
         {
           final args = settings.arguments as Map<String, dynamic>;
-          final PaymentCubit paymentCubit =
-              args['cubit']; 
+          final PaymentCubit paymentCubit = args['cubit'];
           return CupertinoPageRoute(
               builder: (context) => BlocProvider.value(
                   value: paymentCubit,
@@ -82,6 +82,11 @@ class AppRouter {
                     paymentMethod: args['paymentMethod'],
                     amount: args['amount'],
                   )));
+        }
+
+      case AppRoutes.chatWithAI:
+        {
+          return CupertinoPageRoute(builder: (context) => ChatAIScreen());
         }
     }
     return null;
