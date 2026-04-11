@@ -1,6 +1,7 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/ai/chat_ai_screen.dart';
+import 'package:dash_cup/features/ai/cubit/ai_cubit.dart';
 import 'package:dash_cup/features/auth/presentation/screens/login_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/privacy_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/register_screen.dart';
@@ -86,7 +87,9 @@ class AppRouter {
 
       case AppRoutes.chatWithAI:
         {
-          return CupertinoPageRoute(builder: (context) => ChatAIScreen());
+          return CupertinoPageRoute(
+              builder: (context) => BlocProvider<AiCubit>(
+                  create: (context) => AiCubit(), child: ChatAIScreen()));
         }
     }
     return null;
