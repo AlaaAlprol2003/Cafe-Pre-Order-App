@@ -9,4 +9,5 @@ class AppRoutes {
   static const String payment = "payment_screen";
   static const String creditCard = "credit_card";
   static const String paymentSuccess = "payment_success";
+  static const String cart = "cart_screen";
 }
