@@ -10,34 +10,33 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       decoration: BoxDecoration(
         color: ColorsManager.darkChocolate,
         borderRadius: BorderRadius.circular(16.r),
+        
       ),
-
       child: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                
                 decoration: BoxDecoration(
-                  color: ColorsManager.darkBrown,
-
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))
-                ),
+                    color: ColorsManager.warmBeige,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(16.r))),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16.r)),
                   child: Image.asset(
                     product.image,
-                    height: 200.h,
+                    height: 170.h,
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
-
               Padding(
                 padding: REdgeInsets.all(12.0),
                 child: Column(
@@ -47,21 +46,25 @@ class ProductItem extends StatelessWidget {
                       product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayMedium!
+                          .copyWith(color: ColorsManager.creamyWhite),
                     ),
                     SizedBox(height: 4.h),
-                   
                     SizedBox(height: 8.h),
                     Text(
                       "EGP ${product.price}",
-                      style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayMedium!
+                          .copyWith(color: ColorsManager.creamyWhite),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-
           Positioned(
             bottom: 0,
             right: 0,
@@ -84,33 +87,33 @@ class ProductItem extends StatelessWidget {
               ),
             ),
           ),
-
           Positioned(
             top: 8.h,
             right: 8.w,
             child: CircleAvatar(
-              backgroundColor: ColorsManager.burntOrange.withOpacity(0.8),
+              backgroundColor: ColorsManager.warmBeige,
               radius: 14.r,
               child: Icon(
                 Icons.favorite_outline,
-                color: Colors.white,
+                color: Colors.red,
                 size: 18.sp,
               ),
             ),
           ),
-           Positioned(
+          Positioned(
             bottom: 5.h,
             right: 50.w,
-             child: Row(
-                        children: [
-                          Text(
-                            "${product.rate}",
-                            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.darkOrange,fontSize: 14.sp),
-                          ),
-                          Icon(Icons.star, color: Colors.amber, size: 16.sp),
-                        ],
-                      ),
-           ),
+            child: Row(
+              children: [
+                Text(
+                  "${product.rate}",
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                      color: ColorsManager.darkOrange, fontSize: 14.sp),
+                ),
+                Icon(Icons.star, color: Colors.amber, size: 16.sp),
+              ],
+            ),
+          ),
         ],
       ),
     );

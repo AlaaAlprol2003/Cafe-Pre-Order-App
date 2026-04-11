@@ -65,7 +65,7 @@ class OfferModel {
   static List<OfferModel> dashBundles = [
     OfferModel(
       id: "OFF_1",
-      title: "THE CLASSIC DUO ☕🥐",
+      title: "THE CLASSIC DUO",
       cardImage: ImageAssets.classicDuo,
       subTitle: "Latte + Turkey Cheese Croissant",
       fullDescription:
@@ -86,7 +86,7 @@ class OfferModel {
     ),
     OfferModel(
       id: "OFF_2",
-      title: "SWEET ESCAPE 🍩🥤",
+      title: "SWEET ESCAPE",
       cardImage: ImageAssets.sweetEscape,
       subTitle: "Iced Coffee + Donut",
       fullDescription:
@@ -110,7 +110,7 @@ class OfferModel {
     ),
     OfferModel(
       id: "OFF_3",
-      title: "ENERGY PACK ⚡🍪",
+      title: "ENERGY PACK",
       cardImage: ImageAssets.energyPack,
       subTitle: "Double Espresso + Cinnamon Roll",
       fullDescription:
@@ -133,7 +133,7 @@ class OfferModel {
     ),
     OfferModel(
       id: "OFF_4",
-      title: "AFTERNOON CHILL 🍦☕",
+      title: "AFTERNOON CHILL",
       cardImage: ImageAssets.afternoonChili,
       subTitle: "Espresso + Molten Cake",
       fullDescription:
@@ -158,7 +158,7 @@ class OfferModel {
     ),
     OfferModel(
       id: "OFF_5",
-      title: "DOUBLE DELIGHT 🥯☕",
+      title: "DOUBLE DELIGHT",
       cardImage: ImageAssets.doubleDelight,
       subTitle: "2 Americano + 2 Chicken Panini",
       fullDescription:
@@ -181,7 +181,7 @@ class OfferModel {
     ),
     OfferModel(
       id: "OFF_6",
-      title: "LATE NIGHT STUDY 📚🌙",
+      title: "LATE NIGHT STUDY",
       cardImage: ImageAssets.lateNight,
       subTitle: "Cappuccino + Nachos Cheese",
       fullDescription:

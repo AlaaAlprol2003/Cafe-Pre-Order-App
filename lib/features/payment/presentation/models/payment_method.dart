@@ -18,7 +18,7 @@ class PaymentMethod {
         index: 2, title: "Vodafone Cash", imagePath: ImageAssets.vodafoneLogo),
     PaymentMethod(
         index: 3,
-        title: "Dash Points (Available: 120)",
+        title: "Dash Points",
         imagePath: ImageAssets.coinsLogo)
   ];
 }
