@@ -6,6 +6,7 @@ import 'package:dash_cup/features/auth/presentation/screens/login_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/privacy_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/register_screen.dart';
 import 'package:dash_cup/features/auth/presentation/screens/reset_password.dart';
+import 'package:dash_cup/features/cart/presentation/cart_screen.dart';
 import 'package:dash_cup/features/main_layout/main_layout.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/offers/presentation/cubit/offer_details_cubit.dart';
@@ -90,6 +91,10 @@ class AppRouter {
           return CupertinoPageRoute(
               builder: (context) => BlocProvider<AiCubit>(
                   create: (context) => AiCubit(), child: ChatAIScreen()));
+        }
+      case AppRoutes.cart:
+        {
+          return CupertinoPageRoute(builder: (context) => CartScreen());
         }
     }
     return null;

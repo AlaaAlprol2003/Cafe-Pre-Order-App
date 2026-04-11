@@ -47,7 +47,7 @@ class _ReservationsPageState extends State<ReservationsPage> {
                 );
               },
             ),
-
+      ////floatingActionButtonLocation: FloatingActionButtonLocation.
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final result = await Navigator.push(
