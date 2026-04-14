@@ -20,7 +20,7 @@ class BookingCard extends StatelessWidget {
           "Date & Time: ${booking.date} - ${booking.time}\n Occasion: ${booking.occasion}\n Guests: ${booking.guests} \n Table Type: ${booking.tableType}",
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.delete, color: Colors.red),
+          icon:  Icon(Icons.delete, color: Colors.red),
           onPressed: () {
             cubit.deleteBooking((booking as dynamic).id);
           },
