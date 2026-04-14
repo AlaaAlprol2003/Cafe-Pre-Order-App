@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dash_cup/features/booking/presentation/screens/first_screen.dart';
+
 import 'package:dash_cup/features/main_layout/cubit/main_layout_cubit.dart';
 import 'package:dash_cup/features/main_layout/tabs/category/category_tab.dart';
 import 'package:dash_cup/features/main_layout/tabs/favorite/favorite_tab.dart';

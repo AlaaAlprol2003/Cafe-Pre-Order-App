@@ -10,5 +10,4 @@ class ColorsManager {
   static const Color darkBrown = Color(0xFF21130D);
   static const Color charcoalBlue = Color(0xFF1E2732);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color light_biege = Color(0xFFF3EDE6);
 }
