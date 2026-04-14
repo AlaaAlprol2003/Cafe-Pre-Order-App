@@ -38,7 +38,6 @@ dependencies:
   google_fonts: ^8.0.2
   flutter_bloc: ^9.1.1
   provider: ^6.1.5+1
-  animated_toggle_switch: ^0.8.7
   firebase_auth: ^6.1.4
   firebase_core: ^4.4.0
   dart_either: ^2.0.0
