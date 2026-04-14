@@ -25,7 +25,6 @@ class InputArea extends StatelessWidget {
         builder: (context, state) {
           return Row(
             children: [
-              // زرار الكاميرا للتعرف على الصور
               GestureDetector(
                 onTap: aiCubit.handleImagePick,
                 child: CircleAvatar(

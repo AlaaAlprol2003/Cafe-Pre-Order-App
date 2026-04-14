@@ -35,13 +35,12 @@ class AiCubit extends Cubit<AiState> {
     _speak(welcomeMsg);
   }
 
-  // ميزة تحليل الصور
   Future<void> handleImagePick() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       messages.add(
           {"text": "📷 جاري تحليل الصورة لمنتجات داش كاب...", "isUser": true});
-      emit(AiLoading()); // عشان نظهر الـ Lottie
+      emit(AiLoading()); 
       _scrollToBottom();
 
       final response = await _aiService.identifyProductFromImage(
@@ -57,7 +56,6 @@ class AiCubit extends Cubit<AiState> {
     }
   }
 
-  // إرسال رسالة نصية
   Future<void> handleSendMessage() async {
     String userText = controller.text.trim();
     if (userText.isEmpty) return;
@@ -79,7 +77,7 @@ class AiCubit extends Cubit<AiState> {
   void toggleVoice() {
     isVoiceEnabled = !isVoiceEnabled;
     if (!isVoiceEnabled) flutterTts.stop();
-    emit(AiSuccess(List.from(messages))); // تحديث الـ UI (شكل الأيقونة)
+    emit(AiSuccess(List.from(messages)));
   }
 
   void _speak(String text) async {
@@ -106,13 +104,11 @@ class AiCubit extends Cubit<AiState> {
       bool available = await speech.initialize();
       if (available) {
         isListening = true;
-        emit(AiSuccess(List.from(messages))); // عشان نغير لون المايك للأحمر
-
+        emit(AiSuccess(List.from(messages))); 
         speech.listen(
           onResult: (val) {
             controller.text = val.recognizedWords;
             if (val.hasConfidenceRating && val.confidence > 0) {
-              // اختياري: ممكن تبعت الرسالة تلقائياً أول ما يخلص كلام
             }
           },
         );
@@ -120,7 +116,7 @@ class AiCubit extends Cubit<AiState> {
     } else {
       isListening = false;
       speech.stop();
-      emit(AiSuccess(List.from(messages))); // رجع لون المايك طبيعي
+      emit(AiSuccess(List.from(messages))); 
 
       if (controller.text.trim().isNotEmpty) {
         handleSendMessage();
@@ -133,10 +129,9 @@ abstract class AiState {}
 
 class AiInitial extends AiState {}
 
-class AiLoading extends AiState {} // لما الـ AI بيفكر
+class AiLoading extends AiState {} 
 
 class AiSuccess extends AiState {
-  // لما الـ AI يرد
   final List<Map<String, dynamic>> messages;
   AiSuccess(this.messages);
 }

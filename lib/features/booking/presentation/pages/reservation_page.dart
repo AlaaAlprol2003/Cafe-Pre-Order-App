@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'booking_page.dart';
 
 class ReservationsPage extends StatefulWidget {
@@ -29,8 +30,7 @@ class _ReservationsPageState extends State<ReservationsPage> {
 
                   const Text(
                     "No Reservations Yet",
-                    style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
-
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -43,26 +43,27 @@ class _ReservationsPageState extends State<ReservationsPage> {
                 return ListTile(
                   title: Text(r.name),
                   subtitle: Text("${r.guests} guests - ${r.occasion}"),
-
                 );
               },
             ),
       ////floatingActionButtonLocation: FloatingActionButtonLocation.
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const BookingPage()),
-          );
+      floatingActionButton: Padding(
+        padding: REdgeInsets.only(bottom: 100.0),
+        child: FloatingActionButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const BookingPage()),
+            );
 
-          if (result != null) {
-            setState(() {
-              reservations.add(result);
-            });
-          }
-        },
-
-        child: const Icon(Icons.add),
+            if (result != null) {
+              setState(() {
+                reservations.add(result);
+              });
+            }
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

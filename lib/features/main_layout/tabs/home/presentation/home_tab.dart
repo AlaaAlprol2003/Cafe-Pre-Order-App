@@ -91,6 +91,19 @@ class HomeTab extends StatelessWidget {
                           ],
                         ),
                       ),
+                       CircleAvatar(
+                        backgroundColor: const Color.fromARGB(255, 168, 101, 8),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.cart);
+                          },
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            color: ColorsManager.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12.w,),
                       CircleAvatar(
                         backgroundColor: const Color.fromARGB(255, 168, 101, 8),
                         child: IconButton(

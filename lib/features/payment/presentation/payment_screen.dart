@@ -41,7 +41,9 @@ class PaymentScreen extends StatelessWidget {
               ///pinned: true,
               expandedHeight: 70.h,
               leading: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: ColorsManager.darkChocolate,

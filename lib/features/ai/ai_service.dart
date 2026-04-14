@@ -16,7 +16,6 @@ class AIService {
           apiKey: _apiKey,
         );
 
-  // 1. دالة الرد على الشات (النصوص)
   Future<String> getCoffeeAdvice(String userInput) async {
     try {
       final String menuSummary = generateMenuSummary();
@@ -52,11 +51,9 @@ class AIService {
     }
   }
 
-  // 2. دالة التعرف على الصور (Vision)
   Future<String> identifyProductFromImage(
       File imageFile, String menuSummary) async {
     try {
-      // تحويل الصورة لـ Bytes
       final imageBytes = await imageFile.readAsBytes();
 
       final prompt = TextPart("""
@@ -95,7 +92,6 @@ class AIService {
     }
   }
 
-  // ملخص المنيو الموحد للـ Text والـ Vision
   String generateMenuSummary() {
     return """
   --- DASH CUP OFFICIAL MENU DATA ---
