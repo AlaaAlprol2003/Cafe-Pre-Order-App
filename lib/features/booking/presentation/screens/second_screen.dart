@@ -1,3 +1,4 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../cubit/booking_cubit.dart';
 import '../cubit/booking_state.dart';
 import 'third_screen.dart';
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
 class SecondScreen extends StatelessWidget {
   final nameController = TextEditingController();
