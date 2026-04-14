@@ -1,4 +1,3 @@
-import 'package:dash_cup/features/booking/presentation/screens/first_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTab extends StatelessWidget {
@@ -6,6 +5,7 @@ class CategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FirstScreen();
+    return Scaffold();
   }
 }
+

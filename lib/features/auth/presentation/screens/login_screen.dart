@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 message: " Welcome back! We're glad to see you 👋",
               );
-              Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
+              ///Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
             } else if (state is GetUserFromFirestoreFailure) {
               UiUtils.showMessage(
                 context: context,
@@ -99,109 +99,116 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
-              padding: REdgeInsets.only(top: 170.0),
-              child: Column(
-                children: [
-                  Image.asset(
-                    ImageAssets.logo,
-                    height: 135.h,
-                    width: double.infinity,
-                  ),
-                  SizedBox(height: 30.h),
-                  Form(
-                    key: _formKey,
-                    child: Padding(
-                      padding: REdgeInsets.only(right: 16.0, left: 16),
-                      child: Column(
-                        children: [
-                          CustomTextFormField(
-                            labelText: "Email",
-                            preIcon: Icon(Icons.email),
-                            keyboardType: TextInputType.emailAddress,
-                            controller: _emailController,
-                            validator: Validator.email,
-                          ),
-                          SizedBox(height: 24.h),
-                          BlocBuilder<AuthCubit, AuthState>(
-                            builder: (context, state) {
-                              return CustomTextFormField(
-                                labelText: "Password",
-                                isSecured: cubit.isSecuredFieldLog,
-                                preIcon: Icon(Icons.password),
-                                postIcon: IconButton(
-                                  onPressed: () {
-                                    cubit.changeVisibilityStateLog();
-                                  },
-                                  icon: Icon(
-                                    cubit.isSecuredFieldLog
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                                controller: _passwordController,
-                                validator: Validator.password,
-                              );
-                            },
-                          ),
-                          SizedBox(height: 24.h),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: CustomTextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  AppRoutes.resetPassword,
-                                );
-                              },
-                              text: "Forget Password",
-                            ),
-                          ),
-                          SizedBox(height: 24.h),
-                          CustomElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState?.validate() == false)
-                                return;
-                              await cubit.login(
-                                request: LoginRequest(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-                            },
-                            text: "Login",
-                          ),
-                          SizedBox(height: 24.h),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+              padding: REdgeInsets.only(top: 130.0),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 400.w,),
+                  
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        ImageAssets.logo,
+                        height: 200.h,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: 30.h),
+                      Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: REdgeInsets.only(right: 25.0, left: 25),
+                          child: Column(
                             children: [
-                              Text(
-                                "Don't Have Account? ",
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.displayMedium,
+                              CustomTextFormField(
+                                labelText: "Email",
+                                preIcon: Icon(Icons.email),
+                                keyboardType: TextInputType.emailAddress,
+                                controller: _emailController,
+                                validator: Validator.email,
                               ),
-                              CustomTextButton(
-                                text: "Create One",
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.register,
+                              SizedBox(height: 24.h),
+                              BlocBuilder<AuthCubit, AuthState>(
+                                builder: (context, state) {
+                                  return CustomTextFormField(
+                                    labelText: "Password",
+                                    isSecured: cubit.isSecuredFieldLog,
+                                    preIcon: Icon(Icons.password),
+                                    postIcon: IconButton(
+                                      onPressed: () {
+                                        cubit.changeVisibilityStateLog();
+                                      },
+                                      icon: Icon(
+                                        cubit.isSecuredFieldLog
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                      ),
+                                    ),
+                                    keyboardType: TextInputType.visiblePassword,
+                                    controller: _passwordController,
+                                    validator: Validator.password,
                                   );
                                 },
                               ),
+                              SizedBox(height: 24.h),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: CustomTextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.resetPassword,
+                                    );
+                                  },
+                                  text: "Forget Password ?",
+                                ),
+                              ),
+                              SizedBox(height: 24.h),
+                              CustomElevatedButton(
+                                onPressed: () async {
+                                  Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
+                                  // if (_formKey.currentState?.validate() == false)
+                                  //   return;
+                                  // await cubit.login(
+                                  //   request: LoginRequest(
+                                  //     email: _emailController.text,
+                                  //     password: _passwordController.text,
+                                  //   ),
+                                  // );
+                                },
+                                text: "Login",
+                              ),
+                              SizedBox(height: 24.h),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Don't Have Account? ",
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.displayMedium,
+                                  ),
+                                  CustomTextButton(
+                                    text: "Create One",
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutes.register,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                  
+                              // Padding(
+                              //   padding: REdgeInsets.only(top: 60.0),
+                              //   child: CustomAnimatedToggle(),
+                              // ),
                             ],
                           ),
-
-                          Padding(
-                            padding: REdgeInsets.only(top: 60.0),
-                            child: CustomAnimatedToggle(),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

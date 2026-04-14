@@ -19,7 +19,7 @@ import 'features/booking/data/repository/booking_repository_impl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Firebase.initializeApp();
   configureDependencies();
   runApp(
     MultiBlocProvider(
@@ -35,7 +35,6 @@ void main() async {
         ),
 
       ],
-
       child: DashCupApp(),
 
     ),
@@ -48,7 +47,9 @@ class DashCupApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(430, 932),
+      designSize:
+          //Size(1920, 1080),
+          Size(430, 932),
       splitScreenMode: true,
       minTextAdapt: true,
       builder: (context, _) => MaterialApp(

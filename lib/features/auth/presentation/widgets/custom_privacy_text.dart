@@ -14,7 +14,7 @@ class CustomPrivacyText extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         style:  GoogleFonts.roboto(
-          color: Colors.grey,
+          color: ColorsManager.darkChocolate,
           fontSize: 16.sp,
           fontWeight: FontWeight.w500
         ),
@@ -24,7 +24,7 @@ class CustomPrivacyText extends StatelessWidget {
             text: 'Privacy & Terms',
             style:  TextStyle(
               fontSize: 20.sp,
-              color: ColorsManager.burntOrange,
+              color: ColorsManager.darkOrange,
               fontWeight: FontWeight.w600,
               decoration: TextDecoration.underline,
             ),

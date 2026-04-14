@@ -2,7 +2,6 @@ import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/resources/validators.dart';
-import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
@@ -10,6 +9,7 @@ import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -49,7 +49,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color: ColorsManager.burntOrange,
+              color: ColorsManager.darkOrange,
               size: 25,
             ),
           ),
@@ -57,7 +57,13 @@ class _ResetPasswordState extends State<ResetPassword> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset(ImageAssets.reset),
+
+              SizedBox(height: 30.h,),
+
+              Lottie.asset(LottieAssets.password),
+
+              SizedBox(height: 30.h,),
+
 
               Padding(
                 padding: REdgeInsets.only(left: 12, right: 12),

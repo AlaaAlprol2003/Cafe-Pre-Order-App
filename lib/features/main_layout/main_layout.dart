@@ -22,9 +22,15 @@ class MainLayout extends StatelessWidget {
     var cubit = BlocProvider.of<MainLayoutCubit>(context);
     return BlocBuilder<MainLayoutCubit, MainLayoutState>(
       builder: (context, state) {
-        return Scaffold(
-          body: tabs[cubit.selectedTab],
-          bottomNavigationBar: CustomBottomNavBar(),
+        return GestureDetector(
+          onTap: (){
+            FocusScope.of(context).unfocus();
+          },
+          child: Scaffold(
+            body: tabs[cubit.selectedTab],
+            bottomNavigationBar: CustomBottomNavBar(),
+           
+          ),
         );
       },
     );

@@ -1,13 +1,18 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
-import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductCategory extends StatelessWidget {
+class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.product});
 
   final Products product;
+  
+  @override
+  State<ProductCategory> createState() => _ProductCategoryState();
+}
+
+class _ProductCategoryState extends State<ProductCategory> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -18,46 +23,47 @@ class ProductCategory extends StatelessWidget {
           width: double.infinity,
 
           decoration: BoxDecoration(
-            color: ColorsManager.charcoalBlue,
+            color: ColorsManager.darkChocolate,
             borderRadius: BorderRadius.only(topRight: Radius.circular(16.r)),
           ),
         ),
         Positioned(
-          bottom: -50.h,
+          bottom: -16.h,
           left: -10.w,
 
           child: Container(
-            height: 250.h,
-            width: 150.w,
+            height: 185.h,
+            width: 160.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
+              color: ColorsManager.darkBrown
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(product.image, fit: BoxFit.cover),
+              child: Image.asset(widget.product.image, fit: BoxFit.cover),
             ),
           ),
         ),
         Positioned(
-          left: 150.w,
+          left: 160.w,
           top: 20.h,
           child: Column(
             children: [
               Text(
-                product.name,
-                style: Theme.of(context).textTheme.displayMedium,
+                widget.product.name,
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
               ),
               SizedBox(height: 10.h),
               Text(
-                "Pre Time: ${product.pretime}",
+                "Pre Time: ${widget.product.pretime}",
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  color: ColorsManager.burntOrange,
+                  color: ColorsManager.creamyWhite,
                 ),
               ),
               SizedBox(height: 10.h),
               Text(
-                "EGP ${product.price}",
-                style: Theme.of(context).textTheme.displayMedium,
+                "EGP ${widget.product.price}",
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
               ),
               SizedBox(height: 10.h),
             ],
@@ -65,17 +71,18 @@ class ProductCategory extends StatelessWidget {
         ),
         Positioned(
           bottom: 5.h,
-          right: 60.w,
+          right: 40.w,
           child: Row(
             children: [
               Text(
-                "${product.rate}",
+                "${widget.product.rate}",
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  color: ColorsManager.burntOrange,
+                  color: ColorsManager.creamyWhite,
+                  fontSize: 15.sp
                 ),
               ),
               SizedBox(width: 5.w),
-              Icon(Icons.star, color: Colors.amber),
+              Icon(Icons.star, color: Colors.amber,size: 15.h,),
             ],
           ),
         ),
@@ -85,8 +92,8 @@ class ProductCategory extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: ColorsManager.burntOrange,
 
-            radius: 25,
-            child: Icon(Icons.add, color: ColorsManager.darkNavyBlue, size: 25),
+            radius: 20,
+            child: Icon(Icons.add, color: ColorsManager.darkNavyBlue, size: 20),
           ),
         ),
       ],

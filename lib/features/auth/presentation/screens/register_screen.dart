@@ -59,145 +59,150 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: SingleChildScrollView(
           child: Padding(
             padding: REdgeInsets.only(top: 130),
-            child: Column(
-              children: [
-                Image.asset(ImageAssets.logo, height: 145.h),
-                SizedBox(height: 30.h),
-                Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding: REdgeInsets.only(left: 16.0, right: 16),
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          labelText: "Name",
-                          preIcon: Icon(Icons.person),
-                          controller: _nameController,
-                          validator: Validator.name,
-                        ),
-                        SizedBox(height: 24.h),
-                        CustomTextFormField(
-                          labelText: "Email",
-                          preIcon: Icon(Icons.email),
-                          keyboardType: TextInputType.emailAddress,
-                          controller: _emailController,
-                          validator: Validator.email,
-                        ),
-                        SizedBox(height: 24.h),
-                        BlocBuilder<AuthCubit, AuthState>(
-                          builder: (context, state) {
-                            return CustomTextFormField(
-                              labelText: "Password",
-                              isSecured: cubit.isSecuredField,
-                              preIcon: Icon(Icons.password),
-                              postIcon: IconButton(
-                                onPressed: () {
-                                  cubit.changeVisibilityState();
-                                },
-                                icon: Icon(
-                                  cubit.isSecuredField
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                              ),
-                              keyboardType: TextInputType.visiblePassword,
-                              controller: _passwordController,
-                              validator: Validator.password,
-                            );
-                          },
-                        ),
-                        SizedBox(height: 24.h),
-                        CustomTextFormField(
-                          labelText: "Phone Number",
-                          preIcon: Icon(Icons.phone),
-                          keyboardType: TextInputType.phone,
-                          controller: _phoneController,
-                          validator: Validator.phone,
-                        ),
-                        SizedBox(height: 30.h),
-                        CustomPrivacyText(),
-                        SizedBox(height: 16.h),
-                        BlocListener<AuthCubit, AuthState>(
-                          listenWhen: (previous, current) {
-                            if (current is RegisterLoading ||
-                                current is RegisterFailure) {
-                              return true;
-                            }
-                            if (current is RegisterSuccess &&
-                                previous is! RegisterSuccess) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          listener: (context, state) {
-                            if (state is RegisterLoading) {
-                              UiUtils.showLoading(context: context);
-                            } else if (state is RegisterFailure) {
-                              UiUtils.hideLoading(context: context);
-                              UiUtils.showMessage(
-                                context: context,
-                                message: state.message,
-                                bgColor: Colors.red,
-                                icon: Icons.error,
-                              );
-                            } else if (state is RegisterSuccess) {
-                              UiUtils.hideLoading(context: context);
-                              UiUtils.showMessage(
-                                context: context,
-                                message: "Account created successfully!",
-                              );
-                              Future.delayed(
-                                const Duration(milliseconds: 200),
-                                () {
-                                  if (mounted) {
-                                    Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      AppRoutes.login,
-                                      (route) => false,
-                                    );
-                                  }
-                                },
-                              );
-                            }
-                          },
-
-                          child: CustomElevatedButton(
-                            text: "Register",
-                            onPressed: () async {
-                              if (_formKey.currentState?.validate() == false)
-                                return;
-                              cubit.register(
-                                request: RegisterRequest(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                                name: _nameController.text,
-                                phone: _phoneController.text,
-                              );
-                            },
-                          ),
-                        ),
-                        SizedBox(height: 24.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 600.w),
+                child: Column(
+                  children: [
+                    Image.asset(ImageAssets.logo, height: 145.h),
+                    SizedBox(height: 30.h),
+                    Form(
+                      key: _formKey,
+                      child: Padding(
+                        padding: REdgeInsets.only(left: 16.0, right: 16),
+                        child: Column(
                           children: [
-                            Text(
-                              "Already Have Account? ",
-                              style: Theme.of(context).textTheme.displayMedium,
+                            CustomTextFormField(
+                              labelText: "Name",
+                              preIcon: Icon(Icons.person),
+                              controller: _nameController,
+                              validator: Validator.name,
                             ),
-                            CustomTextButton(
-                              text: "Login",
-                              onPressed: () {
-                                Navigator.pushNamed(context, AppRoutes.login);
+                            SizedBox(height: 24.h),
+                            CustomTextFormField(
+                              labelText: "Email",
+                              preIcon: Icon(Icons.email),
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _emailController,
+                              validator: Validator.email,
+                            ),
+                            SizedBox(height: 24.h),
+                            BlocBuilder<AuthCubit, AuthState>(
+                              builder: (context, state) {
+                                return CustomTextFormField(
+                                  labelText: "Password",
+                                  isSecured: cubit.isSecuredField,
+                                  preIcon: Icon(Icons.password),
+                                  postIcon: IconButton(
+                                    onPressed: () {
+                                      cubit.changeVisibilityState();
+                                    },
+                                    icon: Icon(
+                                      cubit.isSecuredField
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  controller: _passwordController,
+                                  validator: Validator.password,
+                                );
                               },
+                            ),
+                            SizedBox(height: 24.h),
+                            CustomTextFormField(
+                              labelText: "Phone Number",
+                              preIcon: Icon(Icons.phone),
+                              keyboardType: TextInputType.phone,
+                              controller: _phoneController,
+                              validator: Validator.phone,
+                            ),
+                            SizedBox(height: 30.h),
+                            CustomPrivacyText(),
+                            SizedBox(height: 16.h),
+                            BlocListener<AuthCubit, AuthState>(
+                              listenWhen: (previous, current) {
+                                if (current is RegisterLoading ||
+                                    current is RegisterFailure) {
+                                  return true;
+                                }
+                                if (current is RegisterSuccess &&
+                                    previous is! RegisterSuccess) {
+                                  return true;
+                                }
+                                return false;
+                              },
+                              listener: (context, state) {
+                                if (state is RegisterLoading) {
+                                  UiUtils.showLoading(context: context);
+                                } else if (state is RegisterFailure) {
+                                  UiUtils.hideLoading(context: context);
+                                  UiUtils.showMessage(
+                                    context: context,
+                                    message: state.message,
+                                    bgColor: Colors.red,
+                                    icon: Icons.error,
+                                  );
+                                } else if (state is RegisterSuccess) {
+                                  UiUtils.hideLoading(context: context);
+                                  UiUtils.showMessage(
+                                    context: context,
+                                    message: "Account created successfully!",
+                                  );
+                                  Future.delayed(
+                                    const Duration(milliseconds: 200),
+                                    () {
+                                      if (mounted) {
+                                        Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          AppRoutes.login,
+                                          (route) => false,
+                                        );
+                                      }
+                                    },
+                                  );
+                                }
+                              },
+                
+                              child: CustomElevatedButton(
+                                text: "Register",
+                                onPressed: () async {
+                                  if (_formKey.currentState?.validate() == false)
+                                    return;
+                                  cubit.register(
+                                    request: RegisterRequest(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                    name: _nameController.text,
+                                    phone: _phoneController.text,
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 24.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Already Have Account? ",
+                                  style: Theme.of(context).textTheme.displayMedium,
+                                ),
+                                CustomTextButton(
+                                  text: "Login",
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, AppRoutes.login);
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
