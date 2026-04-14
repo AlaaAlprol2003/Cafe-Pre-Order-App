@@ -1,5 +1,6 @@
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
+
 import 'package:dash_cup/features/main_layout/cubit/main_layout_cubit.dart';
 import 'package:dash_cup/features/main_layout/tabs/category/category_tab.dart';
 import 'package:dash_cup/features/main_layout/tabs/favorite/favorite_tab.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
