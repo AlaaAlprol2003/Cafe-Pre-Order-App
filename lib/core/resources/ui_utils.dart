@@ -16,7 +16,7 @@ class UiUtils {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircularProgressIndicator(color: ColorsManager.burntOrange),
+                CircularProgressIndicator(color: ColorsManager.darkOrange),
               ],
             ),
           ),

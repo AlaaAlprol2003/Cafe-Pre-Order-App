@@ -16,12 +16,10 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+    {
+  
 
-  late Animation<double> _yellowCircleAnim;
-  late Animation<double> _greenCircleAnim;
-  late Animation<double> _orangeCircleAnim;
+ 
   final List<String> items = ["Caramel", "Vanilla", "Oat Milk", "Extra Shot"];
 
   String? selectedItem;
@@ -31,34 +29,12 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    )..repeat(reverse: true);
-
-    _yellowCircleAnim = Tween<double>(begin: 0, end: 30).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 1.0, curve: Curves.easeInOut),
-      ),
-    );
-
-    _greenCircleAnim = Tween<double>(begin: 0, end: 20).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.2, 0.8, curve: Curves.fastOutSlowIn),
-      ),
-    );
-
-    _orangeCircleAnim = Tween<double>(
-      begin: 0,
-      end: 12,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
+    
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+   
     super.dispose();
   }
 
@@ -69,6 +45,7 @@ class _ProductScreenState extends State<ProductScreen>
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        backgroundColor: ColorsManager.creamyWhite,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -93,10 +70,10 @@ class _ProductScreenState extends State<ProductScreen>
                     ),
                   ),
                   SizedBox(height: 24.h),
-                  AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, _) {
-                      return Stack(
+                 
+                    
+                    
+                       Stack(
                         clipBehavior: Clip.none,
                         children: [
                           Container(
@@ -114,7 +91,7 @@ class _ProductScreenState extends State<ProductScreen>
                           ),
 
                           Positioned(
-                            top: -40.h + _yellowCircleAnim.value,
+                            top: -40.h ,
                             right: -10.w,
                             child: CircleAvatar(
                               radius: 70.r,
@@ -123,7 +100,7 @@ class _ProductScreenState extends State<ProductScreen>
                           ),
 
                           Positioned(
-                            top: 10.h - _orangeCircleAnim.value,
+                            top: 10.h ,
                             right: 40.w,
                             child: CircleAvatar(
                               radius: 50.r,
@@ -132,7 +109,7 @@ class _ProductScreenState extends State<ProductScreen>
                           ),
 
                           Positioned(
-                            top: -10.h + _greenCircleAnim.value,
+                            top: -10.h ,
                             right: 20.w,
                             child: CircleAvatar(
                               radius: 40.r,
@@ -225,9 +202,9 @@ class _ProductScreenState extends State<ProductScreen>
                             ),
                           ),
                         ],
-                      );
-                    },
-                  ),
+                      ),
+                  
+              
                   SizedBox(height: 50.h),
                   Padding(
                     padding: REdgeInsets.symmetric(
@@ -235,26 +212,32 @@ class _ProductScreenState extends State<ProductScreen>
                       vertical: 25,
                     ),
                     child: AnimationLimiter(
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) =>
-                            AnimationConfiguration.staggeredList(
-                              position: index,
-                              duration: const Duration(seconds: 1),
-                              delay: const Duration(milliseconds: 800),
-                              child: SlideAnimation(
-                                verticalOffset: 50.0,
-                                child: FadeInAnimation(
-                                  child: ProductCategory(
-                                    product: widget.products[index],
+                      child: Center(
+                        
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: 500),
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(seconds: 1),
+                                  delay: const Duration(milliseconds: 800),
+                                  child: SlideAnimation(
+                                    verticalOffset: 50.0,
+                                    child: FadeInAnimation(
+                                      child: ProductCategory(
+                                        product: widget.products[index],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 130.h),
-                        itemCount: widget.products.length,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 130.h),
+                            itemCount: widget.products.length,
+                          ),
+                        ),
                       ),
                     ),
                   ),

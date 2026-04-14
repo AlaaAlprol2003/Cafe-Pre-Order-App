@@ -32,10 +32,10 @@ class ThemeManager {
       prefixIconColor: ColorsManager.darkChocolate,
       
       suffixIconColor:  ColorsManager.darkChocolate53,
-      labelStyle: GoogleFonts.roboto(
-        fontSize: 18.sp,
+      hintStyle: GoogleFonts.roboto(
+        fontSize: 14.sp,
         fontWeight: FontWeight.w500,
-        color:  ColorsManager.mediumBrown,
+        color:  ColorsManager.mediumBrown.withValues(alpha: .5),
       ),
     ),
     
@@ -80,13 +80,13 @@ class ThemeManager {
         fontWeight: FontWeight.w500,
         color: ColorsManager.eggshell,
       ),
-      labelMedium: GoogleFonts.roboto(
-        fontSize: 20.sp,
+      labelMedium: GoogleFonts.poppins(
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
         color: ColorsManager.charcoalBlue,
       ),
       titleSmall: GoogleFonts.roboto(
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.darkBrown,
       ),
@@ -94,6 +94,11 @@ class ThemeManager {
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: ColorsManager.burntOrange,
+      ),
+      bodyMedium:  GoogleFonts.roboto(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.darkChocolate,
       ),
     ),
   );

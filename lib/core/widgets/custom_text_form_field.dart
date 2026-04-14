@@ -42,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
-        labelText: labelText,
+        hintText: labelText,
         errorStyle: GoogleFonts.roboto(
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,

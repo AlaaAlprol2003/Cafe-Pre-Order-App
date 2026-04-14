@@ -8,13 +8,13 @@ import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/core/widgets/product_item.dart';
-import 'package:dash_cup/core/widgets/text_animations.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/category_item.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/mood_sheet.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/offer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomeTab extends StatelessWidget {
   HomeTab({super.key});
@@ -22,61 +22,77 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            height: 270.h,
-            decoration: BoxDecoration(
-              color: ColorsManager.darkNavyBlue,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(25.r),
-                bottomLeft: Radius.circular(25.r),
+      child: Padding(
+        padding: REdgeInsets.only(bottom: 50.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 210.h,
+              padding: REdgeInsets.only(top: 80.h, left: 16.w, right: 16.w),
+              decoration: BoxDecoration(
+                color: ColorsManager.darkHoney,
+                gradient: LinearGradient(colors: [
+                  const Color.fromARGB(255, 53, 29, 1),
+                  const Color.fromARGB(255, 80, 45, 2),
+                ]),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(25.r),
+                  bottomLeft: Radius.circular(25.r),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: REdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 40,
-                  ),
-                  child: Row(
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(80.r),
-                        child: Image.asset(
-                          ImageAssets.person,
-                          fit: BoxFit.cover,
-                          height: 100.h,
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 36, 19, 0),
+                            borderRadius: BorderRadius.circular(80.r)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(80.r),
+                          child: Image.asset(
+                            ImageAssets.person,
+                            fit: BoxFit.cover,
+                            height: 80.h,
+                          ),
                         ),
                       ),
                       SizedBox(width: 16.w),
                       Expanded(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Hi, Alaa ✨",
-                              style: Theme.of(context).textTheme.displayMedium,
+                              "Hi, Alaa",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(
+                                    color: ColorsManager.creamyWhite,
+                                  ),
                             ),
-                            SizedBox(height: 12.h),
-                            TextAnimations.colorizeAnimatedText(
-                              text: "Let's start your day\nwith a perfect cup.",
-                              context: context,
+                            SizedBox(height: 5.h),
+                            Text(
+                              "Let's start your day\nwith a perfect cup.",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color.fromARGB(
+                                          255, 251, 241, 205),
+                                      fontSize: 14.sp),
                             ),
-                            // Text(
-                            //   "Let's start your day\nwith a perfect cup.",
-                            //   style: Theme.of(context).textTheme.displayMedium!
-                            //       .copyWith(fontSize: 16.sp),
-                            // ),
                           ],
                         ),
                       ),
-
                       CircleAvatar(
-                        backgroundColor: ColorsManager.burntOrange,
+                        backgroundColor: const Color.fromARGB(255, 168, 101, 8),
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -87,159 +103,200 @@ class HomeTab extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: REdgeInsets.symmetric(horizontal: 16),
-                        child: CustomTextFormField(
-                          labelText: "What are you looking for today?",
-                          controller: _searchController,
-                          preIcon: Icon(Icons.search),
-                        ),
-                      ),
-                    ),
-                   
-                    IconButton(
-                      onPressed: () => showMoodSheet(context),
-                      icon: Icon(Icons.auto_fix_high,color: ColorsManager.burntOrange,size: 30,),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 24.h),
-          Padding(
-            padding: REdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CarouselSlider(
-                  options: CarouselOptions(
-                    height: 200.h,
-
-                    autoPlay: true,
-                    enlargeFactor: 1,
-                    viewportFraction: 1,
+                  SizedBox(
+                    height: 24.h,
                   ),
-                  items: OfferModel.dashBundles
-                      .map((offer) => OfferWidget(imagePath: offer.image))
-                      .toList(),
-                ),
-                SizedBox(height: 24.h),
-                Text(
-                  "Categories",
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                SizedBox(height: 16.h),
-                SizedBox(
-                  height: 200.h,
-                  width: double.infinity,
-                  child: CarouselSlider(
-                    items: Data.categosies
-                        .map(
-                          (category) => InkWell(
-                            onTap: () {
-                              List<Products> filteredList = Data.allProducts
-                                  .where(
-                                    (product) =>
-                                        product.category.categoryid ==
-                                        category.categoryid,
-                                  )
-                                  .toList();
-
-                              Navigator.pushNamed(
-                                context,
-                                AppRoutes.productScreen,
-                                arguments: filteredList,
-                              );
-                            },
-                            child: CategoryItem(
-                              imagePath: category.image,
-                              categoryName: category.name,
+                  Positioned(
+                    bottom: -28.h,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: REdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: SizedBox(
+                              height: 50.h,
+                              child: CustomTextFormField(
+                                labelText: "What are you looking for?",
+                                controller: _searchController,
+                                preIcon: Icon(
+                                  Icons.search,
+                                  color: ColorsManager.darkOrange,
+                                ),
+                                postIcon: IconButton(
+                                  onPressed: () => showMoodSheet(context),
+                                  icon: Icon(
+                                    Icons.auto_fix_high,
+                                    color:
+                                        const Color.fromARGB(255, 149, 92, 11),
+                                    size: 25,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        )
-                        .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 60.h),
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CarouselSlider(
                     options: CarouselOptions(
+                      height: 200.h,
                       autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 3),
-                      autoPlayAnimationDuration: const Duration(
-                        milliseconds: 800,
+                      enlargeFactor: 1,
+                      viewportFraction: 1,
+                    ),
+                    items: OfferModel.dashBundles
+                        .map((offer) => OfferWidget(
+                              imagePath: offer.cardImage,
+                              offer: offer,
+                            ))
+                        .toList(),
+                  ),
+                  SizedBox(height: 24.h),
+                  Text(
+                    "Categories",
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium!
+                        .copyWith(color: const Color.fromARGB(255, 64, 25, 1),fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 35.h),
+                  SizedBox(
+                    height: 150.h,
+                    width: double.infinity,
+                    child:
+
+                        // CarouselSlider(
+                        //   items: Data.categosies
+                        //       .map(
+                        //         (category) => InkWell(
+                        //           onTap: () {
+                        //             List<Products> filteredList = Data.allProducts
+                        //                 .where(
+                        //                   (product) =>
+                        //                       product.category.categoryid ==
+                        //                       category.categoryid,
+                        //                 )
+                        //                 .toList();
+
+                        //             Navigator.pushNamed(
+                        //               context,
+                        //               AppRoutes.productScreen,
+                        //               arguments: filteredList,
+                        //             );
+                        //           },
+                        //           child: CategoryItem(
+                        //             imagePath: category.image,
+                        //             categoryName: category.name,
+                        //           ),
+                        //         ),
+                        //       )
+                        //       .toList(),
+                        //   options: CarouselOptions(
+                        //     autoPlay: true,
+                        //     autoPlayInterval: const Duration(seconds: 3),
+                        //     autoPlayAnimationDuration: const Duration(
+                        //       milliseconds: 800,
+                        //     ),
+                        //     autoPlayCurve: Curves.fastOutSlowIn,
+                        //     enlargeCenterPage: true,
+                        //     viewportFraction: 0.45,
+                        //     scrollDirection: Axis.horizontal,
+                        //   ),
+                        // ),
+
+                        ListView.separated(
+                      itemBuilder: (context, index) =>
+                          AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: Duration(seconds: 1),
+                        delay: Duration(milliseconds: 500),
+                        child: SlideAnimation(
+                          horizontalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: InkWell(
+                              onTap: () {
+                                var category = Data.categosies[index];
+                                List<Products> filteredList = Data.allProducts
+                                    .where(
+                                      (product) =>
+                                          product.category.categoryid ==
+                                          category.categoryid,
+                                    )
+                                    .toList();
+
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.productScreen,
+                                  arguments: filteredList,
+                                );
+                              },
+                              child: CategoryItem(
+                                imagePath: Data.categosies[index].image,
+                                icon: Data.categosies[index].icon,
+                                categoryName: Data.categosies[index].name,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      viewportFraction: 0.45,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(width: 20.w),
+                      itemCount: Data.categosies.length,
                       scrollDirection: Axis.horizontal,
                     ),
                   ),
-
-                  // ListView.separated(
-                  //   itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
-                  //     position: index,
-                  //       duration: const Duration(seconds: 1),
-                  //       delay: const Duration(milliseconds: 500),
-                  //     child: SlideAnimation(
-                  //       horizontalOffset: 50.0,
-                  //       child: FadeInAnimation(
-                  //         child: InkWell(
-
-                  //           onTap: ()  {
-                  //             var category = Data.categosies[index];
-                  //             List<Products> filteredList = Data.allProducts
-                  //                 .where(
-                  //                   (product) =>
-                  //                       product.category.categoryid ==
-                  //                       category.categoryid,
-                  //                 )
-                  //                 .toList();
-
-                  //             Navigator.pushNamed(
-                  //               context,
-                  //               AppRoutes.productScreen,
-                  //               arguments: filteredList,
-                  //             );
-                  //           },
-                  //           child: CategoryItem(
-                  //             imagePath: Data.categosies[index].image,
-                  //             categoryName: Data.categosies[index].name,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   separatorBuilder: (context, index) => SizedBox(width: 12.w),
-                  //   itemCount: Data.categosies.length,
-                  //   scrollDirection: Axis.horizontal,
-                  // ),
-                ),
-
-                Text(
-                  "Popular Items",
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: ColorsManager.darkNavyBlue,
+                  SizedBox(
+                    height: 12.h,
                   ),
-                ),
-
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 7 / 11,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
+                  Text(
+                    "Popular Items",
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                          color: ColorsManager.darkNavyBlue,fontWeight: FontWeight.bold
+                        ),
                   ),
-                  itemBuilder: (context, index) =>
-                      ProductItem(product: Data.popularProducts[index]),
-                  itemCount: 4,
-                ),
-              ],
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 7 / 10,
+                      mainAxisSpacing: 40.h,
+                      crossAxisSpacing: 30.w,
+                    ),
+                    itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorsManager.darkBrown.withValues(alpha: .5),
+                              blurRadius: 10,
+                              spreadRadius: -4,
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                        ),
+                        child:
+                            ProductItem(product: Data.popularProducts[index])),
+                    itemCount: 4,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
