@@ -67,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           },
         ),
-
         BlocListener<AuthCubit, AuthState>(
           listenWhen: (prev, curr) =>
               curr is GetUserFromFirestoreSuccess ||
@@ -80,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 message: " Welcome back! We're glad to see you 👋",
               );
-              ///Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
+              Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
             } else if (state is GetUserFromFirestoreFailure) {
               UiUtils.showMessage(
                 context: context,
@@ -102,8 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: REdgeInsets.only(top: 130.0),
               child: Center(
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 400.w,),
-                  
+                  constraints: BoxConstraints(
+                    maxWidth: 400.w,
+                  ),
                   child: Column(
                     children: [
                       Image.asset(
@@ -164,15 +164,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 24.h),
                               CustomElevatedButton(
                                 onPressed: () async {
-                                  Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
-                                  // if (_formKey.currentState?.validate() == false)
-                                  //   return;
-                                  // await cubit.login(
-                                  //   request: LoginRequest(
-                                  //     email: _emailController.text,
-                                  //     password: _passwordController.text,
-                                  //   ),
-                                  // );
+                                  //Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
+                                  if (_formKey.currentState?.validate() ==
+                                      false) return;
+                                  await cubit.login(
+                                    request: LoginRequest(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
                                 },
                                 text: "Login",
                               ),
@@ -197,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ],
                               ),
-                  
+
                               // Padding(
                               //   padding: REdgeInsets.only(top: 60.0),
                               //   child: CustomAnimatedToggle(),
