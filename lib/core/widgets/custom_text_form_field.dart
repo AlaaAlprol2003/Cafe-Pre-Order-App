@@ -29,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         color: ColorsManager.darkHoney,
+
       ),
       cursorColor: ColorsManager.darkOrange,
       obscuringCharacter: "*",
