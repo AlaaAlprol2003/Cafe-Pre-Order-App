@@ -80,7 +80,7 @@ class _ProductScreenState extends State<ProductScreen>
                             width: 400.w,
                             height: 300.h,
                             decoration: BoxDecoration(
-                              color: ColorsManager.charcoalBlue,
+                              color:Colors.brown,
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(50.r),
                                 bottomLeft: Radius.circular(50.r),

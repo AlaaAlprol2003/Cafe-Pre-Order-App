@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../cubit/booking_cubit.dart';
-import '../widgets/booking_card.dart';
 import 'second_screen.dart';
+import 'package:dash_cup/features/booking/presentation/widgets/booking_card.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({super.key});
@@ -34,20 +35,23 @@ class FirstScreen extends StatelessWidget {
           }
 
           return ListView(
-            children: data
-                .map((b) => BookingCard(booking: b))
-                .toList(),
+            children: data.map((b) => BookingCard(booking: b)).toList(),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => SecondScreen()),
-          );
-        },
-        child: Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Padding(
+        padding:  EdgeInsets.symmetric( vertical: 90.h),
+        child: FloatingActionButton(
+
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => SecondScreen()),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }

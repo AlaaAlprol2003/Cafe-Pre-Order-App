@@ -21,7 +21,14 @@ class SecondScreen extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.watch<BookingCubit>();
         return Scaffold(
-          appBar: AppBar(title: Text("Create Booking")),
+          appBar: AppBar(
+              title: Text(
+            "Create Booking",
+            style: TextStyle(
+                color: ColorsManager.creamyWhite,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold),
+          )),
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -37,7 +44,7 @@ class SecondScreen extends StatelessWidget {
                             image: AssetImage(
                               "assets/images/blur cafe background.png",
                             ),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -54,52 +61,63 @@ class SecondScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
+                        color: ColorsManager.darkBrown
                       ),
                     ),
                     Container(
-                      height: 50.h,
+                      height: 80.h,
                       width: 400.w,
+
                       decoration: BoxDecoration(
+                        color: ColorsManager.creamyWhite,
                         border: Border.all(
                           color: ColorsManager.darkBrown,
                           style: BorderStyle.solid,
                         ),
-                        borderRadius: BorderRadius.circular(20.r),
+                        borderRadius: BorderRadius.circular(16.r),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(Icons.people, color: ColorsManager.darkBrown),
-                          CircleAvatar(
-                            backgroundColor: ColorsManager.white,
-                            radius: 20.r,
-                            child: IconButton(
-                              onPressed: cubit.decrement,
-                              icon: Icon(Icons.remove),
-                            ),
-                          ),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                        child: Row(
 
-                          BlocBuilder<BookingCubit, dynamic>(
-                            builder: (context, state) {
-                              return Text(
-                                "${cubit.guests}",
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            },
-                          ),
+                          children: [
+                            Icon(Icons.people, color: ColorsManager.darkBrown, size: 45.sp,),
+                            SizedBox(width: 80.w,),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(24.r)),
 
-                          CircleAvatar(
-                            backgroundColor: ColorsManager.white,
-                            radius: 20.r,
-                            child: IconButton(
-                              onPressed: cubit.increment,
-                              icon: Icon(Icons.add),
+                                border: Border.all(
+                                  color: ColorsManager.darkBrown,
+                                  style: BorderStyle.solid,
+                                )
+                              ),
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        cubit.decrement();
+                                      },
+                                      icon: Icon(Icons.remove,
+                                          color: ColorsManager.darkBrown)),
+                                  Text(
+                                    "${cubit.guests} Guests",
+                                    style: TextStyle(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        cubit.increment();
+                                      },
+                                      icon: Icon(Icons.add,
+                                          color: ColorsManager.darkBrown)),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -115,61 +133,76 @@ class SecondScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 18.h),
                 //table type toggle
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           "Table Type",
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
+                              color: ColorsManager.darkBrown
                           ),
                         ),
                       ),
-                    ),
-                    AnimatedToggleSwitch<String>.rolling(
-                      animationCurve: Curves.easeInOut,
-                      textDirection: TextDirection.ltr,
-                      indicatorSize: Size(100.w, 50.h),
-                      current: cubit.tableType,
-                      values: ['Indoor', 'Outdoor'],
-                      onChanged: (value) => cubit.setTable(value),
-                      iconBuilder: (value, isSelected) => Text(
-                        value,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: isSelected
-                              ? ColorsManager.white
-                              : ColorsManager.darkBrown,
-                          fontWeight: FontWeight.bold,
+                      AnimatedToggleSwitch<String>.rolling(
+                        style: ToggleStyle(
+                          backgroundColor: ColorsManager.creamyWhite,
+                          indicatorColor: ColorsManager.darkBrown,
+                          borderColor: ColorsManager.darkBrown,
+                          borderRadius: BorderRadius.all(Radius.circular(18.r))
+                        ), animationCurve: Curves.easeInOut,
+                        animationDuration: Duration(milliseconds: 300),
+                        textDirection: TextDirection.ltr,
+                        indicatorSize: Size(150.w, 50.h),
+                        current: cubit.tableType,
+                        values: ['Indoor', 'Outdoor'],
+                        onChanged: (value) => cubit.setTable(value),
+                        iconBuilder: (value, isSelected) => Text(
+                          value,
+                          style: TextStyle(
+
+                            fontSize: 16.sp,
+                            color: isSelected
+                                ? ColorsManager.white
+                                : Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 SizedBox(height: 12.h),
                 //occasion field
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          child: Text(
-                            "Occasion",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        child: Text(
+                          "Occasion",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                              color: ColorsManager.darkBrown
                           ),
                         ),
                       ),
                       DropdownButton<String>(
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          color: ColorsManager.darkBrown,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                        dropdownColor: ColorsManager.creamyWhite,
                         value: cubit.occasion,
                         onChanged: (val) {
                           cubit.setOccasion(val!);
@@ -182,9 +215,9 @@ class SecondScreen extends StatelessWidget {
                           "Football match"
                         ]
                             .map((e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(e),
-                        ))
+                                  value: e,
+                                  child: Text(e),
+                                ))
                             .toList(),
                       ),
                     ],
@@ -192,113 +225,128 @@ class SecondScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h),
                 //date picker
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           "Date",
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
+                              color: ColorsManager.darkBrown
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorsManager.darkBrown,
-                            style: BorderStyle.solid,
-                          ),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.calendar_month, color: ColorsManager.darkBrown),
-                            Text(
-                              cubit.date.isEmpty ? "Pick a Date" : cubit.date,
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(onPressed: () async {
-                              final date = await showDatePicker(
-                                context: context,
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                                initialDate: DateTime.now(),
-                              );
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorsManager.creamyWhite,
 
-                              if (date != null) {
-                                cubit.setDate(date.toString().split(" ")[0]);
-                              }
-                            }, icon: Icon(Icons.edit_calendar, color: ColorsManager.darkBrown))
-                          ],
+                            border: Border.all(
+                              color: ColorsManager.darkBrown,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(Icons.calendar_month,
+                                  color: ColorsManager.darkBrown),
+                              Text(
+                                cubit.date.isEmpty ? "Pick a Date" : cubit.date,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () async {
+                                    final date = await showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime.now(),
+                                      lastDate: DateTime(2100),
+                                      initialDate: DateTime.now(),
+                                    );
+
+                                    if (date != null) {
+                                      cubit
+                                          .setDate(date.toString().split(" ")[0]);
+                                    }
+                                  },
+                                  icon: Icon(Icons.edit_calendar,
+                                      color: ColorsManager.darkBrown))
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(height: 12.h),
                 //time picker
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           "Time",
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
+                              color: ColorsManager.darkBrown
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorsManager.darkBrown,
-                            style: BorderStyle.solid,
-                          ),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.watch_later_outlined, color: ColorsManager.darkBrown),
-                            Text(
-                              cubit.date.isEmpty ? "Pick a Time" : cubit.time,
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(onPressed: () async {
-                              final time = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.now(),
-                              );
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorsManager.creamyWhite,
 
-                              if (time != null) {
-                                cubit.setTime(time.format(context));
-                              }
-                            }, icon: Icon(Icons.add_alarm_outlined, color: ColorsManager.darkBrown))
-                          ],
+                            border: Border.all(
+                              color: ColorsManager.darkBrown,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(Icons.watch_later_outlined,
+                                  color: ColorsManager.darkBrown),
+                              Text(
+                                cubit.date.isEmpty ? "Pick a Time" : cubit.time,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () async {
+                                    final time = await showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now(),
+                                    );
+
+                                    if (time != null) {
+                                      cubit.setTime(time.format(context));
+                                    }
+                                  },
+                                  icon: Icon(Icons.add_alarm_outlined,
+                                      color: ColorsManager.darkBrown))
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(height: 12.h),
                 //price
@@ -313,6 +361,7 @@ class SecondScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
+                              color: ColorsManager.darkBrown
                           ),
                         ),
                       ),
@@ -321,33 +370,46 @@ class SecondScreen extends StatelessWidget {
                       width: 200.w,
                       height: 50.h,
                       decoration: BoxDecoration(
-                        color: ColorsManager.white,
+                        color: ColorsManager.creamyWhite,
+                        border: Border.all(
+                          color: ColorsManager.darkBrown,
+                          style: BorderStyle.solid,
+                        ),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text(" ${cubit.price} EGP", style:
-                          TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                          ),)],
+                        children: [
+                          Text(
+                            " ${cubit.price} EGP",
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h,),
-               //next button
-               Padding(
-                 padding:  EdgeInsets.all(8.h),
-                 child: CustomElevatedButton(onPressed: () {
-                   Navigator.push(
-                     context,
-                     MaterialPageRoute(
-                       builder: (_) => ThirdScreen(name: nameController.text),
-                     ),
-                   );
-                 }, text:"Next"),
-               )
+                SizedBox(
+                  height: 12.h,
+                ),
+                //next button
+                Padding(
+                  padding: EdgeInsets.all(8.h),
+                  child: CustomElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                ThirdScreen(name: nameController.text),
+                          ),
+                        );
+                      },
+                      text: "Next"),
+                )
               ],
             ),
           ),

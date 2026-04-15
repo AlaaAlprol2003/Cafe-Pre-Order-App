@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/booking_model.dart';
@@ -13,7 +14,7 @@ class BookingRemoteDataSource {
   Future<void> addBooking(BookingModel booking) async {
     final user = FirebaseAuth.instance.currentUser;
 
-    if (user == null) throw Exception("User not logged in");
+    if (user == null) return null;
 
     await firestore
         .collection("users")
@@ -27,7 +28,7 @@ class BookingRemoteDataSource {
 
     return firestore
         .collection("users")
-        .doc(user!.uid)
+        .doc(user?.uid)
         .collection("bookings")
         .snapshots()
         .map((snapshot) {
@@ -42,7 +43,7 @@ class BookingRemoteDataSource {
 
     await firestore
         .collection("users")
-        .doc(user!.uid)
+        .doc(user?.uid)
         .collection("bookings")
         .doc(id)
         .delete();

@@ -12,6 +12,7 @@ class Category {
     required this.image,
     required this.icon
   });
+
 }
 
 class Products {
@@ -21,7 +22,7 @@ class Products {
   final double rate;
   final String pretime;
   final String image;
-  final Category category;  
+  final Category category;
   final String description;
 
   Products({
@@ -34,4 +35,5 @@ class Products {
     required this.category,
     required this.description,
   });
+
 }
