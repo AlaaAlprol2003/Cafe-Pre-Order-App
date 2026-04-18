@@ -242,7 +242,7 @@ class HomeTab extends StatelessWidget {
                           child: FadeInAnimation(
                             child: InkWell(
                               onTap: () {
-                                var category = Data.categosies[index];
+                                var category = Data.categories[index];
                                 List<Products> filteredList = Data.allProducts
                                     .where(
                                       (product) =>
@@ -258,9 +258,9 @@ class HomeTab extends StatelessWidget {
                                 );
                               },
                               child: CategoryItem(
-                                imagePath: Data.categosies[index].image,
-                                icon: Data.categosies[index].icon,
-                                categoryName: Data.categosies[index].name,
+                                imagePath: Data.categories[index].image,
+                                icon: Data.categories[index].icon,
+                                categoryName: Data.categories[index].name,
                               ),
                             ),
                           ),
@@ -268,7 +268,7 @@ class HomeTab extends StatelessWidget {
                       ),
                       separatorBuilder: (context, index) =>
                           SizedBox(width: 20.w),
-                      itemCount: Data.categosies.length,
+                      itemCount: Data.categories.length,
                       scrollDirection: Axis.horizontal,
                     ),
                   ),

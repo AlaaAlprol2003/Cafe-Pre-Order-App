@@ -11,85 +11,76 @@ final Category Tea_Herbal_Drinks = Category(
     categoryid: "C1",
     name: "Botanicals",
     image: "assets/images/teaandherbaldrinks.png",
-    icon: FaIcon(FontAwesomeIcons.mugSaucer,color: ColorsManager.darkBrown,));
+    hasMilkOption: true, // الشاي باللبن
+    hasSugarOption: true,
+    icon: FaIcon(FontAwesomeIcons.mugSaucer, color: ColorsManager.darkBrown));
+
 final Category HotCoffee = Category(
     categoryid: "C2",
     name: "Hot Coffee",
     image: "assets/images/hot coffee.png",
-    icon: FaIcon(FontAwesomeIcons.mugHot,color: ColorsManager.darkBrown));
+    hasMilkOption: true, // القهوة الساخنة تحتاج لبن
+    hasSugarOption: true,
+    icon: FaIcon(FontAwesomeIcons.mugHot, color: ColorsManager.darkBrown));
+
 final Category IcedCoffee = Category(
     categoryid: "C3",
     name: "IcedCoffee",
     image: "assets/images/iced coffee category.png",
-    icon: FaIcon(FontAwesomeIcons.glassWater,color: ColorsManager.darkBrown));
+    hasMilkOption: true, // القهوة الباردة تحتاج لبن
+    hasSugarOption: true,
+    icon: FaIcon(FontAwesomeIcons.glassWater, color: ColorsManager.darkBrown));
+
 final Category Dessert_Snacks = Category(
     categoryid: "C4",
     name: "Dessert&Snacks",
     image: "assets/images/dessert and snacks logo.png",
-    icon: FaIcon(FontAwesomeIcons.cakeCandles,color: ColorsManager.darkBrown));
+    hasMilkOption: false, // الحلويات لا تحتاج لبن أو سكر إضافي
+    hasSugarOption: false,
+    icon: FaIcon(FontAwesomeIcons.cakeCandles, color: ColorsManager.darkBrown));
+
 final Category LightBites = Category(
     categoryid: "C5",
     name: "Light Bites",
     image: "assets/images/chicken panini logo.png",
-    icon: FaIcon(FontAwesomeIcons.breadSlice,color: ColorsManager.darkBrown));
+    hasMilkOption: false,
+    hasSugarOption: false,
+    icon: FaIcon(FontAwesomeIcons.breadSlice, color: ColorsManager.darkBrown));
+
 final Category SoftDrinks = Category(
     categoryid: "C6",
     name: "Soft Drinks",
     image: "assets/images/soft drinks logo.png",
-    icon: FaIcon(FontAwesomeIcons.bottleWater,color: ColorsManager.darkBrown));
+    hasMilkOption: false,
+    hasSugarOption: false,
+    icon: FaIcon(FontAwesomeIcons.bottleWater, color: ColorsManager.darkBrown));
+
 final Category FreshJuices = Category(
     categoryid: "C7",
     name: "Fresh Juices",
     image: "assets/images/fresh juice logo.png",
-    icon: FaIcon(FontAwesomeIcons.wineGlass,color: ColorsManager.darkBrown));
+    hasMilkOption: false,
+    hasSugarOption: true, // العصير يحتاج تحديد مستوى السكر فقط
+    icon: FaIcon(FontAwesomeIcons.wineGlass, color: ColorsManager.darkBrown));
+
 final Category Smoothies_Milkshakes = Category(
     categoryid: "C8",
     name: "Shakes & Co",
     image: "assets/images/smoothie and shakes logo.png",
-    icon: FaIcon(FontAwesomeIcons.blender,color: ColorsManager.darkBrown));
+    hasMilkOption: false, // هي أصلاً فيها لبن، مفيش خيار تغيير نوع اللبن غالباً
+    hasSugarOption: true,
+    icon: FaIcon(FontAwesomeIcons.blender, color: ColorsManager.darkBrown));
 
 class Data {
-  static List<Category> categosies = [
-    Category(
-        categoryid: "C1",
-        name: "Botanicals",
-        image: "assets/images/teaandherbaldrinks.png",
-        icon: FaIcon(FontAwesomeIcons.mugSaucer,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C2",
-        name: "Hot Coffee",
-        image: "assets/images/hot coffee.png",
-        icon: FaIcon(FontAwesomeIcons.mugHot,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C3",
-        name: "IcedCoffee",
-        image: "assets/images/iced coffee category.png",
-        icon: FaIcon(FontAwesomeIcons.glassWater,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C4",
-        name: "Dessert&Snacks",
-        image: "assets/images/dessert and snacks logo.png",
-        icon: FaIcon(FontAwesomeIcons.cakeCandles,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C5",
-        name: "Light Bites",
-        image: "assets/images/chicken panini logo.png",
-        icon: FaIcon(FontAwesomeIcons.breadSlice,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C6",
-        name: "Soft Drinks",
-        image: "assets/images/soft drinks logo.png",
-        icon: FaIcon(FontAwesomeIcons.bottleWater,color: ColorsManager.darkBrown)),
-    Category(
-        categoryid: "C7",
-        name: "Fresh Juices",
-        image: "assets/images/fresh juice logo.png",
-        icon: FaIcon(FontAwesomeIcons.wineGlass,color: const Color.fromARGB(255, 71, 35, 29))),
-    Category(
-        categoryid: "C8",
-        name: "Shakes & Co",
-        image: "assets/images/smoothie and shakes logo.png",
-        icon: FaIcon(FontAwesomeIcons.blender,color: const Color.fromARGB(255, 68, 26, 2))),
+  static List<Category> categories = [
+    Tea_Herbal_Drinks,
+    HotCoffee,
+    IcedCoffee,
+    Dessert_Snacks,
+    LightBites,
+    SoftDrinks,
+    FreshJuices,
+    Smoothies_Milkshakes,
   ];
 
   static List<Products> teaProducts = [
@@ -101,7 +92,10 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/redtea.png",
       category: Tea_Herbal_Drinks,
-      description: "Classic black tea with a rich aroma and strong flavor.",
+      isOrganic: true,
+      isFavorite: false,
+      description:
+          "Experience the timeless tradition of our signature Red Tea. Sourced from the finest high-altitude tea gardens, it offers a deep amber hue, a robust aroma, and a smooth, full-bodied flavor that awakens your senses with every sip.",
     ),
     Products(
       productid: "THD2",
@@ -111,7 +105,10 @@ class Data {
       pretime: "6–8 min",
       image: "assets/images/green tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Light and refreshing green tea.",
+      isOrganic: true,
+      isFavorite: true,
+      description:
+          "A delicate and refreshing infusion of organic green tea leaves. Rich in antioxidants and lightly steamed to preserve its natural earthy notes, this tea provides a clean, revitalizing finish perfect for a mindful mid-day break.",
     ),
     Products(
       productid: "THD3",
@@ -121,7 +118,9 @@ class Data {
       pretime: "7–10 min",
       image: "assets/images/karak tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Strong spiced tea with milk and cardamom.",
+      isOrganic: false,
+      description:
+          "Indulge in our creamy and aromatic Karak Tea. A masterful blend of strong black tea, evaporated milk, and a secret mix of warming spices like cardamom and ginger, simmered slowly to create a rich and comforting traditional delight.",
     ),
     Products(
       productid: "THD4",
@@ -131,7 +130,9 @@ class Data {
       pretime: "6–8 min",
       image: "assets/images/mint green tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Green tea blended with fresh mint.",
+      isOrganic: true,
+      description:
+          "A vibrant blend of organic green tea leaves infused with hand-picked fresh mint. This crisp and cool beverage offers a soothing aroma and a refreshing taste that perfectly balances the tea's natural bitterness with minty brightness.",
     ),
     Products(
       productid: "THD5",
@@ -141,7 +142,9 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/chamomile tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Relaxing chamomile herbal tea.Chill",
+      isOrganic: true,
+      description:
+          "Unwind with the floral serenity of our premium Chamomile. Naturally caffeine-free and made from whole organic chamomile flowers, this golden infusion offers a gentle honey-like sweetness and a calming effect for the perfect evening ritual.",
     ),
     Products(
       productid: "THD6",
@@ -151,7 +154,9 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/karkade.png",
       category: Tea_Herbal_Drinks,
-      description: "Hibiscus tea with tangy flavor.",
+      isOrganic: true,
+      description:
+          "Discover the bold and tangy soul of traditional Hibiscus tea. Our Karkade is deep crimson in color, packed with Vitamin C, and offers a unique tart flavor profile that is equally delicious whether served steaming hot or refreshingly iced.",
     ),
     Products(
       productid: "THD7",
@@ -161,7 +166,9 @@ class Data {
       pretime: "4–6 min",
       image: "assets/images/anise.png",
       category: Tea_Herbal_Drinks,
-      description: "Warm anise herbal drink.Chill",
+      isOrganic: true,
+      description:
+          "Enjoy the warm, licorice-like notes of our organic Anise tea. Known for its soothing properties, this clear herbal drink is naturally sweet and aromatic, making it the ideal choice for comfort and relaxation after a long meal.",
     ),
     Products(
       productid: "THD8",
@@ -171,7 +178,9 @@ class Data {
       pretime: "6–9 min",
       image: "assets/images/cinnamon milk.png",
       category: Tea_Herbal_Drinks,
-      description: "Creamy milk with cinnamon.",
+      isOrganic: false,
+      description:
+          "A cozy and nostalgic blend of creamy whole milk infused with high-quality ground cinnamon. This velvety smooth drink is lightly sweetened to enhance the natural warmth of the spice, creating a liquid dessert in a cup.",
     ),
     Products(
       productid: "THD9",
@@ -181,7 +190,9 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/Mint Tea.png",
       category: Tea_Herbal_Drinks,
-      description: "Black tea with fresh mint.",
+      isOrganic: false,
+      description:
+          "The classic bold flavor of our Red Tea elevated with a burst of cooling mint. This balanced blend provides the strength of black tea with a clean, minty aftertaste that makes it an incredibly versatile drink for any time of day.",
     ),
     Products(
       productid: "THD10",
@@ -191,10 +202,11 @@ class Data {
       pretime: "5–7 min",
       image: "assets/images/helba.png",
       category: Tea_Herbal_Drinks,
-      description: "Traditional fenugreek drink.",
+      isOrganic: true,
+      description:
+          "A traditional Mediterranean favorite, our Helba (Fenugreek) drink is brewed to a golden perfection. It features a unique nutty aroma and a rich, slightly bitter taste that is traditionally enjoyed with a touch of honey for its many health benefits.",
     ),
   ];
-
   static List<Products> hotCoffee = [
     Products(
       productid: "HC1",
@@ -204,8 +216,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Espresso Coffee.png',
       category: HotCoffee,
+      isOrganic: true,
+      isFavorite: false,
       description:
-          'Strong concentrated coffee shot with rich flavor and crema on top.Sleepy',
+          'A pure and intense shot of our premium organic dark-roasted beans. This Espresso features a rich, complex flavor profile with subtle notes of caramel and a thick, golden crema on top. The ultimate pick-me-up for true coffee purists.',
     ),
     Products(
       productid: "HC2",
@@ -215,8 +229,10 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/double espresso.png',
       category: HotCoffee,
+      isOrganic: true,
+      isFavorite: true,
       description:
-          'Two shots of espresso for a stronger and bolder coffee experience.Sleepy',
+          'Double the intensity, double the satisfaction. Two shots of our signature concentrated espresso blend together to create a bold, robust coffee experience that lingers beautifully on the palate. Perfect for those who need an extra boost of energy.',
     ),
     Products(
       productid: "HC3",
@@ -226,8 +242,9 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/Americano.png',
       category: HotCoffee,
+      isOrganic: true,
       description:
-          'Espresso diluted with hot water for a smooth and balanced taste.',
+          'Our classic Americano is prepared by combining a rich shot of espresso with hot purified water. This process retains the complex notes of the coffee while providing a smoother, more elongated drinking experience. Clean, crisp, and deeply satisfying.',
     ),
     Products(
       productid: "HC4",
@@ -237,8 +254,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Turkish coffee.png',
       category: HotCoffee,
+      isOrganic: false,
       description:
-          'Finely ground coffee brewed traditionally with rich foam and strong flavor.',
+          'Experience the heritage of authentic Turkish Coffee. Finely ground Arabica beans are traditionally slow-brewed in a cezve to produce a thick, velvety foam and a uniquely powerful flavor profile. Served unfiltered to preserve its legendary strength and aroma.',
     ),
     Products(
       productid: "HC5",
@@ -248,8 +266,9 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/french coffee.png',
       category: HotCoffee,
+      isOrganic: false,
       description:
-          'Coffee blended with flavors like vanilla or hazelnut for a creamy taste.',
+          'A sophisticated and creamy delight. Our French Coffee blend combines medium-roasted beans with a hint of hazelnut and vanilla notes, topped with a touch of silky cream. It offers a smooth, lingering sweetness that makes it the perfect companion for a quiet morning.',
     ),
     Products(
       productid: "HC6",
@@ -259,7 +278,10 @@ class Data {
       pretime: "5–8 min",
       image: 'assets/images/cappuccino.png',
       category: HotCoffee,
-      description: 'Espresso with steamed milk and thick milk foam on top.',
+      isOrganic: false,
+      isFavorite: true,
+      description:
+          'The perfect balance of texture and taste. We combine a sharp shot of espresso with equal parts steamed milk and a deep layer of airy, velvety milk foam. Finished with a light dusting of cocoa, it’s a timeless classic that delivers comfort in every sip.',
     ),
     Products(
       productid: "HC7",
@@ -269,8 +291,9 @@ class Data {
       pretime: "6–9 min",
       image: 'assets/images/latte.png',
       category: HotCoffee,
+      isOrganic: false,
       description:
-          'Espresso mixed with a large amount of steamed milk and light foam.',
+          'Silky smooth and elegantly simple. Our Caffe Latte features a rich espresso base mellowed by a generous amount of expertly steamed milk. With just a thin veil of foam on top, it offers a creamy, mild flavor that highlights the sweetness of the milk.',
     ),
     Products(
       productid: "HC8",
@@ -280,8 +303,9 @@ class Data {
       pretime: "6–9 min",
       image: 'assets/images/mocha.png',
       category: HotCoffee,
+      isOrganic: false,
       description:
-          'Espresso with chocolate syrup and steamed milk, topped with foam.',
+          'A heavenly marriage of coffee and chocolate. We blend our signature espresso with premium dark chocolate syrup and velvety steamed milk. This rich, indulgent beverage is perfect for those who want the kick of coffee with the sweetness of a dessert.',
     ),
     Products(
       productid: "HC9",
@@ -291,8 +315,10 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/Spanish Latte.png',
       category: HotCoffee,
+      isOrganic: true,
+      isFavorite: true,
       description:
-          'Latte made with sweetened condensed milk for a rich and sweet flavor.',
+          'Our most popular sweet indulgence. The Spanish Latte is crafted by layering rich espresso over creamy steamed milk and a generous swirl of sweetened condensed milk. The result is a uniquely thick, velvety, and naturally sweet coffee masterpiece.',
     ),
     Products(
       productid: "HC10",
@@ -302,11 +328,11 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/White Mocha.png',
       category: HotCoffee,
+      isOrganic: false,
       description:
-          'Espresso with white chocolate and steamed milk for a creamy taste.',
+          'A luxuriously creamy twist on the classic mocha. We use premium white chocolate buttons melted into hot espresso and blended with silky steamed milk. It offers a smooth, buttery sweetness that provides a sophisticated alternative to traditional dark chocolate.',
     ),
   ];
-
   static List<Products> icedCoffee = [
     Products(
       productid: "IC1",
@@ -316,8 +342,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Iced Coffee.png',
       category: IcedCoffee,
+      isOrganic: true,
+      isFavorite: false,
       description:
-          'Freshly brewed coffee served over ice for a refreshing cold experience.',
+          'Cool down with our Classic Ice Coffee, made from premium organic beans. Slow-steeped to perfection, this refreshing brew is served over crystal-clear ice, offering a clean, bold coffee flavor that provides a perfect caffeine kick on a warm day.',
     ),
     Products(
       productid: "IC2",
@@ -327,8 +355,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Iced Americano.png',
       category: IcedCoffee,
+      isOrganic: true,
+      isFavorite: true,
       description:
-          'Espresso mixed with cold water and ice for a smooth bold flavor.',
+          'A chilled twist on a classic. Our Iced Americano combines two powerful shots of espresso with cold purified water and ice. It maintains a crisp, robust flavor profile with a smooth finish, highlighting the natural fruity notes of our organic roast.',
     ),
     Products(
       productid: "IC3",
@@ -338,8 +368,9 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/Iced Latte.png',
       category: IcedCoffee,
+      isOrganic: false,
       description:
-          'Espresso combined with cold milk and ice for a creamy chilled drink.',
+          'Our Iced Latte is the definition of creamy refreshment. Rich espresso is poured over cold, fresh milk and ice, creating a beautiful layered effect. It offers a mellow, milky sweetness that perfectly balances the strength of the coffee.',
     ),
     Products(
       productid: "IC4",
@@ -349,8 +380,9 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/iced cappuccino.png',
       category: IcedCoffee,
+      isOrganic: false,
       description:
-          'Chilled espresso with cold milk and light foam served over ice.',
+          'Enjoy the airy texture of a cappuccino in a chilled version. This drink features bold espresso and cold milk served over ice, topped with a surprisingly thick and velvety cold milk foam for a multi-sensory coffee experience.',
     ),
     Products(
       productid: "IC5",
@@ -360,7 +392,10 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Iced Mocha.png',
       category: IcedCoffee,
-      description: 'Espresso blended with chocolate and cold milk over ice.',
+      isOrganic: false,
+      isFavorite: true,
+      description:
+          'Indulge your sweet tooth with our Iced Mocha. A decadent fusion of rich espresso, premium dark chocolate syrup, and cold milk poured over ice. It’s a refreshing chocolate-coffee treat that’s both energizing and deeply satisfying.',
     ),
     Products(
       productid: "IC6",
@@ -370,8 +405,10 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Iced Spanish Latte.png',
       category: IcedCoffee,
+      isOrganic: false,
+      isFavorite: true,
       description:
-          'Cold latte mixed with sweetened condensed milk for a rich sweet flavor.',
+          'Our fan-favorite Iced Spanish Latte is a creamy masterpiece. Sweetened condensed milk is blended with fresh cold milk and topped with rich espresso shots. The result is a thick, velvety, and sweet chilled latte that’s impossible to resist.',
     ),
     Products(
       productid: "IC7",
@@ -381,8 +418,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Iced Caramel Latte.png',
       category: IcedCoffee,
+      isOrganic: false,
       description:
-          'Iced latte flavored with caramel syrup for a smooth sweet taste.',
+          'Sweet, buttery caramel meets bold espresso in this chilled delight. Our Iced Caramel Latte is swirled with premium caramel syrup and cold milk, creating a smooth and golden beverage that feels like a celebration in every sip.',
     ),
     Products(
       productid: "IC8",
@@ -392,7 +430,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/iced vanilla latte.png',
       category: IcedCoffee,
-      description: 'Cold latte infused with vanilla syrup and served over ice.',
+      isOrganic: false,
+      description:
+          'Elegant and fragrant, our Iced Vanilla Latte is infused with high-quality natural vanilla syrup. This smooth blend of cold milk and espresso over ice offers a light, aromatic sweetness that enhances the coffee without overpowering it.',
     ),
     Products(
       productid: "IC9",
@@ -402,8 +442,10 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/White Iced Mocha.png',
       category: IcedCoffee,
+      isOrganic: false,
+      isFavorite: true,
       description:
-          'Espresso with white chocolate and cold milk served over ice.',
+          'Step into luxury with our Iced White Mocha. We combine silky white chocolate sauce with our signature espresso and cold milk. Served over ice, this drink is exceptionally creamy, sweet, and provides a sophisticated twist on the classic mocha.',
     ),
     Products(
       productid: "IC10",
@@ -413,10 +455,11 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Hazelnut Iced Coffee.png',
       category: IcedCoffee,
-      description: 'Refreshing iced latte flavored with hazelnut syrup.',
+      isOrganic: false,
+      description:
+          'A nutty and refreshing iced beverage. Our Iced Hazelnut Latte features the toasted aroma of premium hazelnut syrup blended perfectly with cold milk and rich espresso. It’s a smooth, earthy, and sweet chilled coffee option.',
     ),
   ];
-
   static List<Products> dessertSnack = [
     Products(
       productid: "DS1",
@@ -426,7 +469,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/classic waffle.png',
       category: Dessert_Snacks,
-      description: 'Freshly baked waffle served with your choice of toppings.',
+      isOrganic: true,
+      description:
+          'Enjoy the golden perfection of our freshly baked Belgian-style waffle. Crispy on the outside and light and fluffy on the inside, it’s served warm with a light dusting of powdered sugar and your choice of fresh seasonal toppings.',
     ),
     Products(
       productid: "DS2",
@@ -436,7 +481,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/chocolate waffle.png',
       category: Dessert_Snacks,
-      description: 'Crispy waffle topped with rich chocolate sauce.',
+      isFavorite: true,
+      description:
+          'Indulge in a chocolate lover’s dream. Our signature crispy waffle is generously smothered in rich, premium milk chocolate sauce, creating a decadent treat that satisfies every sweet craving with its velvety texture.',
     ),
     Products(
       productid: "DS3",
@@ -446,7 +493,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/nutella waffle.png',
       category: Dessert_Snacks,
-      description: 'Golden waffle covered with creamy Nutella spread.Sweet',
+      isFavorite: true,
+      description:
+          'Experience pure bliss with our Nutella Waffle. We take a warm, golden waffle and cover it with a thick layer of creamy Nutella hazelnut spread, perfectly balanced to provide a rich and comforting dessert experience.',
     ),
     Products(
       productid: "DS4",
@@ -456,7 +505,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Lotus waffle.png',
       category: Dessert_Snacks,
-      description: 'Waffle topped with Lotus biscuit spread and crumbs.',
+      description:
+          'A trendy delight for biscuit lovers. Our waffle is topped with smooth, caramelized Lotus Biscoff spread and finished with a generous sprinkle of crunchy biscuit crumbs for a unique, spicy-sweet flavor profile.',
     ),
     Products(
       productid: "DS5",
@@ -466,7 +516,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/White choc waffle.png',
       category: Dessert_Snacks,
-      description: 'Crispy waffle drizzled with smooth white chocolate.',
+      description:
+          'A sophisticated and silky sweet option. This crispy waffle is elegantly drizzled with premium, melted white chocolate, offering a smooth and buttery sweetness that melts in your mouth with every bite.',
     ),
     Products(
       productid: "DS6",
@@ -476,7 +527,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Oreo Waffle.png',
       category: Dessert_Snacks,
-      description: 'Delicious waffle topped with crushed Oreo and chocolate.',
+      isFavorite: true,
+      description:
+          'The ultimate cookie-infused treat. Our classic waffle is topped with a layer of dark chocolate sauce and finished with a mountain of crushed Oreo cookies and a signature cream drizzle for a satisfying crunch.',
     ),
     Products(
       productid: "DS7",
@@ -486,7 +539,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/classic pancakes.png',
       category: Dessert_Snacks,
-      description: 'Soft fluffy pancakes served warm.',
+      isOrganic: true,
+      description:
+          'Start your day or end your meal with our soft and fluffy stack of classic pancakes. Light, airy, and prepared with the finest ingredients, they are served warm and are perfect with a drizzle of maple syrup.',
     ),
     Products(
       productid: "DS8",
@@ -496,7 +551,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Chocolate Pancakes.png',
       category: Dessert_Snacks,
-      description: 'Fluffy pancakes topped with rich chocolate sauce.',
+      description:
+          'Take your pancake experience to the next level. A stack of our fluffy pancakes topped with a rich, dark chocolate sauce that seeps into every layer, creating a moist and deeply chocolatey indulgence.',
     ),
     Products(
       productid: "DS9",
@@ -506,7 +562,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Nutella Pancakes.png',
       category: Dessert_Snacks,
-      description: 'Pancakes covered with creamy Nutella spread.',
+      isFavorite: true,
+      description:
+          'A heavenly stack of soft pancakes layered with premium Nutella hazelnut spread. Every bite offers a perfect mix of fluffy cake and creamy chocolate, making it a favorite for kids and adults alike.',
     ),
     Products(
       productid: "DS10",
@@ -516,7 +574,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/Lotus Pancakes.png',
       category: Dessert_Snacks,
-      description: 'Pancakes topped with Lotus spread and biscuit crumbs.',
+      description:
+          'Soft, buttery pancakes topped with caramelized Lotus Biscoff spread and crushed speculoos cookies. This combination provides a delightful contrast between the soft pancake and the crunchy biscuit topping.',
     ),
     Products(
       productid: "DS11",
@@ -526,7 +585,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/white Chocolate Pancakes.png',
       category: Dessert_Snacks,
-      description: 'Soft pancakes drizzled with white chocolate.',
+      description:
+          'Indulge in the creamy sweetness of our White Chocolate Pancakes. Drizzled with high-quality melted white chocolate, these pancakes are a lighter but equally decadent alternative to traditional chocolate.',
     ),
     Products(
       productid: "DS12",
@@ -536,7 +596,9 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/Molten Chocolate.png',
       category: Dessert_Snacks,
-      description: 'Warm chocolate cake with a rich molten center.Sweet',
+      isFavorite: true,
+      description:
+          'A masterpiece of dessert engineering. This warm, individual chocolate cake features a firm outer shell that, when broken, releases a rich and flowing molten chocolate center. A true chocolate explosion.',
     ),
     Products(
       productid: "DS13",
@@ -546,7 +608,8 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/lotus molten cake.png',
       category: Dessert_Snacks,
-      description: 'Molten cake filled with creamy Lotus spread.',
+      description:
+          'A unique twist on the classic lava cake. This warm cake is filled with a flowing center of creamy Lotus Biscoff spread, offering a warm, spiced caramel flavor that pairs perfectly with the soft cake exterior.',
     ),
     Products(
       productid: "DS14",
@@ -556,7 +619,9 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/cheese cake.png',
       category: Dessert_Snacks,
-      description: 'Smooth and creamy classic cheesecake slice.',
+      isOrganic: true,
+      description:
+          'Savor the elegance of our classic New York-style cheesecake. Featuring a thick, buttery graham cracker crust and a smooth, dense, and creamy cheese filling, it’s a balanced dessert that is neither too sweet nor too heavy.',
     ),
     Products(
       productid: "DS15",
@@ -566,7 +631,9 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/lotus cheese cake.png',
       category: Dessert_Snacks,
-      description: 'Cheesecake topped with Lotus biscuit spread.',
+      isFavorite: true,
+      description:
+          'Our premium cheesecake taken to the next level. Layered with a thick coating of Lotus Biscoff spread and a biscuit-crumb base, this cheesecake is a dream for anyone who loves the taste of caramelized speculoos.',
     ),
     Products(
       productid: "DS16",
@@ -576,7 +643,8 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Chocolate Ice Cream.png',
       category: Dessert_Snacks,
-      description: 'Creamy chocolate ice cream scoop.',
+      description:
+          'A timeless favorite. Our Chocolate Ice Cream is made with real cocoa for a deep, rich flavor and a silky smooth texture that provides a cooling and satisfying end to any meal or snack time.',
     ),
     Products(
       productid: "DS17",
@@ -586,7 +654,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Vanilla Ice Cream.png',
       category: Dessert_Snacks,
-      description: 'Classic smooth vanilla ice cream.',
+      isOrganic: true,
+      description:
+          'Simple, pure, and elegant. Prepared with real vanilla beans, this classic ice cream scoop offers a light, aromatic sweetness and a creamy mouthfeel that makes it perfect on its own or as a topping.',
     ),
     Products(
       productid: "DS18",
@@ -596,7 +666,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Mango Ice Cream.png',
       category: Dessert_Snacks,
-      description: 'Refreshing mango flavored ice cream.',
+      isOrganic: true,
+      description:
+          'Taste the tropics with our vibrant Mango Ice Cream. Made with real fruit pulp from sun-ripened mangos, it offers a refreshing, tangy, and sweet flavor profile that is both light and revitalizing.',
     ),
     Products(
       productid: "DS19",
@@ -606,7 +678,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/strawberry icecream.png',
       category: Dessert_Snacks,
-      description: 'Sweet strawberry ice cream with fruity flavor.',
+      isOrganic: true,
+      description:
+          'Bursting with the flavor of summer. Our Strawberry Ice Cream is infused with real strawberry pieces, providing a naturally sweet and slightly tart fruity experience that is incredibly refreshing.',
     ),
     Products(
       productid: "DS20",
@@ -616,7 +690,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Blueberry Ice Cream.png',
       category: Dessert_Snacks,
-      description: 'Creamy ice cream blended with blueberry flavor.',
+      isOrganic: true,
+      description:
+          'A sophisticated berry delight. This creamy ice cream is swirled with a natural blueberry reduction, offering a rich purple hue and a deep, sweet berry flavor that is both unique and delicious.',
     ),
     Products(
       productid: "DS21",
@@ -626,7 +702,8 @@ class Data {
       pretime: "2–4 min",
       image: 'assets/images/donut.png',
       category: Dessert_Snacks,
-      description: 'Soft sweet donut with sugar or glaze topping.',
+      description:
+          'Our classic yeast-raised donut is light, airy, and soft. Finished with a sweet sugar glaze or a simple dusting of sugar, it’s the perfect companion for your morning coffee or an afternoon snack.',
     ),
     Products(
       productid: "DS22",
@@ -636,7 +713,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/cinnamon roll.png',
       category: Dessert_Snacks,
-      description: 'Warm cinnamon roll topped with sweet icing.',
+      isFavorite: true,
+      description:
+          'Indulge in the aromatic warmth of our Cinnamon Roll. Swirled with high-quality cinnamon and brown sugar, then topped with a generous amount of sweet cream cheese icing, it’s a comforting and gooey delight.',
     ),
     Products(
       productid: "DS23",
@@ -646,7 +725,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/nacho cheese.png',
       category: Dessert_Snacks,
-      description: 'Crunchy nachos served with melted cheese dip.',
+      description:
+          'The perfect savory snack. A large portion of crunchy corn tortilla chips served with a warm, flowing side of rich and savory melted nacho cheese dip. Perfect for sharing or a quick salty fix.',
     ),
     Products(
       productid: "DS24",
@@ -656,7 +736,9 @@ class Data {
       pretime: "2–4 min",
       image: 'assets/images/chips.png',
       category: Dessert_Snacks,
-      description: 'Crispy salted potato chips.',
+      isOrganic: true,
+      description:
+          'Crispy, thin, and perfectly salted. Our potato chips are sliced fresh and fried to a golden crunch, providing a simple yet satisfying savory snack that pairs well with any of our cold beverages.',
     ),
     Products(
       productid: "DS25",
@@ -666,10 +748,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/french fries.png',
       category: Dessert_Snacks,
-      description: 'Golden crispy french fries served hot.',
+      description:
+          'A classic favorite. Our French Fries are cut from premium potatoes and fried until golden and crispy on the outside while remaining soft on the inside. Served hot with a light seasoning of sea salt.',
     ),
   ];
-
   static List<Products> lightBites = [
     Products(
       productid: "LB1",
@@ -679,8 +761,9 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/Chicken  Panini.png',
       category: LightBites,
+      isFavorite: true,
       description:
-          'Grilled panini filled with seasoned chicken and melted cheese.',
+          'A perfectly pressed Italian-style panini, filled with succulent grilled chicken breast, seasoned with aromatic herbs, and layered with melted mozzarella cheese. Served warm to ensure a crispy golden crust and a gooey, flavorful center.',
     ),
     Products(
       productid: "LB2",
@@ -690,7 +773,8 @@ class Data {
       pretime: "7–10 min",
       image: 'assets/images/tuna melt.png',
       category: LightBites,
-      description: 'Toasted sandwich loaded with tuna and melted cheese.',
+      description:
+          'Our Tuna Melt is a classic comfort favorite. Featuring a savory tuna salad blend with crisp celery and onions, topped with a thick layer of melted cheddar cheese on toasted artisanal bread. A balanced meal that is both hearty and delicious.',
     ),
     Products(
       productid: "LB3",
@@ -700,7 +784,10 @@ class Data {
       pretime: "5–8 min",
       image: 'assets/images/turkey and cheese croissant.png',
       category: LightBites,
-      description: 'Flaky croissant stuffed with turkey slices and cheese.',
+      isOrganic: true,
+      isFavorite: true,
+      description:
+          'Start your morning right with our flaky, buttery French croissant. Stuffed with premium organic smoked turkey slices and melted Swiss cheese, this croissant is baked until golden for the perfect combination of light texture and savory flavor.',
     ),
     Products(
       productid: "LB4",
@@ -711,7 +798,7 @@ class Data {
       image: 'assets/images/chicken caesar wrap.png',
       category: LightBites,
       description:
-          'Grilled chicken wrap with fresh lettuce and Caesar dressing.',
+          'A refreshing and satisfying wrap featuring tender grilled chicken strips, crisp Romaine lettuce, and crunchy croutons. All tossed in our signature creamy Caesar dressing and neatly tucked into a soft flour tortilla.',
     ),
     Products(
       productid: "LB5",
@@ -721,8 +808,9 @@ class Data {
       pretime: "8–12 min",
       image: 'assets/images/Club Sandwich.png',
       category: LightBites,
+      isFavorite: true,
       description:
-          'Triple-layer sandwich with chicken, turkey, cheese, and veggies.',
+          'The ultimate three-layered feast. Our signature Club Sandwich features toasted bread stacked with grilled chicken, smoked turkey, fresh tomatoes, crisp lettuce, and a perfectly fried egg, held together with a touch of light mayo.',
     ),
     Products(
       productid: "LB6",
@@ -733,7 +821,7 @@ class Data {
       image: 'assets/images/Mini Chicken Quesadilla.png',
       category: LightBites,
       description:
-          'Grilled tortilla filled with seasoned chicken and melted cheese.',
+          'Inspired by Mexican flavors, these mini tortillas are stuffed with a savory blend of spiced chicken, bell peppers, and melted Monterey Jack cheese. Grilled until crisp and served with a side of cool sour cream or salsa.',
     ),
     Products(
       productid: "LB7",
@@ -743,7 +831,9 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/fries basket.png',
       category: LightBites,
-      description: 'Basket of crispy golden french fries.',
+      isOrganic: true,
+      description:
+          'A generous basket of our signature golden french fries. Hand-cut from organic potatoes and double-fried to achieve the perfect crunch on the outside while remaining soft and fluffy on the inside. Seasoned with just a hint of sea salt.',
     ),
     Products(
       productid: "LB8",
@@ -753,7 +843,9 @@ class Data {
       pretime: "5–8 min",
       image: 'assets/images/mozzarilla sticks.png',
       category: LightBites,
-      description: 'Crispy fried mozzarella sticks served with dipping sauce.',
+      isFavorite: true,
+      description:
+          'Golden-brown and irresistibly cheesy. These premium mozzarella sticks are breaded with seasoned crumbs and fried to perfection. Served with a side of warm marinara sauce for the classic "cheese pull" experience.',
     ),
     Products(
       productid: "LB9",
@@ -763,7 +855,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/chicken nuggets.png',
       category: LightBites,
-      description: 'Crispy chicken nuggets served hot and fresh.',
+      description:
+          'Crispy on the outside and tender on the inside. Our chicken nuggets are made from 100% white meat chicken, lightly breaded and fried to a golden finish. A classic snack that is perfect for a quick bite or to share with friends.',
     ),
     Products(
       productid: "LB10",
@@ -773,7 +866,8 @@ class Data {
       pretime: "5–7 min",
       image: 'assets/images/garlic bread.png',
       category: LightBites,
-      description: 'Toasted garlic bread topped with melted cheese.',
+      description:
+          'Indulge in the aromatic goodness of our toasted garlic bread. Sliced artisanal baguette brushed with garlic butter and herbs, topped with a thick layer of melted mozzarella and cheddar cheese for a savory, crispy delight.',
     ),
   ];
 
@@ -786,7 +880,9 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/coca cola.png',
       category: SoftDrinks,
-      description: 'Chilled classic Coca-Cola served refreshing and fizzy.',
+      isFavorite: true,
+      description:
+          'Enjoy the legendary taste of Classic Coca-Cola. Perfectly chilled and bursting with refreshing fizz, this iconic sparkling beverage provides the ultimate crisp refreshment to accompany any meal or snack.',
     ),
     Products(
       productid: "SD2",
@@ -796,7 +892,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/diet cola.png',
       category: SoftDrinks,
-      description: 'Zero sugar Diet Coke with the same great taste.',
+      description:
+          'All the great taste of Coca-Cola without the sugar. Our Diet Coke is served ice-cold, offering that familiar crisp, light flavor and refreshing carbonation for those seeking a calorie-free sparkling delight.',
     ),
     Products(
       productid: "SD3",
@@ -806,7 +903,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/Pepsi.png',
       category: SoftDrinks,
-      description: 'Cold and refreshing Pepsi with bold cola flavor.',
+      description:
+          'Quench your thirst with the bold and refreshing taste of Pepsi. This classic cola is served chilled to perfection, delivering a smooth, sweet, and carbonated experience that invigorates your senses with every sip.',
     ),
     Products(
       productid: "SD4",
@@ -816,7 +914,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/7-UP.png',
       category: SoftDrinks,
-      description: 'Crisp lemon-lime flavored sparkling drink.',
+      description:
+          'A crisp and clear lemon-lime flavored sparkling drink. 7UP is naturally caffeine-free and offers a clean, refreshing taste that balances zesty citrus notes with a bubbly, thirst-quenching finish.',
     ),
     Products(
       productid: "SD5",
@@ -826,7 +925,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/mirinda.png',
       category: SoftDrinks,
-      description: 'Sweet and fizzy orange flavored soft drink.',
+      description:
+          'Brighten your mood with the vibrant and fizzy taste of Mirinda Orange. This sparkling soft drink is packed with sweet, intense orange flavor and lively bubbles, making it a fun and refreshing choice.',
     ),
     Products(
       productid: "SD6",
@@ -836,7 +936,9 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/Fanta Orange.png',
       category: SoftDrinks,
-      description: 'Refreshing sparkling drink with fruity orange taste.',
+      isFavorite: true,
+      description:
+          'Experience the fruity explosion of Fanta Orange. This refreshing sparkling drink is made with natural fruit flavors, providing a sweet and tangy citrus experience that is best enjoyed ice-cold.',
     ),
     Products(
       productid: "SD7",
@@ -846,7 +948,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/sprite.png',
       category: SoftDrinks,
-      description: 'Cool lemon-lime soda served ice cold.',
+      description:
+          'The ultimate lemon-lime soda. Sprite offers a crisp, clean taste that is incredibly refreshing and caffeine-free. Served chilled over ice, it provides a cool burst of citrus flavor that clears the palate.',
     ),
     Products(
       productid: "SD8",
@@ -856,7 +959,8 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/SCHWEPPES.png',
       category: SoftDrinks,
-      description: 'Sparkling Schweppes with a crisp and refreshing taste.',
+      description:
+          'Sophistication in a bottle. Our sparkling Schweppes offers a refined carbonated experience with a uniquely crisp and dry finish. It is the perfect refreshing choice for those who prefer a slightly more elevated soda experience.',
     ),
     Products(
       productid: "SD9",
@@ -866,7 +970,9 @@ class Data {
       pretime: "1–2 min",
       image: 'assets/images/Red Bull.png',
       category: SoftDrinks,
-      description: 'Energy drink that boosts focus and performance.Active',
+      isFavorite: true,
+      description:
+          'Vitalize your body and mind with Red Bull. This world-famous energy drink is designed to boost focus, performance, and alertness. Served chilled, it provides a unique functional beverage experience for those on the go.',
     ),
     Products(
       productid: "SD10",
@@ -876,10 +982,11 @@ class Data {
       pretime: "1 min",
       image: 'assets/images/water.png',
       category: SoftDrinks,
-      description: 'Chilled bottled mineral water.',
+      isOrganic: true,
+      description:
+          'Pure, clean, and essential. Our bottled Mineral Water is sourced from natural springs and served perfectly chilled. It is the healthiest way to stay hydrated and refreshed throughout your day.',
     ),
   ];
-
   static List<Products> freshJuices = [
     Products(
       productid: "FJ1",
@@ -887,9 +994,12 @@ class Data {
       price: 35.0,
       rate: 4.6,
       pretime: "3–5 min",
-      image: 'assets/images/water.png',
+      image: 'assets/images/water.png', // تأكد من مراجعة مسار الصورة هنا
       category: FreshJuices,
-      description: 'Freshly squeezed orange juice served chilled.',
+      isOrganic: true,
+      isFavorite: true,
+      description:
+          'Pure sunshine in a glass. Our Orange Juice is freshly squeezed upon order from the finest organic citrus fruits. Packed with Vitamin C and natural sweetness, it offers a vibrant, zesty flavor that is perfectly refreshing at any time of the day.',
     ),
     Products(
       productid: "FJ2",
@@ -899,7 +1009,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/mango.png',
       category: FreshJuices,
-      description: 'Sweet and refreshing mango juice made from ripe mangoes.',
+      isOrganic: true,
+      isFavorite: true,
+      description:
+          'Indulge in the tropical richness of our premium Mango Juice. Made from hand-picked, ripe organic mangoes, this juice has a thick, velvety texture and a honey-like sweetness that transports your senses straight to a tropical paradise.',
     ),
     Products(
       productid: "FJ3",
@@ -909,7 +1022,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/strawberry.png',
       category: FreshJuices,
-      description: 'Fresh strawberry juice blended to perfection.',
+      isOrganic: true,
+      description:
+          'Savor the sweet and tangy delight of our fresh Strawberry Juice. We blend sun-ripened organic strawberries to create a vibrant red infusion that is both light and bursting with natural berry aroma. A refreshing treat for fruit lovers.',
     ),
     Products(
       productid: "FJ4",
@@ -919,7 +1034,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Guava.png',
       category: FreshJuices,
-      description: 'Natural guava juice with a rich tropical flavor.',
+      isOrganic: true,
+      description:
+          'Experience the unique, floral sweetness of our natural Guava Juice. This tropical favorite is prepared from organic pink guavas, offering a rich, smooth consistency and a distinctive fragrance that is both calming and revitalizing.',
     ),
     Products(
       productid: "FJ5",
@@ -929,7 +1046,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/watermelon.png',
       category: FreshJuices,
-      description: 'Cool and refreshing watermelon juice.',
+      isOrganic: true,
+      description:
+          'The ultimate hydration hero. Our Watermelon Juice is made from the heart of crisp, organic watermelons. It’s incredibly light, naturally sweet, and served ice-cold to provide an instant cooling effect on even the warmest days.',
     ),
     Products(
       productid: "FJ6",
@@ -939,7 +1058,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/pineapple.png',
       category: FreshJuices,
-      description: 'Fresh pineapple juice with a sweet and tangy taste.',
+      isOrganic: true,
+      description:
+          'Bright, tangy, and full of life. Our Pineapple Juice is extracted from gold, organic pineapples at their peak ripeness. This tropical elixir offers a perfect balance of tartness and sweetness, packed with digestive enzymes and fresh flavor.',
     ),
     Products(
       productid: "FJ7",
@@ -949,7 +1070,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/kiwi.png',
       category: FreshJuices,
-      description: 'Refreshing kiwi juice packed with natural flavor.',
+      isOrganic: true,
+      description:
+          'Discover the zesty and exotic taste of our fresh Kiwi Juice. Made from nutrient-dense organic kiwis, this vibrant green drink offers a unique tangy profile and a refreshing crispness that awakens your palate and boosts your energy.',
     ),
     Products(
       productid: "FJ8",
@@ -959,8 +1082,10 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/lemon ment.png',
       category: FreshJuices,
+      isOrganic: true,
+      isFavorite: true,
       description:
-          'Fresh lemon juice blended with mint for a cooling effect.Active',
+          'Our signature refresher. We blend freshly squeezed organic lemons with hand-picked garden mint leaves and a touch of ice. This cooling beverage is the perfect balance of citrus zing and herbal freshness, ideal for a quick detox.',
     ),
     Products(
       productid: "FJ9",
@@ -970,7 +1095,9 @@ class Data {
       pretime: "3–5 min",
       image: 'assets/images/Pomegranate.png',
       category: FreshJuices,
-      description: 'Rich and healthy pomegranate juice full of antioxidants.',
+      isOrganic: true,
+      description:
+          'Rich, bold, and incredibly healthy. Our Pomegranate Juice is pressed from the finest organic seeds, resulting in a deep crimson drink that is loaded with antioxidants. It offers a sophisticated, slightly tart flavor that is as nutritious as it is delicious.',
     ),
     Products(
       productid: "FJ10",
@@ -980,10 +1107,12 @@ class Data {
       pretime: "4–6 min",
       image: 'assets/images/cocktail.png',
       category: FreshJuices,
-      description: 'A delicious blend of seasonal fresh fruits.',
+      isOrganic: true,
+      isFavorite: true,
+      description:
+          'A masterfully crafted blend of our finest seasonal organic fruits. This vibrant cocktail combines the sweetness of mango, the tang of orange, and the aroma of strawberry into one harmonious drink. Every sip offers a new layer of fruity goodness.',
     ),
   ];
-
   static List<Products> smoothiesMilkshakes = [
     Products(
       productid: "SM1",

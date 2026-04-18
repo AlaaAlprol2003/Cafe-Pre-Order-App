@@ -54,7 +54,7 @@ class DashCupApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.login,
+        initialRoute: AppRoutes.mainLayout,
         onGenerateRoute: AppRouter.router,
         theme: ThemeManager.lightTheme,
         darkTheme: ThemeManager.darkTheme,

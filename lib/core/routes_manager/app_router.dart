@@ -16,6 +16,7 @@ import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart'
 import 'package:dash_cup/features/payment/presentation/payment_screen.dart';
 import 'package:dash_cup/features/payment/presentation/payment_success_screen.dart';
 import 'package:dash_cup/features/product/presentation/product_screen.dart';
+import 'package:dash_cup/features/product_details/presentation/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,6 +96,12 @@ class AppRouter {
       case AppRoutes.cart:
         {
           return CupertinoPageRoute(builder: (context) => CartScreen());
+        }
+
+      case AppRoutes.productDetails:
+        var product = settings.arguments as Products;
+        {
+          return CupertinoPageRoute(builder: (context) => ProductDetailsPage(product: product,));
         }
     }
     return null;
