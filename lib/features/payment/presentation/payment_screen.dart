@@ -187,6 +187,9 @@ class PaymentScreen extends StatelessWidget {
                               CustomCostWidget(
                                 label: "Subtotal",
                                 cost: "${subtotal.toStringAsFixed(2)} EGP",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.sp,
+                                color: ColorsManager.darkHoney,
                               ),
                               SizedBox(
                                 height: 8.h,
@@ -194,12 +197,19 @@ class PaymentScreen extends StatelessWidget {
                               CustomCostWidget(
                                 label: "VAT(14%)",
                                 cost: "${vat.toStringAsFixed(2)} EGP",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.sp,
+                                color: ColorsManager.darkHoney,
                               ),
                               SizedBox(
                                 height: 8.h,
                               ),
                               CustomCostWidget(
                                 label: "Delivery Fees",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.sp,
+                                color: ColorsManager.darkHoney,
+                                colorNumber: ColorsManager.darkOrange,
                                 cost:
                                     cubit.currentIndex == 1 ? "Free" : "15 EGP",
                               ),
@@ -214,10 +224,11 @@ class PaymentScreen extends StatelessWidget {
                               CustomCostWidget(
                                 label: "Total",
                                 cost: "${total.toStringAsFixed(2)} EGP",
+                                
                                 color: ColorsManager.darkBrown,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
-                                fontSizeNumber: 20,
+                                fontSizeNumber: 18.sp,
                               )
                             ],
                           );

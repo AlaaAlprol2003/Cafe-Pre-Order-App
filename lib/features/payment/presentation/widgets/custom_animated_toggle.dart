@@ -60,7 +60,7 @@ class CustomAnimatedToggle extends StatelessWidget {
                   color: cubit.currentIndex == 0
                       ? ColorsManager.darkChocolate
                       : ColorsManager.umber,
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: cubit.currentIndex == 0
                       ? FontWeight.bold
                       : FontWeight.w500),
@@ -85,7 +85,7 @@ class CustomAnimatedToggle extends StatelessWidget {
                   color: cubit.currentIndex == 1
                       ? ColorsManager.darkChocolate
                       : ColorsManager.umber,
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: cubit.currentIndex == 1
                       ? FontWeight.bold
                       : FontWeight.w500),

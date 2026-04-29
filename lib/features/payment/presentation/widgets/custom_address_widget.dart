@@ -30,10 +30,11 @@ class CustomAddressWidget extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: cubit.currentIndex == 1
-                  ? ColorsManager.white
+                  ? ColorsManager.eggshell
                   : ColorsManager.creamyWhite,
               border: cubit.currentIndex == 1
-                  ? Border.all(color: ColorsManager.darkChocolate, width: 1.5)
+                  ? Border.all(
+                      color: const Color.fromARGB(76, 94, 53, 2), width: 1.5)
                   : null,
               borderRadius:
                   BorderRadius.circular(cubit.currentIndex == 1 ? 16.r : 0.r),
@@ -93,24 +94,29 @@ class CustomAddressWidget extends StatelessWidget {
                     BlocBuilder<PaymentCubit, PaymentState>(
                       builder: (context, state) {
                         if (state is LocationLoadingState)
-                          return Text("Calculating distance...");
+                          return Text("Calculating distance...",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500),);
                         return Text(
                           cubit.distanceInKm != null
                               ? "${cubit.distanceInKm!.toStringAsFixed(1)} KM away from you"
                               : "Tap to see distance",
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              color: cubit.currentIndex == 1
-                                  ? ColorsManager.umber
-                                  : ColorsManager.darkChocolate
-                                      .withValues(alpha: .35)),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: cubit.currentIndex == 1
+                                      ? ColorsManager.umber
+                                      : ColorsManager.darkChocolate
+                                          .withValues(alpha: .35)),
                         );
                       },
                     ),
                     Text(
                       "Tanta, Gharbia",
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
                           color: cubit.currentIndex == 1
                               ? ColorsManager.umber
                               : ColorsManager.darkChocolate
@@ -154,7 +160,8 @@ class CustomAddressWidget extends StatelessWidget {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.r),
-                    borderSide: BorderSide(color: ColorsManager.darkChocolate),
+                    borderSide:
+                        BorderSide(color: const Color.fromARGB(76, 94, 53, 2)),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.r),

@@ -10,7 +10,7 @@ class PaymentElevatedButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orange,
+            backgroundColor: const Color.fromARGB(255, 148, 94, 12),
             elevation: 5,
             shadowColor: ColorsManager.creamyWhite.withValues(alpha: .5),
             shape: RoundedRectangleBorder(
@@ -22,7 +22,7 @@ class PaymentElevatedButton extends StatelessWidget {
             children: [
               Icon(
                 Icons.shopping_cart_checkout_rounded,
-                color: ColorsManager.darkChocolate,
+                color: const Color.fromARGB(255, 255, 226, 190),
                 size: 25.h,
               ),
               Text(
@@ -34,7 +34,7 @@ class PaymentElevatedButton extends StatelessWidget {
               ),
               Icon(
                   Icons.arrow_forward_rounded,
-                  color: ColorsManager.darkChocolate,
+                  color: const Color.fromARGB(255, 255, 226, 190),
           
                   size: 25.h,
                 ),

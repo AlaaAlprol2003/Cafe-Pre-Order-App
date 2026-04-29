@@ -41,7 +41,7 @@ class PaymentSuccessScreen extends StatelessWidget {
               SizedBox(height: 50.h),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorsManager.darkBrown,
+                  backgroundColor: const Color.fromARGB(255, 71, 40, 1),
                   minimumSize: Size(double.infinity, 55.h),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35.r)),
@@ -65,7 +65,7 @@ class PaymentSuccessScreen extends StatelessWidget {
     return _buildContainer(
       child: Column(
         children: [
-          Text("Fawry Payment Code", style: TextStyle(color: Colors.grey)),
+          Text("Fawry Payment Code", style: TextStyle(color: const Color.fromARGB(255, 130, 129, 129))),
           SizedBox(
             height: 8.h,
           ),
@@ -78,7 +78,7 @@ class PaymentSuccessScreen extends StatelessWidget {
             height: 8.h,
           ),
           Text("Pay at any Fawry outlet",
-              style: TextStyle(fontWeight: FontWeight.bold)),
+              style: TextStyle(fontWeight: FontWeight.bold,color:   const Color.fromARGB(255, 130, 129, 129))),
           Divider(),
           _buildRow("Total Amount", "${amount.toStringAsFixed(2)} EGP"),
         ],
@@ -145,7 +145,7 @@ class PaymentSuccessScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorsManager.eggshell,
         borderRadius: BorderRadius.circular(15.r),
         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
       ),
@@ -175,6 +175,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                 Text("Remaining Balance",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 20.sp,
                         color: ColorsManager.darkBrown)),
                 Text("${cubit.remainingPoints.toStringAsFixed(0)} Points",
                     style: TextStyle(
@@ -198,7 +199,7 @@ class PaymentSuccessScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey)),
+          Text(label, style: TextStyle(color:  const Color.fromARGB(255, 130, 129, 129),fontWeight: FontWeight.w300,fontSize: 20.sp)),
           Text(value,
               style: TextStyle(
                   fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
