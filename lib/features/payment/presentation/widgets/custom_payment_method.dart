@@ -17,11 +17,11 @@ class CustomPaymentMethod extends StatelessWidget {
       padding: REdgeInsets.only(left: 12),
       decoration: BoxDecoration(
         color: isSelected
-            ? ColorsManager.white
+            ? ColorsManager.eggshell
             : ColorsManager.creamyWhite.withValues(alpha: .5),
         border: BoxBorder.all(
             color: isSelected
-                ? ColorsManager.darkChocolate
+                ? const Color.fromARGB(76, 94, 53, 2)
                 : ColorsManager.darkChocolate.withValues(alpha: .5),
             width: isSelected ? 1.5 : .5),
         borderRadius: BorderRadius.circular(16.r),
@@ -50,7 +50,7 @@ class CustomPaymentMethod extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!
-                .copyWith(fontSize: 18.sp),
+                .copyWith(fontSize: 18.sp,),
           ),
           Spacer(),
           Checkbox(

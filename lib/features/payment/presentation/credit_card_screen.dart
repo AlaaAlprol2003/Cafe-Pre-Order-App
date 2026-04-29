@@ -85,7 +85,7 @@ class CardDetailsScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsManager.darkBrown,
+                            backgroundColor: const Color.fromARGB(255, 71, 40, 1),
                             minimumSize: Size(double.infinity, 55.h),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.r)),
