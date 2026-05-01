@@ -19,6 +19,7 @@ import 'package:dash_cup/features/payment/presentation/payment_success_screen.da
 import 'package:dash_cup/features/product/presentation/product_screen.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/product_details.dart';
+import 'package:dash_cup/features/quick_checkout/quick_checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -108,6 +109,12 @@ class AppRouter {
               builder: (context) => ProductDetailsPage(
                 product: product,
               ));
+        }
+
+        case AppRoutes.quickCheckout:
+        final offer = settings.arguments as OfferModel;
+        {
+          return CupertinoPageRoute(builder: (context) => QuickCheckout(offer: offer));
         }
     }
     return null;

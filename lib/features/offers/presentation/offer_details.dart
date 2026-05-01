@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/offers/presentation/cubit/offer_details_cubit.dart';
@@ -69,7 +70,9 @@ class _OfferDetailsState extends State<OfferDetails> {
                 SizedBox(
                     width: 250.w,
                     child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context,AppRoutes.quickCheckout,arguments: widget.currentOffer);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(255, 84, 47, 1),
                         ),
@@ -80,7 +83,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                           size: 25,
                         ),
                         label: Text(
-                          "Add Bundle To Cart",style: GoogleFonts.roboto(fontSize: 18.sp,color: ColorsManager.creamyWhite,fontWeight: FontWeight.bold),
+                          "Quick Checkout",style: GoogleFonts.roboto(fontSize: 18.sp,color: ColorsManager.creamyWhite,fontWeight: FontWeight.bold),
                         ))
 
                     // CustomElevatedButton(

@@ -12,4 +12,5 @@ class AppRoutes {
   static const String chatWithAI = "chat_ai_screen";
   static const String cart = "cart_screen";
   static const String productDetails = "product_details";
+  static const String quickCheckout = "quickCheckout";
 }
