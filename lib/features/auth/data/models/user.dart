@@ -7,6 +7,7 @@ class UserModel {
   String email;
   String password;
   String phone;
+  int points;
   List<String> favoriteItems;
   UserModel({
     required this.id,
@@ -15,6 +16,7 @@ class UserModel {
     required this.password,
     required this.phone,
     required this.favoriteItems,
+    required this.points,
   });
 
   Map<String, dynamic> toJson() => {
@@ -24,6 +26,7 @@ class UserModel {
         "password": password,
         "phone": phone,
         "favoriteItems": favoriteItems,
+        "points":points
       };
 
   UserModel.fromJson(Map<String, dynamic> json)
@@ -36,5 +39,6 @@ class UserModel {
           favoriteItems: (json["favoriteItems"] as List<dynamic>)
               .map((item) => item.toString())
               .toList(),
+              points: json["points"] ?? 0,
         );
 }

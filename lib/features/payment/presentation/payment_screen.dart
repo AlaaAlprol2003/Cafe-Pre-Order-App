@@ -23,7 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key,required this.orders});
+  const PaymentScreen({super.key, required this.orders});
   final List<OrderModel> orders;
 
   @override
@@ -87,8 +87,10 @@ class PaymentScreen extends StatelessWidget {
                           REdgeInsets.symmetric(horizontal: 12.0, vertical: 24),
                       child: CarouselSlider(
                           items: orders
-                              .map((order) =>
-                                  OrderedProductCart(product: order.product,order: order,))
+                              .map((order) => OrderedProductCart(
+                                    product: order.product,
+                                    order: order,
+                                  ))
                               .toList(),
                           options: CarouselOptions(
                               height: 100.h,
@@ -178,10 +180,13 @@ class PaymentScreen extends StatelessWidget {
                         padding: REdgeInsets.symmetric(horizontal: 12.0),
                         child: BlocBuilder<PaymentCubit, PaymentState>(
                             builder: (context, state) {
-                          double deliveryFees =
-                              cubit.currentIndex == 1 ? 0.0 : 15;
-                          double subtotal = orders.fold(0, (sum, item) => sum + item.totalPrice);
+                          double subtotal = orders.fold(
+                              0, (sum, item) => sum + item.totalPrice);
+
                           double vat = subtotal * 0.14;
+                          double deliveryFees =
+                              cubit.currentIndex == 1 ? 0.0 : 15.0;
+
                           double total = subtotal + vat + deliveryFees;
 
                           return Column(
@@ -226,7 +231,6 @@ class PaymentScreen extends StatelessWidget {
                               CustomCostWidget(
                                 label: "Total",
                                 cost: "${total.toStringAsFixed(2)} EGP",
-                                
                                 color: ColorsManager.darkBrown,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
@@ -241,21 +245,27 @@ class PaymentScreen extends StatelessWidget {
                       child: SizedBox(
                           height: 55.h,
                           child: PaymentElevatedButton(onPress: () async {
+                            double currentSubtotal = orders.fold(
+                                0, (sum, item) => sum + item.totalPrice);
+
+                            // 2. حساب المصاريف الإضافية بناءً على نوع الاستلام
                             double deliveryFees =
                                 cubit.currentIndex == 1 ? 0.0 : 15;
-                            double total = cubit.subtotalValue +
-                                (cubit.subtotalValue * 0.14) +
-                                deliveryFees;
+                            double vat = currentSubtotal * 0.14;
+                            double total = currentSubtotal + vat + deliveryFees;
 
+                            // 3. التحقق من طريقة الدفع
                             if (cubit.currentPaymentMethod == 0) {
+                              // دفع بالبطاقة
                               Navigator.pushNamed(context, AppRoutes.creditCard,
                                   arguments: cubit);
                             } else if (cubit.currentPaymentMethod == 3) {
+                              // دفع بالنقط - نستخدم الـ total الجديد للتحقق
                               if (cubit.hasEnoughPoints(total)) {
                                 UiUtils.showLoading(context: context);
-                                cubit.deductPoints(total);
-                                await Future.delayed(
-                                    const Duration(seconds: 2));
+
+                                // تنفيذ عملية الخصم وتحديث النقط في Firestore
+                                await cubit.deductPoints(total);
 
                                 if (context.mounted) {
                                   Navigator.pushNamed(
@@ -274,25 +284,29 @@ class PaymentScreen extends StatelessWidget {
                                     message: "Insufficient points balance!");
                               }
                             } else {
+                              // طرق دفع أخرى (Fawry / Vodafone Cash)
                               String methodName =
                                   cubit.currentPaymentMethod == 1
                                       ? "Fawry"
                                       : "Vodafone";
-
                               UiUtils.showLoading(context: context);
 
-                              await Future.delayed(Duration(seconds: 2));
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PaymentSuccessScreen(
-                                    paymentMethod: methodName,
-                                    amount: cubit.subtotalValue +
-                                        (cubit.subtotalValue * 0.14) +
-                                        (cubit.currentIndex == 1 ? 0 : 15),
+                              // تحديث نقط المستخدم بعد الدفع بنجاح (كاش أو فوري)
+                              await cubit.updateUserPoints(totalAmount: total);
+
+                              await Future.delayed(const Duration(seconds: 2));
+                              if (context.mounted) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentSuccessScreen(
+                                      paymentMethod: methodName,
+                                      amount:
+                                          total, // نرسل الـ total الجديد المحسوب بدقة
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             }
                           })),
                     )

@@ -179,8 +179,8 @@ class _CartScreenState extends State<CartScreen> {
         ),
         child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
           builder: (context, state) {
-            final total = cubit.orders.fold(
-                0.0, (sum, item) => sum + (item.product.price * item.quantity));
+            final total =
+                cubit.orders.fold(0.0, (sum, item) => sum + item.totalPrice);
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -72,6 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
           email: request.email,
           password: request.password,
           phone: phone,
+          points: 0,
           favoriteItems: [],
         );
 

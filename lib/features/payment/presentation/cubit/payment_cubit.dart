@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/graduation_project_model.dart';
+import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:geolocator/geolocator.dart';
@@ -64,14 +66,30 @@ class PaymentCubit extends Cubit<PaymentState> {
     return pointsInCurrency >= totalAmount;
   }
 
-  void deductPoints(double totalAmount) {
-    double pointsConsumed = totalAmount / pointExchangeRate;
+  Future<void> deductPoints(double totalAmount) async {
+    emit(UpdatePointsLoading()); // استخدمنا الـ state الجديدة
+    try {
+      // 1. التأكد إن العميل مسجل دخول وله بيانات
+      if (UserModel.currentUser == null) return;
 
-    remainingPoints = userPointsBalance - pointsConsumed;
+      // 2. حساب الرصيد الجديد (نحول الـ total لـ int لأن النقط أرقام صحيحة)
+      int pointsToDeduct = totalAmount.toInt();
+      int currentPoints = UserModel.currentUser!.points;
+      int updatedPoints = currentPoints - pointsToDeduct;
 
-    userPointsBalance = remainingPoints;
+      // 3. تحديث الـ Firestore
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(UserModel.currentUser!.id)
+          .update({'points': updatedPoints});
 
-    emit(PointsDeductedState());
+      // 4. تحديث الموديل المحلي عشان الـ UI يتحدث فوراً
+      UserModel.currentUser!.points = updatedPoints;
+
+      emit(UpdatePointsSuccess());
+    } catch (e) {
+      emit(UpdatePointsFailure(message: e.toString()));
+    }
   }
 
   Future<void> calculateDistance() async {
@@ -122,6 +140,30 @@ class PaymentCubit extends Cubit<PaymentState> {
           "https://www.google.com/maps/search/?api=1&query=$cafeLat,$cafeLng"));
     }
   }
+
+  Future<void> updateUserPoints({required double totalAmount}) async {
+    try {
+      // 1. حساب النقط الجديدة (مثلاً نقطة لكل 10 جنيه)
+      int newPoints = (totalAmount / 10).floor();
+
+      // 2. الحصول على النقط الحالية للمستخدم
+      int currentPoints = UserModel.currentUser?.points ?? 0;
+      int updatedPoints = currentPoints + newPoints;
+
+      // 3. تحديث الـ Firestore
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(UserModel.currentUser!.id)
+          .update({'points': updatedPoints});
+
+      // 4. تحديث الـ Local Model عشان يظهر في البروفايل فوراً
+      UserModel.currentUser!.points = updatedPoints;
+
+      emit(UpdatePointsSuccess());
+    } catch (e) {
+      emit(UpdatePointsFailure(message: e.toString()));
+    }
+  }
 }
 
 class PaymentState {}
@@ -153,4 +195,13 @@ class LocationSuccessState extends PaymentState {
 class LocationErrorState extends PaymentState {
   final String? message;
   LocationErrorState({this.message});
+}
+
+class UpdatePointsLoading extends PaymentState {}
+
+class UpdatePointsSuccess extends PaymentState {}
+
+class UpdatePointsFailure extends PaymentState {
+  final String message;
+  UpdatePointsFailure({required this.message});
 }
