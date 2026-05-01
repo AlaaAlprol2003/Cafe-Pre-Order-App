@@ -103,11 +103,9 @@ class AppRouter {
         var product = settings.arguments as Products;
         {
           return CupertinoPageRoute(
-              builder: (context) => BlocProvider<ProductDetailsCubit>(
-                  create: (context) => ProductDetailsCubit(),
-                  child: ProductDetailsPage(
-                    product: product,
-                  )));
+              builder: (context) => ProductDetailsPage(
+                product: product,
+              ));
         }
     }
     return null;

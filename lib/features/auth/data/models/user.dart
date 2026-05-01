@@ -1,3 +1,5 @@
+import 'package:dash_cup/core/models/graduation_project_model.dart';
+
 class UserModel {
   static UserModel? currentUser;
   String id;
@@ -6,7 +8,6 @@ class UserModel {
   String password;
   String phone;
   List<String> favoriteItems;
-
   UserModel({
     required this.id,
     required this.name,
@@ -17,23 +18,23 @@ class UserModel {
   });
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "password": password,
-    "phone": phone,
-    "favoriteItems": favoriteItems,
-  };
+        "id": id,
+        "name": name,
+        "email": email,
+        "password": password,
+        "phone": phone,
+        "favoriteItems": favoriteItems,
+      };
 
   UserModel.fromJson(Map<String, dynamic> json)
-    : this(
-        id: json["id"],
-        name: json["name"],
-        email: json["email"],
-        password: json["password"],
-        phone: json["phone"],
-        favoriteItems: (json["favoriteItems"] as List<dynamic>)
-            .map((item) => item.toString())
-            .toList(),
-      );
+      : this(
+          id: json["id"],
+          name: json["name"],
+          email: json["email"],
+          password: json["password"],
+          phone: json["phone"],
+          favoriteItems: (json["favoriteItems"] as List<dynamic>)
+              .map((item) => item.toString())
+              .toList(),
+        );
 }

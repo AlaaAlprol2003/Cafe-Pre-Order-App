@@ -1,5 +1,7 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/resources/ui_utils.dart';
+import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/widgets/bottom_area.dart';
 import 'package:dash_cup/features/product_details/presentation/widgets/custom_options.dart';
@@ -77,7 +79,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   ProductDetailsState>(
                                 builder: (context, state) {
                                   return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomOptions(
                                         title: "Select Size",
@@ -125,7 +128,26 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               ),
             ],
           ),
-          BottomArea(),
+          BlocListener<ProductDetailsCubit, ProductDetailsState>(
+            listener: (context, state) {
+              print(state.runtimeType);
+              if (state is AddOrderToFirestoreLoading) {
+                UiUtils.showLoading(context: context);
+              } else if (state is AddOrderToFirestoreFailure) {
+                Navigator.pop(context);
+                UiUtils.showMessage(context: context, message: state.message);
+              } else if (state is AddOrderToFirestoreSuccess) {
+                Navigator.pop(context);
+                UiUtils.showMessage(
+                    context: context,
+                    message: "Order added to cart successfully");
+              }
+              
+            },
+            child: BottomArea(
+              product: widget.product,
+            ),
+          ),
         ],
       ),
     );

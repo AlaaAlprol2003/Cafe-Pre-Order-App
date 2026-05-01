@@ -1,4 +1,7 @@
+import 'package:dash_cup/core/models/graduation_project_model.dart';
+import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/widgets/diamond_button.dart';
 import 'package:dash_cup/features/product_details/presentation/widgets/quantity_button.dart';
@@ -8,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomArea extends StatefulWidget {
-  const BottomArea({super.key});
-
+  const BottomArea({super.key, required this.product});
+  final Products product;
   @override
   State<BottomArea> createState() => _BottomAreaState();
 }
@@ -69,7 +72,19 @@ class _BottomAreaState extends State<BottomArea> {
                       color: ColorsManager.darkChocolate,
                       fontWeight: FontWeight.bold),
                 )),
-                DiamondButton(),
+                GestureDetector(
+                    onTap: () {
+                      cubit.addOrderToFirestore(
+                          order: OrderModel(
+                              orderId: "",
+                              product: widget.product,
+                              size: cubit.size,
+                              sugarLevel: cubit.sugar,
+                              milkType: cubit.milk,
+                              quantity: cubit.quantity,
+                              uId: ""));
+                    },
+                    child: DiamondButton()),
               ],
             );
           },
