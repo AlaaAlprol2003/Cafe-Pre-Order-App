@@ -1,4 +1,5 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
+import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/ai/chat_ai_screen.dart';
 import 'package:dash_cup/features/ai/cubit/ai_cubit.dart';
@@ -63,10 +64,11 @@ class AppRouter {
           );
         }
       case AppRoutes.payment:
+      final orders = settings.arguments as List<OrderModel>;
         {
           return CupertinoPageRoute(
               builder: (context) => BlocProvider<PaymentCubit>(
-                  create: (context) => PaymentCubit(), child: PaymentScreen()));
+                  create: (context) => PaymentCubit(), child: PaymentScreen(orders: orders,)));
         }
       case AppRoutes.creditCard:
         {

@@ -23,7 +23,7 @@ class Category {
 class Products {
   final String productid;
   final String name;
-  final double price;
+   double price;
   final double rate;
   final String pretime;
   final String image;

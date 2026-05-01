@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/add_order_to_firestore_use_case.dart';
+import 'package:dash_cup/features/product_details/domain/use_case/delete_cart_items_use_case.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/delete_order_from_firestore_use_case.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/get_orders_use_case.dart';
+import 'package:dash_cup/features/product_details/domain/use_case/update_order_quantity_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,11 +14,15 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   AddOrderToFirestoreUseCase addOrderToFirestoreUseCase;
   GetOrdersFromFirestoreUseCase getOrdersFromFirestoreUseCase;
   DeleteOrderFromFirestoreUseCase deleteOrderFromFirestoreUseCase;
-  ProductDetailsCubit(
-      {required this.addOrderToFirestoreUseCase,
-      required this.getOrdersFromFirestoreUseCase,
-      required this.deleteOrderFromFirestoreUseCase})
-      : super(ProductDetailsInitialState());
+  UpdateOrderQuantityUseCase updateOrderQuantityUseCase;
+  DeleteCartItemsUseCase deleteCartItemsUseCase;
+  ProductDetailsCubit({
+    required this.addOrderToFirestoreUseCase,
+    required this.getOrdersFromFirestoreUseCase,
+    required this.deleteOrderFromFirestoreUseCase,
+    required this.updateOrderQuantityUseCase,
+    required this.deleteCartItemsUseCase,
+  }) : super(ProductDetailsInitialState());
 
   int quantity = 1;
   String size = "M";
@@ -24,9 +30,15 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   String milk = "No Milk";
   List<String> availableSizes = ["S", "M", "L"];
   List<String> sugarLevels = ["No Sugar", "Low", "Normal", "Extra"];
-  List<String> milkTypes = ["No Milk", "Regular", "Almond", "Soy"];
+  List<String> milkTypes = [
+    "No Milk",
+    "Regular (+10)",
+    "Almond (+20)",
+    "Soy (+30)"
+  ];
   List<OrderModel> orders = [];
   StreamSubscription<List<OrderModel>>? ordersSubscription;
+  String? loadingProductId;
   void increaseQuantity() {
     quantity++;
     emit(IncreaseQuantityState());
@@ -54,11 +66,15 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   }
 
   void addOrderToFirestore({required OrderModel order}) async {
+    loadingProductId = order.product.productid;
     emit(AddOrderToFirestoreLoading());
     final result = await addOrderToFirestoreUseCase(order: order);
+    await Future.delayed(const Duration(milliseconds: 500));
     result.fold(ifLeft: (failure) {
+      loadingProductId = null;
       emit(AddOrderToFirestoreFailure(message: failure.message));
     }, ifRight: (_) {
+      loadingProductId = null;
       emit(AddOrderToFirestoreSuccess());
     });
   }
@@ -93,6 +109,52 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
       emit(GetOrdersSuccess(orders: List.from(orders)));
     });
+  }
+
+  void updateOrderQuantity(
+      {required String orderId, required int newQuantity}) async {
+    // 1. تحديث محلي سريع عشان الـ UI ميتأخرش
+    final index = orders.indexWhere((e) => e.orderId == orderId);
+    if (index != -1) {
+      orders[index].quantity = newQuantity;
+      emit(GetOrdersSuccess(orders: List.from(orders)));
+
+      // 2. تحديث في Firebase عن طريق الـ UseCase
+      final result = await updateOrderQuantityUseCase(
+        orderId: orderId,
+        newQuantity: newQuantity,
+      );
+
+      result.fold(
+        ifLeft: (failure) {
+          // لو حصل فشل ممكن ترجع الكمية القديمة أو تطلع error
+          emit(GetOrdersFailure(message: failure.message));
+        },
+        ifRight: (_) {
+          // نجح التحديث في Firebase (الداتا كدة كدة اتحدثت محلياً)
+        },
+      );
+    }
+  }
+
+  Future<void> clearCart({required String uId}) async {
+    // بنبعت Loading داخلياً لو حبيت تستخدمه مستقبلاً
+    emit(DeleteCartLoading());
+
+    final result = await deleteCartItemsUseCase.call(uId: uId);
+
+    result.fold(
+      ifLeft: (failure) {
+        // فشل الحذف (صامت)
+        emit(DeleteCartFailure(message: failure.message));
+      },
+      ifRight: (_) {
+        // نجاح الحذف (صامت)[cite: 3]
+        emit(DeleteCartSuccess());
+        // ملحوظة: الـ Stream اللي إنت عامله في الكيوبيت
+        // هيحس إن الـ Firestore فضي وهيحدث الـ UI لوحده[cite: 3]
+      },
+    );
   }
 }
 
@@ -139,3 +201,12 @@ class DeleteOrderToFirestoreFailure extends ProductDetailsState {
 }
 
 class DeleteOrderToFirestoreSuccess extends ProductDetailsState {}
+
+class DeleteCartLoading extends ProductDetailsState {}
+
+class DeleteCartSuccess extends ProductDetailsState {}
+
+class DeleteCartFailure extends ProductDetailsState {
+  String message;
+  DeleteCartFailure({required this.message});
+}

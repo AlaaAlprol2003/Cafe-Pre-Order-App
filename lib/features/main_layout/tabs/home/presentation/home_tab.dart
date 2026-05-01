@@ -91,7 +91,7 @@ class HomeTab extends StatelessWidget {
                           ],
                         ),
                       ),
-                       CircleAvatar(
+                      CircleAvatar(
                         backgroundColor: const Color.fromARGB(255, 168, 101, 8),
                         child: IconButton(
                           onPressed: () {
@@ -103,7 +103,9 @@ class HomeTab extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 12.w,),
+                      SizedBox(
+                        width: 12.w,
+                      ),
                       CircleAvatar(
                         backgroundColor: const Color.fromARGB(255, 168, 101, 8),
                         child: IconButton(
@@ -181,10 +183,9 @@ class HomeTab extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Text(
                     "Categories",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium!
-                        .copyWith(color: const Color.fromARGB(255, 64, 25, 1),fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        color: const Color.fromARGB(255, 64, 25, 1),
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 35.h),
                   SizedBox(
@@ -278,8 +279,8 @@ class HomeTab extends StatelessWidget {
                   Text(
                     "Popular Items",
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          color: ColorsManager.darkNavyBlue,fontWeight: FontWeight.bold
-                        ),
+                        color: ColorsManager.darkNavyBlue,
+                        fontWeight: FontWeight.bold),
                   ),
                   GridView.builder(
                     shrinkWrap: true,
@@ -294,15 +295,22 @@ class HomeTab extends StatelessWidget {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: ColorsManager.darkBrown.withValues(alpha: .5),
+                              color:
+                                  ColorsManager.darkBrown.withValues(alpha: .5),
                               blurRadius: 10,
                               spreadRadius: -4,
                               offset: Offset(0, 2),
                             )
                           ],
                         ),
-                        child:
-                            ProductItem(product: Data.popularProducts[index])),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.productDetails,
+                                  arguments: Data.popularProducts[index]);
+                            },
+                            child: ProductItem(
+                                product: Data.popularProducts[index]))),
                     itemCount: 4,
                   ),
                 ],

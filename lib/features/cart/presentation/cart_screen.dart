@@ -1,12 +1,15 @@
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
+import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/cart/presentation/widgets/cart_item.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -29,6 +32,9 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: ColorsManager.warmBeige, // 👈 نفس الستايل
       body: BlocListener<ProductDetailsCubit, ProductDetailsState>(
         listener: (context, state) {
+          if (state is GetOrdersFailure) {
+            UiUtils.showMessage(context: context, message: state.message);
+          }
           if (state is GetOrdersFailure) {
             UiUtils.showMessage(context: context, message: state.message);
           }
@@ -63,7 +69,13 @@ class _CartScreenState extends State<CartScreen> {
                                 color: ColorsManager.darkChocolate)),
                       ],
                     ),
-                    _circleIcon(Icons.delete_outline),
+                    GestureDetector(
+                        onTap: () {
+                          cubit.clearCart(
+                              uId: FirebaseAuth.instance.currentUser!.uid);
+                        },
+                        child: _circleIcon(Icons.delete_outline,
+                            iconColor: Colors.red)),
                   ],
                 ),
               ),
@@ -108,32 +120,44 @@ class _CartScreenState extends State<CartScreen> {
                     );
                   }
 
-                  if (state is GetOrdersFailure) {
-                    UiUtils.showLoading(context: context);
+                  final orders = cubit.orders;
+
+                  if (state is GetOrdersLoading && cubit.orders.isEmpty) {
+                    return const Expanded(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                              color: ColorsManager.darkChocolate)),
+                    );
                   }
 
-                  if (state is GetOrdersSuccess) {
-                    final orders = cubit.orders;
+                  if (cubit.orders.isNotEmpty) {
+                    return Expanded(
+                      child: ListView.separated(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        itemCount: cubit.orders.length,
+                        separatorBuilder: (_, __) => SizedBox(height: 15.h),
+                        itemBuilder: (context, index) {
+                          final order = cubit.orders[index];
 
-                    if (state is GetOrdersLoading && cubit.orders.isEmpty) {
-                      return const Expanded(
-                        child: Center(
-                            child: CircularProgressIndicator(
-                                color: ColorsManager.darkChocolate)),
-                      );
-                    }
-
-                    if (cubit.orders.isNotEmpty) {
-                      return Expanded(
-                        child: ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          itemCount: cubit.orders.length,
-                          separatorBuilder: (_, __) => SizedBox(height: 15.h),
-                          itemBuilder: (context, index) =>
-                              CartItem(order: cubit.orders[index]),
-                        ),
-                      );
-                    }
+                          return Dismissible(
+                            key: Key(order.orderId),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (_) {
+                              cubit.deleteOrderFromFirestore(
+                                  orderId: order.orderId);
+                            },
+                            background: Container(
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.only(right: 20),
+                              color: Colors.red,
+                              child:
+                                  const Icon(Icons.delete, color: Colors.white),
+                            ),
+                            child: CartItem(order: order),
+                          );
+                        },
+                      ),
+                    );
                   }
 
                   return Expanded(
@@ -153,49 +177,69 @@ class _CartScreenState extends State<CartScreen> {
             top: Radius.circular(30.r),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            /// Price
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+          builder: (context, state) {
+            final total = cubit.orders.fold(
+                0.0, (sum, item) => sum + (item.product.price * item.quantity));
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Total", style: TextStyle(color: Colors.white70)),
-                Text("EGP 170",
-                    style: TextStyle(
-                        color: ColorsManager.darkHoney,
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.bold)),
-              ],
-            ),
-
-            /// Button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorsManager.darkOrange,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.r),
+                /// Price
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Total", style: TextStyle(color: Colors.white70)),
+                    Text("EGP  ${total.toStringAsFixed(0)}",
+                        style: TextStyle(
+                            color: ColorsManager.white,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.bold)),
+                  ],
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 12.h),
-              ),
-              onPressed: () {},
-              child: Text("Place Order",
-                  style: TextStyle(fontSize: 16.sp, color: Colors.white)),
-            )
-          ],
+
+                /// Button
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorsManager.darkOrange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 25.w, vertical: 12.h),
+                  ),
+                  onPressed: () {
+                    if (cubit.orders.isNotEmpty) {
+                      // ننتقل لصفحة الدفع ونمرر لستة الأوردرات كـ Arguments
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.payment,
+                        arguments: cubit.orders,
+                      );
+                    } else {
+                      UiUtils.showMessage(
+                          context: context, message: "Your cart is empty");
+                    }
+                  },
+                  child: Text("Checkout",
+                      style: GoogleFonts.roboto(
+                          fontSize: 16.sp, color: Colors.white)),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget _circleIcon(IconData icon) {
+  Widget _circleIcon(IconData icon, {Color? iconColor}) {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: ColorsManager.creamyWhite,
         shape: BoxShape.circle,
       ),
-      child: Icon(icon),
+      child: Icon(icon, color: iconColor),
     );
   }
 

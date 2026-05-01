@@ -2,6 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
+import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
@@ -22,7 +23,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key});
+  const PaymentScreen({super.key,required this.orders});
+  final List<OrderModel> orders;
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +86,9 @@ class PaymentScreen extends StatelessWidget {
                       padding:
                           REdgeInsets.symmetric(horizontal: 12.0, vertical: 24),
                       child: CarouselSlider(
-                          items: Data.hotCoffee
-                              .map((product) =>
-                                  OrderedProductCart(product: product))
+                          items: orders
+                              .map((order) =>
+                                  OrderedProductCart(product: order.product,order: order,))
                               .toList(),
                           options: CarouselOptions(
                               height: 100.h,
@@ -178,7 +180,7 @@ class PaymentScreen extends StatelessWidget {
                             builder: (context, state) {
                           double deliveryFees =
                               cubit.currentIndex == 1 ? 0.0 : 15;
-                          double subtotal = cubit.subtotalValue;
+                          double subtotal = orders.fold(0, (sum, item) => sum + item.totalPrice);
                           double vat = subtotal * 0.14;
                           double total = subtotal + vat + deliveryFees;
 

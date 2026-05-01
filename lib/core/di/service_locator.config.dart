@@ -45,6 +45,8 @@ import '../../features/product_details/domain/repository/order_repository.dart'
     as _i770;
 import '../../features/product_details/domain/use_case/add_order_to_firestore_use_case.dart'
     as _i941;
+import '../../features/product_details/domain/use_case/delete_cart_items_use_case.dart'
+    as _i72;
 import '../../features/product_details/domain/use_case/delete_order_from_firestore_use_case.dart'
     as _i455;
 import '../../features/product_details/domain/use_case/get_orders_use_case.dart'
@@ -90,6 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i941.AddOrderToFirestoreUseCase>(() =>
         _i941.AddOrderToFirestoreUseCase(
             orderRepository: gh<_i770.OrderRepository>()));
+    gh.lazySingleton<_i72.DeleteCartItemsUseCase>(() =>
+        _i72.DeleteCartItemsUseCase(
+            orderRepository: gh<_i770.OrderRepository>()));
     gh.lazySingleton<_i455.DeleteOrderFromFirestoreUseCase>(() =>
         _i455.DeleteOrderFromFirestoreUseCase(
             orderRepository: gh<_i770.OrderRepository>()));
@@ -116,6 +121,8 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i443.GetOrdersFromFirestoreUseCase>(),
           deleteOrderFromFirestoreUseCase:
               gh<_i455.DeleteOrderFromFirestoreUseCase>(),
+          updateOrderQuantityUseCase: gh<_i307.UpdateOrderQuantityUseCase>(),
+          deleteCartItemsUseCase: gh<_i72.DeleteCartItemsUseCase>(),
         ));
     return this;
   }

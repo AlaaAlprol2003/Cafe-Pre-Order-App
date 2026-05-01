@@ -10,4 +10,5 @@ abstract class OrderRepository {
       {required String orderId});
   Future<Either<Failure, void>> updateOrderQuantity(
       {required String orderId, required int newQuantity});
+      Future<Either<Failure, void>> deleteCartItems({required String uId});
 }

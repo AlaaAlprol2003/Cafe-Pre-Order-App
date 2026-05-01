@@ -1,6 +1,10 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
+import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/resources/ui_utils.dart';
+import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductItem extends StatelessWidget {
@@ -9,12 +13,11 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<ProductDetailsCubit>(context);
     return Container(
-      
       decoration: BoxDecoration(
         color: ColorsManager.darkChocolate,
         borderRadius: BorderRadius.circular(16.r),
-        
       ),
       child: Stack(
         children: [
@@ -66,25 +69,57 @@ class ProductItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 0,
+            bottom: 0, // 👈 تحت خالص
             right: 0,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(8.r),
-                decoration: BoxDecoration(
-                  color: ColorsManager.warmBeige,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16.r),
-                    bottomRight: Radius.circular(16.r),
+            child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+              builder: (context, state) {
+                // لودينج بسيط جداً مكان الأيقونة
+                bool isLoading = state is AddOrderToFirestoreLoading && 
+                   cubit.loadingProductId == product.productid;
+
+                return GestureDetector(
+                  onTap: isLoading
+                      ? null
+                      : () {
+                          // نمنع الضغط أثناء التحميل
+                          cubit.addOrderToFirestore(
+                            order: OrderModel(
+                                milkType: "No Milk",
+                                orderId: "",
+                                product: product,
+                                quantity: 1,
+                                size: "S",
+                                sugarLevel: "Normal",
+                                totalPrice: product.price,
+                                uId: ""),
+                          );
+                        },
+                  child: Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      color: ColorsManager.warmBeige,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16.r),
+                        bottomRight: Radius.circular(16.r),
+                      ),
+                    ),
+                    child: isLoading
+                        ? SizedBox(
+                            width: 24.sp,
+                            height: 24.sp,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: ColorsManager.darkChocolate,
+                            ),
+                          )
+                        : Icon(
+                            Icons.add,
+                            color: ColorsManager.darkChocolate,
+                            size: 24.sp,
+                          ),
                   ),
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: ColorsManager.darkChocolate,
-                  size: 24.sp,
-                ),
-              ),
+                );
+              },
             ),
           ),
           Positioned(

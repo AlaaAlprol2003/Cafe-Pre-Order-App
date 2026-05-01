@@ -55,7 +55,9 @@ class CartItem extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 Wrap(
-                  spacing: 6,
+                  spacing: 4.w,
+                  runSpacing: 10.h,
+                  
                   children: [
                     Container(
                       padding:
@@ -92,20 +94,18 @@ class CartItem extends StatelessWidget {
                       height: 10.h,
                     ),
                     if (order.milkType != null)
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                            color: ColorsManager.warmBeige,
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: Text(
-                            order.milkType!,
-                            style: GoogleFonts.roboto(
-                                fontSize: 14.sp,
-                                color: ColorsManager.darkChocolate),
-                          ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          color: ColorsManager.warmBeige,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Text(
+                          order.milkType!,
+                          style: GoogleFonts.roboto(
+                              fontSize: 14.sp,
+                              color: ColorsManager.darkChocolate),
                         ),
                       ),
                   ],
@@ -137,15 +137,13 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  _qtyButton(Icons.remove),
-                  SizedBox(width: 5.w),
-                  Text("${order.quantity}"),
-                  SizedBox(width: 5.w),
-                  _qtyButton(Icons.add),
-                ],
-              ),
+              Image.asset("assets/images/flower.png",height: 50.h,),
+              SizedBox(height: 20.h),
+              Text("${order.quantity} item/s",
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      color: ColorsManager.darkOrange,
+                      fontWeight: FontWeight.bold)),
               SizedBox(height: 20.h),
               Text("${order.product.price} EGP",
                   style: TextStyle(
@@ -160,14 +158,17 @@ class CartItem extends StatelessWidget {
   }
 }
 
-Widget _qtyButton(IconData icon) {
-  return Container(
-    height: 40.h,
-    padding: EdgeInsets.all(6.w),
-    decoration: BoxDecoration(
-      color: ColorsManager.darkChocolate,
-      shape: BoxShape.circle,
+Widget _qtyButton(IconData icon, {VoidCallback? onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      height: 40.h,
+      padding: EdgeInsets.all(6.w),
+      decoration: BoxDecoration(
+        color: ColorsManager.darkChocolate,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(icon, color: Colors.white, size: 14),
     ),
-    child: Icon(icon, color: Colors.white, size: 14),
   );
 }

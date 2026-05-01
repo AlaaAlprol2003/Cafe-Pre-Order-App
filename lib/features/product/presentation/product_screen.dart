@@ -2,9 +2,12 @@
 
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
+import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/product_category.dart';
+import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

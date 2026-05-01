@@ -9,6 +9,7 @@ class OrderModel {
   String sugarLevel;
   String? milkType;
   int quantity;
+  double totalPrice;
 
   OrderModel(
       {required this.orderId,
@@ -17,7 +18,8 @@ class OrderModel {
       required this.sugarLevel,
       required this.milkType,
       required this.quantity,
-      required this.uId});
+      required this.uId,
+      required this.totalPrice});
 
   OrderModel.fromJson(Map<String, dynamic> json)
       : this(
@@ -28,7 +30,8 @@ class OrderModel {
             size: json["size"],
             sugarLevel: json["sugarLevel"],
             milkType: json["milkType"],
-            quantity: json["quantity"]);
+            quantity: json["quantity"],
+            totalPrice: json["totalPrice"]);
 
   Map<String, dynamic> toJson() => {
         "orderId": orderId,
@@ -36,7 +39,8 @@ class OrderModel {
         "userId": uId,
         "size": size,
         "sugarLevel": sugarLevel,
-        "milkType": milkType ,
+        "milkType": milkType,
         "quantity": quantity,
+        "totalPrice": totalPrice
       };
 }

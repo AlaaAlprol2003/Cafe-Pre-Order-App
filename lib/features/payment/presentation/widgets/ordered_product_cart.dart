@@ -1,4 +1,5 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
+import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,10 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class OrderedProductCart extends StatelessWidget {
   const OrderedProductCart({
-    super.key, required this.product,
+    super.key, required this.product,required this.order
   });
 
   final Products product;
+  final OrderModel order;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -36,7 +38,7 @@ class OrderedProductCart extends StatelessWidget {
                       color: ColorsManager.darkOrange,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10.r),bottomRight: Radius.circular(10.r))
                     ),
-                    child: Text("2x",style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w400,color: ColorsManager.white),),
+                    child: Text("${order.quantity}x",style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w400,color: ColorsManager.white),),
                   )
             ],
           ),

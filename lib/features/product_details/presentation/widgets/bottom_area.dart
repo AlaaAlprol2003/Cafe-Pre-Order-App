@@ -74,6 +74,18 @@ class _BottomAreaState extends State<BottomArea> {
                 )),
                 GestureDetector(
                     onTap: () {
+                      double unitPrice = widget.product.price;
+
+                      if (cubit.milk == "Regular (+10)") {
+                        unitPrice += 10;
+                      } else if (cubit.milk == "Almond (+20)") {
+                        unitPrice += 20;
+                      } else if (cubit.milk == "Soy (+30)") {
+                        unitPrice += 30;
+                      }
+
+                      double totalPrice = unitPrice * cubit.quantity;
+
                       cubit.addOrderToFirestore(
                           order: OrderModel(
                               orderId: "",
@@ -82,7 +94,8 @@ class _BottomAreaState extends State<BottomArea> {
                               sugarLevel: cubit.sugar,
                               milkType: cubit.milk,
                               quantity: cubit.quantity,
-                              uId: ""));
+                              uId: "",
+                              totalPrice: totalPrice));
                     },
                     child: DiamondButton()),
               ],
