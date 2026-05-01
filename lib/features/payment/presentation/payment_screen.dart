@@ -1,12 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
-import 'package:dash_cup/core/widgets/custom_elevated_button.dart';
 import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:dash_cup/features/payment/presentation/models/payment_method.dart';
 import 'package:dash_cup/features/payment/presentation/payment_success_screen.dart';
@@ -56,11 +54,7 @@ class PaymentScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               actions: [
-                BlocBuilder<PaymentCubit, PaymentState>(
-                  builder: (context, state) {
-                    return CustomDropdown();
-                  },
-                )
+                CustomDropdown(count: orders.length)
               ],
             ),
             SliverToBoxAdapter(

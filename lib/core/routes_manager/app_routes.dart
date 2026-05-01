@@ -13,4 +13,8 @@ class AppRoutes {
   static const String cart = "cart_screen";
   static const String productDetails = "product_details";
   static const String quickCheckout = "quickCheckout";
+  static const String personalInfo = "personalInfo";
+  static const String helpSupportScreen = "helpSupportScreen";
+  static const String aboutUsScreen = "aboutUsScreen";
+  static const String notificationsScreen = "notificationsScreen";
 }

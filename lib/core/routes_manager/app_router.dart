@@ -10,6 +10,10 @@ import 'package:dash_cup/features/auth/presentation/screens/reset_password.dart'
 import 'package:dash_cup/features/cart/presentation/cart_screen.dart';
 import 'package:dash_cup/features/main_layout/main_layout.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
+import 'package:dash_cup/features/main_layout/tabs/profile/about_us_screen.dart';
+import 'package:dash_cup/features/main_layout/tabs/profile/help_support_screen.dart';
+import 'package:dash_cup/features/main_layout/tabs/profile/notificatons_screen.dart';
+import 'package:dash_cup/features/main_layout/tabs/profile/personal_info.dart';
 import 'package:dash_cup/features/offers/presentation/cubit/offer_details_cubit.dart';
 import 'package:dash_cup/features/offers/presentation/offer_details.dart';
 import 'package:dash_cup/features/payment/presentation/credit_card_screen.dart';
@@ -115,6 +119,26 @@ class AppRouter {
         final offer = settings.arguments as OfferModel;
         {
           return CupertinoPageRoute(builder: (context) => QuickCheckout(offer: offer));
+        }
+
+        case AppRoutes.personalInfo:
+        {
+          return CupertinoPageRoute(builder: (context) => PersonalInformation());
+        }
+
+        case AppRoutes.helpSupportScreen:
+        {
+          return CupertinoPageRoute(builder: (context) => HelpSupportScreen());
+        }
+
+        case AppRoutes.aboutUsScreen:
+        {
+          return CupertinoPageRoute(builder: (context) => AboutUsScreen());
+        }
+
+        case AppRoutes.notificationsScreen:
+        {
+          return CupertinoPageRoute(builder: (context) => NotificationsScreen());
         }
     }
     return null;
