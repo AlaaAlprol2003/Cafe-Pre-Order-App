@@ -15,11 +15,7 @@ class ProductScreen extends StatefulWidget {
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen>
-    {
-  
-
- 
+class _ProductScreenState extends State<ProductScreen> {
   final List<String> items = ["Caramel", "Vanilla", "Oat Milk", "Extra Shot"];
 
   String? selectedItem;
@@ -29,12 +25,10 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
   void dispose() {
-   
     super.dispose();
   }
 
@@ -65,146 +59,199 @@ class _ProductScreenState extends State<ProductScreen>
                       },
                       child: Icon(
                         Icons.arrow_back_ios,
-                        color: ColorsManager.charcoalBlue,
+                        color: const Color.fromRGBO(227, 197, 156, 1),
                       ),
                     ),
                   ),
                   SizedBox(height: 24.h),
-                 
-                    
-                    
-                       Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Container(
-                            width: 400.w,
-                            height: 300.h,
-                            decoration: BoxDecoration(
-                              color: ColorsManager.charcoalBlue,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(50.r),
-                                bottomLeft: Radius.circular(50.r),
-                                topLeft: Radius.circular(50.r),
-                                topRight: Radius.circular(50.r),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        width: 400.w,
+                        height: 240.h,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 57, 35, 7),
+                          borderRadius: BorderRadius.circular(50.r),
+                        ),
+                      ),
+                      Positioned(
+                        top: -40.h,
+                        right: -10.w,
+                        child: CircleAvatar(
+                          radius: 70.r,
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 233, 185),
+                        ),
+                      ),
+                      Positioned(
+                        top: 10.h,
+                        right: 40.w,
+                        child: CircleAvatar(
+                          radius: 50.r,
+                          backgroundColor:
+                              const Color.fromARGB(255, 132, 97, 55),
+                        ),
+                      ),
+                      Positioned(
+                        top: -10.h,
+                        right: 20.w,
+                        child: CircleAvatar(
+                          radius: 40.r,
+                          backgroundColor:
+                              const Color.fromARGB(255, 62, 39, 11),
+                        ),
+                      ),
+                      Positioned(
+                        left: 20.w,
+                        top: 20.h,
+                        child: Text(
+                          "Make It Yours",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                color: Color.fromARGB(255, 253, 235, 190),
+                              ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 90.h,
+                        left: 20.w,
+                        right: 120.w,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 12.h),
+                            SizedBox(
+                              child: DropdownButtonFormField<String>(
+                                value: selectedItem,
+                                dropdownColor:
+                                    const Color.fromARGB(255, 132, 97, 55),
+                                borderRadius: BorderRadius.circular(16.r),
+                                hint: Text(
+                                  "Select an add-on",
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.displayMedium,
+                                ),
+                                items: items.map((String item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium!
+                                          .copyWith(
+                                            color: const Color.fromARGB(
+                                                255, 255, 234, 184),
+                                          ),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) {
+                                  selectedItem = newValue;
+                                },
+                                iconEnabledColor: ColorsManager.warmBeige,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor:
+                                      const Color.fromARGB(255, 57, 35, 7),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                  ),
+                                  contentPadding: REdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-
-                          Positioned(
-                            top: -40.h ,
-                            right: -10.w,
-                            child: CircleAvatar(
-                              radius: 70.r,
-                              backgroundColor: Colors.amber,
-                            ),
-                          ),
-
-                          Positioned(
-                            top: 10.h ,
-                            right: 40.w,
-                            child: CircleAvatar(
-                              radius: 50.r,
-                              backgroundColor: Colors.deepOrange,
-                            ),
-                          ),
-
-                          Positioned(
-                            top: -10.h ,
-                            right: 20.w,
-                            child: CircleAvatar(
-                              radius: 40.r,
-                              backgroundColor: Colors.green,
-                            ),
-                          ),
-                          Positioned(
-                            left: 20.w,
-                            top: 20.h,
-                            child: Text(
-                              "Make It Yours ✨",
-                              style: Theme.of(context).textTheme.headlineLarge,
-                            ),
-                          ),
-                          Positioned(
-                            top: 90.h,
-                            left: 20.w,
-                            right: 120.w,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  child: DropdownButtonFormField<String>(
-                                    value: selectedItem,
-                                    dropdownColor: ColorsManager.blueGrey,
-                                    borderRadius: BorderRadius.circular(16.r),
-                                    hint: Text(
-                                      "Select an add-on",
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.displayMedium,
+                            SizedBox(height: 16.h),
+                            SizedBox(
+                              height: 50.h,
+                              child: TextFormField(
+                                controller: _specialInstructions,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor:
+                                      const Color.fromARGB(255, 57, 35, 7),
+                                  hintText: "Any special instructions",
+                                  hintStyle: Theme.of(
+                                    context,
+                                  ).textTheme.displayMedium!.copyWith(
+                                      color: const Color.fromARGB(
+                                          170, 225, 208, 165)),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
                                     ),
-                                    items: items.map((String item) {
-                                      return DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(
-                                          item,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displayMedium!
-                                              .copyWith(
-                                                color:
-                                                    ColorsManager.burntOrange,
-                                              ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (newValue) {
-                                      selectedItem = newValue;
-                                    },
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: ColorsManager.blueGrey,
-
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          12.r,
-                                        ),
-                                      ),
-                                      contentPadding: REdgeInsets.symmetric(
-                                        horizontal: 12,
-                                        vertical: 8,
-                                      ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 252, 232, 191),
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      12.r,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 12.h),
-                                CircleAvatar(
-                                  backgroundColor: ColorsManager.burntOrange,
-
-                                  radius: 20,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: ColorsManager.darkNavyBlue,
-                                    size: 25,
-                                  ),
-                                ),
-                                SizedBox(height: 12.h),
-                                TextFormField(
-                                  controller: _specialInstructions,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: ColorsManager.blueGrey,
-                                    hintText: "Any special instructions",
-                                    hintStyle: Theme.of(
-                                      context,
-                                    ).textTheme.displayMedium,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                  
-              
+                      Positioned(
+                        bottom: -5.h,
+                        right: -5.w,
+                        child: Container(
+                          height: 45.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 132, 97, 55),
+                              borderRadius: BorderRadius.circular(12.r)),
+                          child: Icon(
+                            Icons.add_outlined,
+                            color: ColorsManager.creamyWhite,
+                            size: 30.h,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 50.h),
                   Padding(
                     padding: REdgeInsets.symmetric(
@@ -213,7 +260,6 @@ class _ProductScreenState extends State<ProductScreen>
                     ),
                     child: AnimationLimiter(
                       child: Center(
-                        
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 500),
                           child: ListView.separated(
@@ -221,18 +267,18 @@ class _ProductScreenState extends State<ProductScreen>
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) =>
                                 AnimationConfiguration.staggeredList(
-                                  position: index,
-                                  duration: const Duration(seconds: 1),
-                                  delay: const Duration(milliseconds: 800),
-                                  child: SlideAnimation(
-                                    verticalOffset: 50.0,
-                                    child: FadeInAnimation(
-                                      child: ProductCategory(
-                                        product: widget.products[index],
-                                      ),
-                                    ),
+                              position: index,
+                              duration: const Duration(seconds: 1),
+                              delay: const Duration(milliseconds: 800),
+                              child: SlideAnimation(
+                                verticalOffset: 50.0,
+                                child: FadeInAnimation(
+                                  child: ProductCategory(
+                                    product: widget.products[index],
                                   ),
                                 ),
+                              ),
+                            ),
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: 130.h),
                             itemCount: widget.products.length,

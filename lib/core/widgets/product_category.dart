@@ -1,13 +1,17 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../features/favourite/presentation/cubit/favourite_cubit.dart';
+import '../../features/favourite/presentation/cubit/favourite_state.dart';
 
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.product});
 
   final Products product;
-  
+
   @override
   State<ProductCategory> createState() => _ProductCategoryState();
 }
@@ -21,26 +25,25 @@ class _ProductCategoryState extends State<ProductCategory> {
         Container(
           height: 150.h,
           width: double.infinity,
-
           decoration: BoxDecoration(
-            color: ColorsManager.darkChocolate,
+           
+            color: const Color.fromARGB(255, 57, 35, 7),
             borderRadius: BorderRadius.only(topRight: Radius.circular(16.r)),
           ),
         ),
         Positioned(
           bottom: -16.h,
           left: -10.w,
-
           child: Container(
             height: 185.h,
             width: 160.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
-              color: ColorsManager.darkBrown
+              color: const Color.fromARGB(255, 132, 97, 55),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(widget.product.image, fit: BoxFit.cover),
+              child: Image.asset(widget.product.image, fit: BoxFit.contain),
             ),
           ),
         ),
@@ -51,19 +54,25 @@ class _ProductCategoryState extends State<ProductCategory> {
             children: [
               Text(
                 widget.product.name,
-                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: ColorsManager.creamyWhite),
               ),
               SizedBox(height: 10.h),
               Text(
                 "Pre Time: ${widget.product.pretime}",
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  color: ColorsManager.creamyWhite,
-                ),
+                      color: ColorsManager.creamyWhite,
+                    ),
               ),
               SizedBox(height: 10.h),
               Text(
                 "EGP ${widget.product.price}",
-                style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorsManager.creamyWhite),
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: ColorsManager.creamyWhite),
               ),
               SizedBox(height: 10.h),
             ],
@@ -77,25 +86,61 @@ class _ProductCategoryState extends State<ProductCategory> {
               Text(
                 "${widget.product.rate}",
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  color: ColorsManager.creamyWhite,
-                  fontSize: 15.sp
-                ),
+                    color: ColorsManager.creamyWhite, fontSize: 15.sp),
               ),
               SizedBox(width: 5.w),
-              Icon(Icons.star, color: Colors.amber,size: 15.h,),
+              Icon(
+                Icons.star,
+                color: Colors.amber,
+                size: 15.h,
+              ),
             ],
           ),
         ),
         Positioned(
           bottom: -10.h,
           right: -10.w,
-          child: CircleAvatar(
-            backgroundColor: ColorsManager.burntOrange,
-
-            radius: 20,
-            child: Icon(Icons.add, color: ColorsManager.darkNavyBlue, size: 20),
+          child: Container(
+            height: 30.h,
+            width: 40.w,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 132, 97, 55),
+                borderRadius: BorderRadius.circular(8.r)),
+            child: Icon(
+              Icons.add_outlined,
+              color: ColorsManager.creamyWhite,
+              size: 25.h,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
+        Positioned(
+          top: -6,
+          child: BlocBuilder<FavouriteCubit, FavouriteState>(
+            builder: (context, state) {
+
+              if (state is FavouriteLoaded) {
+                final isFav = state.ids.contains(widget.product.productid);
+
+                return GestureDetector(
+                  onTap: () {
+                    context.read<FavouriteCubit>().toggle(widget.product.productid);
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: ColorsManager.warmBeige,
+                    radius: 16.r,
+                    child: Icon(
+                      isFav ? Icons.favorite : Icons.favorite_border,
+                      color: ColorsManager.darkBrown
+                    ),
+                  ),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        )
       ],
     );
   }

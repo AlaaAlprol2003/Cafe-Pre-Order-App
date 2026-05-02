@@ -11,7 +11,7 @@ class BookingModel extends BookingEntity {
     required String occasion,
     required double price,
   }) : super(
-    id: id, // 🔥 مهم
+    id: id,
     name: name,
     guests: guests,
     tableType: tableType,

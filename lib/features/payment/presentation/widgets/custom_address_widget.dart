@@ -30,7 +30,7 @@ class CustomAddressWidget extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: cubit.currentIndex == 1
-                  ? ColorsManager.white
+                  ? ColorsManager.eggshell
                   : ColorsManager.creamyWhite,
               border: cubit.currentIndex == 1
                   ? Border.all(color: ColorsManager.darkChocolate, width: 1.5)
