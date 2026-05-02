@@ -1,7 +1,11 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../features/favourite/presentation/cubit/favourite_cubit.dart';
+import '../../features/favourite/presentation/cubit/favourite_state.dart';
 
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.product});
@@ -110,6 +114,33 @@ class _ProductCategoryState extends State<ProductCategory> {
             ),
           ),
         ),
+        Positioned(
+          top: -6,
+          child: BlocBuilder<FavouriteCubit, FavouriteState>(
+            builder: (context, state) {
+
+              if (state is FavouriteLoaded) {
+                final isFav = state.ids.contains(widget.product.productid);
+
+                return GestureDetector(
+                  onTap: () {
+                    context.read<FavouriteCubit>().toggle(widget.product.productid);
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: ColorsManager.warmBeige,
+                    radius: 16.r,
+                    child: Icon(
+                      isFav ? Icons.favorite : Icons.favorite_border,
+                      color: ColorsManager.darkBrown
+                    ),
+                  ),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        )
       ],
     );
   }

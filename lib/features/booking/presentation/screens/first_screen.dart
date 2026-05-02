@@ -43,8 +43,12 @@ class FirstScreen extends StatelessWidget {
               );
             }
 
-            return ListView(
-              children: data.map((b) => BookingCard(booking: b)).toList(),
+            return ListView.builder(
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                return BookingCard(booking: data[index]);
+              },
             );
           },
         ),

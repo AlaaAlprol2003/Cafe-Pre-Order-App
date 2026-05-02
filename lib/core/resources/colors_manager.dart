@@ -20,6 +20,7 @@ class ColorsManager {
   static const Color umber =  Color.fromARGB(255, 100, 73, 38);// بنى ترابى 
   static const Color russet =  Color.fromARGB(255, 106, 71, 28); // اسمر محمر
   static const Color eggshell =   Color.fromARGB(255, 251, 253, 227); // قشر البيض 
-  static const Color darkHoney =   Color.fromARGB(255, 133, 89, 13); // عسل داكن  
-  
+  static const Color darkHoney =   Color.fromARGB(255, 133, 89, 13); //// عسل داكن
+  static const Color mediumBrown2 = Color(0xFF8B5E3C);
+  static const Color lightBrown = Color(0xFFC89B7B);
 }

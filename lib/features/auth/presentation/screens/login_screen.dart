@@ -8,7 +8,6 @@ import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/features/auth/data/models/login_request.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
-import 'package:dash_cup/features/auth/presentation/widgets/custom_animated_toggle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

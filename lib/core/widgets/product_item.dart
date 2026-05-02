@@ -1,7 +1,11 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../features/favourite/presentation/cubit/favourite_cubit.dart';
+import '../../features/favourite/presentation/cubit/favourite_state.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.product});
@@ -93,10 +97,29 @@ class ProductItem extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: ColorsManager.warmBeige,
               radius: 14.r,
-              child: Icon(
-                Icons.favorite_outline,
-                color: Colors.red,
-                size: 18.sp,
+              child: BlocBuilder<FavouriteCubit, FavouriteState>(
+                builder: (context, state) {
+
+                  if (state is FavouriteLoaded) {
+                    final isFav = state.ids.contains(product.productid);
+
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<FavouriteCubit>().toggle(product.productid);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: ColorsManager.warmBeige,
+                        radius: 16.r,
+                        child: Icon(
+                            isFav ? Icons.favorite : Icons.favorite_border,
+                            color: ColorsManager.darkBrown
+                        ),
+                      ),
+                    );
+                  }
+
+                  return const SizedBox();
+                },
               ),
             ),
           ),

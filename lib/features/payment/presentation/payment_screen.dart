@@ -71,7 +71,7 @@ class PaymentScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorsManager.darkChocolate.withValues(alpha: 0.1),
+                      color: ColorsManager.darkBrown.withValues(alpha: 0.1),
                       blurRadius: 40,
                       spreadRadius: 8,
                       offset: Offset(0, 0),
