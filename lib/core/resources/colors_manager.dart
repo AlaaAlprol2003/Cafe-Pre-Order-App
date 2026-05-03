@@ -24,4 +24,6 @@ class ColorsManager {
   static const Color deepBrown =  Color(0xFF1B0C08);  
   static const Color deepBurntBrown = Color(0xFF2D140D);  
   
+  static const Color mediumBrown2 = Color(0xFF8B5E3C);
+  static const Color lightBrown = Color(0xFFC89B7B);
 }

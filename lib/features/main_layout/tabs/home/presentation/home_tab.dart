@@ -129,14 +129,37 @@ class HomeTab extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: REdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
+                            padding: REdgeInsets.symmetric(horizontal: 16),
                             child: SizedBox(
                               height: 50.h,
                               child: CustomTextFormField(
                                 labelText: "What are you looking for?",
                                 controller: _searchController,
+
+                                // 1. تغيير شكل زرار الكيبورد لعلامة البحث 🔍
+                                textInputAction: TextInputAction.search,
+
+                                // 2. تنفيذ البحث عند الضغط على الزرار في الكيبورد
+                                onFieldSubmitted: (value) {
+                                  if (value.trim().isEmpty)
+                                    return; // لو البحث فاضي ميعملش حاجة
+
+                                  // فلترة كل المنتجات بناءً على النص المدخل
+                                  List<Products> searchResults = Data
+                                      .allProducts
+                                      .where((product) => product.name
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()))
+                                      .toList();
+
+                                  // الانتقال لشاشة المنتجات مع تمرير النتائج
+                                  Navigator.pushNamed(
+                                    context,
+                                    AppRoutes.productScreen,
+                                    arguments: searchResults,
+                                  );
+                                },
+
                                 preIcon: Icon(
                                   Icons.search,
                                   color: ColorsManager.darkOrange,

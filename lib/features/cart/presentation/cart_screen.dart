@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
@@ -161,7 +162,9 @@ class _CartScreenState extends State<CartScreen> {
                   }
 
                   return Expanded(
-                      child: Center(child: Text("Your Cart is Empty")));
+                      child: Center(child: ZoomIn(
+                        duration: Duration(seconds: 2),
+                        child: Text("Your Cart is Empty"))));
                 },
               ),
             ],
@@ -209,7 +212,6 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                   onPressed: () {
                     if (cubit.orders.isNotEmpty) {
-                      // ننتقل لصفحة الدفع ونمرر لستة الأوردرات كـ Arguments
                       Navigator.pushNamed(
                         context,
                         AppRoutes.payment,

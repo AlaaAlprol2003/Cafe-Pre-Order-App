@@ -1,11 +1,13 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
-import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../features/favourite/presentation/cubit/favourite_cubit.dart';
+import '../../features/favourite/presentation/cubit/favourite_state.dart';
 
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.product});
@@ -26,30 +28,37 @@ class _ProductCategoryState extends State<ProductCategory> {
         Container(
           height: 150.h,
           width: double.infinity,
+          margin: REdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: ColorsManager.darkChocolate,
+            color: const Color.fromARGB(255, 57, 35, 7),
             borderRadius: BorderRadius.only(topRight: Radius.circular(16.r)),
           ),
         ),
+
         Positioned(
           bottom: -16.h,
           left: -10.w,
           child: Container(
             height: 185.h,
             width: 160.w,
+            margin: REdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
-                color: ColorsManager.darkBrown),
+              borderRadius: BorderRadius.circular(16.r),
+              color: const Color.fromARGB(255, 132, 97, 55),
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(widget.product.image, fit: BoxFit.cover),
+              child: Image.asset(widget.product.image, fit: BoxFit.contain),
             ),
           ),
         ),
+
+        // بيانات المنتج (الاسم، السعر، الوقت)
         Positioned(
-          left: 160.w,
+          left: 190.w,
           top: 20.h,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 widget.product.name,
@@ -73,10 +82,11 @@ class _ProductCategoryState extends State<ProductCategory> {
                     .displayMedium!
                     .copyWith(color: ColorsManager.creamyWhite),
               ),
-              SizedBox(height: 10.h),
             ],
           ),
         ),
+
+        // التقييم[cite: 7]
         Positioned(
           bottom: 5.h,
           right: 40.w,
@@ -96,26 +106,29 @@ class _ProductCategoryState extends State<ProductCategory> {
             ],
           ),
         ),
+
+        // زر الإضافة للسلة مع حالة الـ Loading[cite: 7]
         Positioned(
           bottom: -10.h,
-          right: -10.w,
+          right: -5.w,
           child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
             builder: (context, state) {
-              // إحنا محتاجين نعرف هل اللودينج ده يخص المنتج الحالي ولا لأ
-              // بس كحل سريع وبسيط، هنظهر اللودينج لو الحالة Loading
               bool isLoading = state is AddOrderToFirestoreLoading &&
                   cubit.loadingProductId == widget.product.productid;
 
-              return CircleAvatar(
-                backgroundColor: ColorsManager.burntOrange,
-                radius: 20.r,
+              return Container(
+                height: 40.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 132, 97, 55),
+                    borderRadius: BorderRadius.circular(8.r)),
                 child: isLoading
                     ? SizedBox(
-                        width: 20.w,
-                        height: 20.w,
+                        width: 10.w,
+                        height: 10.w,
                         child: CircularProgressIndicator(
-                          color: ColorsManager.darkNavyBlue,
-                          strokeWidth: 2, // عشان يبقى رفيع ولطيف
+                          color: ColorsManager.creamyWhite,
+                          strokeWidth: 2,
                         ),
                       )
                     : GestureDetector(
@@ -135,14 +148,46 @@ class _ProductCategoryState extends State<ProductCategory> {
                         },
                         child: Icon(
                           Icons.add,
-                          color: ColorsManager.darkNavyBlue,
-                          size: 20.sp,
+                          color: ColorsManager.creamyWhite,
+                          size: 25.h,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
               );
             },
           ),
         ),
+
+        // أيقونة المفضلات[cite: 7]
+        Positioned(
+          top: -10.h,
+          left: 5.w,
+          child: BlocBuilder<FavouriteCubit, FavouriteState>(
+            builder: (context, state) {
+              if (state is FavouriteLoaded) {
+                final isFav = state.ids.contains(widget.product.productid);
+
+                return GestureDetector(
+                  onTap: () {
+                    context
+                        .read<FavouriteCubit>()
+                        .toggle(widget.product.productid);
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: ColorsManager.warmBeige,
+                    radius: 16.r,
+                    child: Icon(
+                      isFav ? Icons.favorite : Icons.favorite_border,
+                      color: ColorsManager.darkBrown,
+                      size: 18.sp,
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox();
+            },
+          ),
+        )
       ],
     );
   }

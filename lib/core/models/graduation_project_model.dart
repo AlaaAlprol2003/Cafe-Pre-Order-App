@@ -18,6 +18,7 @@ class Category {
     this.hasMilkOption = false, // القيمة الافتراضية "لا يوجد"
     this.hasSugarOption = false,
   });
+
 }
 
 class Products {
@@ -27,7 +28,7 @@ class Products {
   final double rate;
   final String pretime;
   final String image;
-  final Category category;  
+  final Category category;
   final String description;
   
   // خصائص إضافية للتصميم (القلب والورقة الخضراء)
@@ -46,4 +47,5 @@ class Products {
     this.isFavorite = false,
     this.isOrganic = false,
   });
+
 }

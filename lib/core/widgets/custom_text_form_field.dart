@@ -13,6 +13,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     this.validator,
     this.isSecured = false,
+    this.textInputAction,
+    this.onFieldSubmitted
   });
   final String labelText;
   final Widget? preIcon;
@@ -21,7 +23,8 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool isSecured;
-
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -29,15 +32,14 @@ class CustomTextFormField extends StatelessWidget {
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         color: ColorsManager.darkHoney,
+
       ),
       cursorColor: ColorsManager.darkOrange,
       obscuringCharacter: "*",
       
-      onFieldSubmitted: (_) {
-        FocusScope.of(context).nextFocus();
-      },
+      onFieldSubmitted: onFieldSubmitted,
       keyboardType: keyboardType,
-
+      textInputAction: textInputAction,
       obscureText: isSecured,
       controller: controller,
       validator: validator,

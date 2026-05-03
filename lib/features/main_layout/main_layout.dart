@@ -33,6 +33,7 @@ class MainLayout extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
+            extendBody: true,
             body: tabs[cubit.selectedTab],
             bottomNavigationBar: CustomBottomNavBar(),
             floatingActionButton: FloatingActionButton(

@@ -24,6 +24,7 @@ import 'package:dash_cup/features/product/presentation/product_screen.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/product_details.dart';
 import 'package:dash_cup/features/quick_checkout/quick_checkout.dart';
+import 'package:dash_cup/features/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -139,6 +140,11 @@ class AppRouter {
         case AppRoutes.notificationsScreen:
         {
           return CupertinoPageRoute(builder: (context) => NotificationsScreen());
+        }
+
+         case AppRoutes.splashScreen:
+        {
+          return CupertinoPageRoute(builder: (context) => SplashScreen());
         }
     }
     return null;
