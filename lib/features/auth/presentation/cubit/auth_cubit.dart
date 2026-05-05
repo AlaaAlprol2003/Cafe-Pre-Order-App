@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dash_cup/features/auth/data/models/login_request.dart';
 import 'package:dash_cup/features/auth/data/models/register_request.dart';
 import 'package:dash_cup/features/auth/data/models/user.dart';
@@ -8,6 +10,7 @@ import 'package:dash_cup/features/auth/domain/use_cases/register_use_case.dart';
 import 'package:dash_cup/features/auth/domain/use_cases/reset_password_use_case.dart';
 import 'package:dash_cup/features/auth/presentation/cubit/auth_states.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -65,7 +68,8 @@ class AuthCubit extends Cubit<AuthState> {
       },
       ifRight: (credential) async {
         userCredential = credential;
-
+        String imageUrl =
+            "https://ui-avatars.com/api/?name=$name&background=random";
         final userModel = UserModel(
           id: credential.user!.uid,
           name: name,
@@ -73,6 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
           password: request.password,
           phone: phone,
           points: 0,
+          image: imageUrl,
           favoriteItems: [],
         );
 
@@ -80,7 +85,10 @@ class AuthCubit extends Cubit<AuthState> {
 
         result.fold(
           ifLeft: (failure) => emit(RegisterFailure(message: failure.message)),
-          ifRight: (_) => emit(RegisterSuccess()),
+          ifRight: (_) {
+            UserModel.currentUser = userModel;
+            emit(RegisterSuccess());
+          },
         );
       },
     );
@@ -89,12 +97,23 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login({required LoginRequest request}) async {
     emit(LoginLoading());
     final result = await loginUseCase(request: request);
-    result.fold(
+
+    await result.fold(
       ifLeft: (failure) {
         emit(LoginFailure(message: failure.message));
       },
-      ifRight: (_) {
-        emit(LoginSuccess());
+      ifRight: (_) async {
+        final userResult = await getUserFromfirestoreUseCase(
+          userId: FirebaseAuth.instance.currentUser!.uid,
+        );
+
+        userResult.fold(
+          ifLeft: (failure) => emit(LoginFailure(message: failure.message)),
+          ifRight: (user) {
+            UserModel.currentUser = user; 
+            emit(LoginSuccess());
+          },
+        );
       },
     );
   }

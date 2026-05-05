@@ -30,7 +30,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<ProductDetailsCubit>(context);
     return Scaffold(
-      backgroundColor: ColorsManager.warmBeige, // 👈 نفس الستايل
+      backgroundColor: ColorsManager.warmBeige, 
       body: BlocListener<ProductDetailsCubit, ProductDetailsState>(
         listener: (context, state) {
           if (state is GetOrdersFailure) {
@@ -50,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              /// 🔹 Header
+              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
                 child: Row(
@@ -81,7 +81,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
 
-              /// 🔹 Free delivery bar
+              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Container(
@@ -108,7 +108,7 @@ class _CartScreenState extends State<CartScreen> {
 
               SizedBox(height: 20.h),
 
-              /// 🔹 Items
+              
               BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
                 builder: (context, state) {
                   if (state is GetOrdersLoading) {
@@ -187,7 +187,7 @@ class _CartScreenState extends State<CartScreen> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /// Price
+                
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -200,7 +200,7 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
 
-                /// Button
+                
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.darkOrange,

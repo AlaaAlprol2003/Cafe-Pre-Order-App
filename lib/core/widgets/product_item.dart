@@ -72,11 +72,11 @@ class ProductItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 0, // 👈 تحت خالص
+            bottom: 0, 
             right: 0,
             child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
               builder: (context, state) {
-                // لودينج بسيط جداً مكان الأيقونة
+                
                 bool isLoading = state is AddOrderToFirestoreLoading && 
                    cubit.loadingProductId == product.productid;
 
@@ -84,7 +84,7 @@ class ProductItem extends StatelessWidget {
                   onTap: isLoading
                       ? null
                       : () {
-                          // نمنع الضغط أثناء التحميل
+                          
                           cubit.addOrderToFirestore(
                             order: OrderModel(
                                 milkType: "No Milk",

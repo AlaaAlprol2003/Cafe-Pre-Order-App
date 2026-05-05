@@ -1,5 +1,7 @@
 // ignore_for_file: unused_element, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/resources/validators.dart';
@@ -14,6 +16,7 @@ import 'package:dash_cup/features/auth/presentation/widgets/custom_privacy_text.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -23,6 +26,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+ 
+
   late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
@@ -65,6 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     Image.asset(ImageAssets.logo, height: 145.h),
+                    
                     SizedBox(height: 30.h),
                     Form(
                       key: _formKey,
@@ -163,12 +169,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   );
                                 }
                               },
-                
                               child: CustomElevatedButton(
                                 text: "Register",
                                 onPressed: () async {
-                                  if (_formKey.currentState?.validate() == false)
-                                    return;
+                                  if (_formKey.currentState?.validate() ==
+                                      false) return;
                                   cubit.register(
                                     request: RegisterRequest(
                                       email: _emailController.text,
@@ -176,6 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     name: _nameController.text,
                                     phone: _phoneController.text,
+                                   
                                   );
                                 },
                               ),
@@ -186,12 +192,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               children: [
                                 Text(
                                   "Already Have Account? ",
-                                  style: Theme.of(context).textTheme.displayMedium,
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
                                 ),
                                 CustomTextButton(
                                   text: "Login",
                                   onPressed: () {
-                                    Navigator.pushNamed(context, AppRoutes.login);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.login);
                                   },
                                 ),
                               ],

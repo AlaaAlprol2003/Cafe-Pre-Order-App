@@ -83,7 +83,7 @@ class QuickCheckout extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         ),
         onPressed: () {
-          // هنا ممكن تنادي على ميثود الدفع مباشرة أو تروح لصفحة النجاح
+          
           showDialog(
             context: context,
             builder: (context) => AlertDialog(

@@ -67,23 +67,19 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   Future<void> deductPoints(double totalAmount) async {
-    emit(UpdatePointsLoading()); // استخدمنا الـ state الجديدة
+    emit(UpdatePointsLoading()); 
     try {
-      // 1. التأكد إن العميل مسجل دخول وله بيانات
       if (UserModel.currentUser == null) return;
 
-      // 2. حساب الرصيد الجديد (نحول الـ total لـ int لأن النقط أرقام صحيحة)
       int pointsToDeduct = totalAmount.toInt();
       int currentPoints = UserModel.currentUser!.points;
       int updatedPoints = currentPoints - pointsToDeduct;
 
-      // 3. تحديث الـ Firestore
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(UserModel.currentUser!.id)
           .update({'points': updatedPoints});
 
-      // 4. تحديث الموديل المحلي عشان الـ UI يتحدث فوراً
       UserModel.currentUser!.points = updatedPoints;
 
       emit(UpdatePointsSuccess());
@@ -143,20 +139,16 @@ class PaymentCubit extends Cubit<PaymentState> {
 
   Future<void> updateUserPoints({required double totalAmount}) async {
     try {
-      // 1. حساب النقط الجديدة (مثلاً نقطة لكل 10 جنيه)
       int newPoints = (totalAmount / 10).floor();
 
-      // 2. الحصول على النقط الحالية للمستخدم
       int currentPoints = UserModel.currentUser?.points ?? 0;
       int updatedPoints = currentPoints + newPoints;
 
-      // 3. تحديث الـ Firestore
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(UserModel.currentUser!.id)
           .update({'points': updatedPoints});
 
-      // 4. تحديث الـ Local Model عشان يظهر في البروفايل فوراً
       UserModel.currentUser!.points = updatedPoints;
 
       emit(UpdatePointsSuccess());

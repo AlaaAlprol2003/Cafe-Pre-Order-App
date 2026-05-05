@@ -1,3 +1,7 @@
+
+
+
+
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dash_cup/core/resources/assets_manager.dart';
@@ -27,7 +31,7 @@ class ProfileTab extends StatelessWidget {
               children: [
                 _buildHeader(),
                 SizedBox(height: 20.h),
-                _buildUserInfo(), 
+                _buildUserInfo(),
                 SizedBox(height: 25.h),
                 _buildStatsCard(),
                 SizedBox(height: 25.h),
@@ -81,7 +85,8 @@ class ProfileTab extends StatelessWidget {
               backgroundColor: ColorsManager.creamyWhite,
               child: CircleAvatar(
                 radius: 50.r,
-                backgroundImage: const AssetImage(ImageAssets.person),
+                
+                backgroundImage: AssetImage(ImageAssets.person)
               ),
             ),
             Container(
@@ -233,7 +238,7 @@ class ProfileTab extends StatelessWidget {
 
   Widget _buildLogoutButton(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: REdgeInsets.only(left: 20,right: 20,bottom: 90),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorsManager.creamyWhite,
@@ -244,12 +249,11 @@ class ProfileTab extends StatelessWidget {
           elevation: 0,
         ),
         onPressed: () {
-          
           FirebaseAuth.instance.signOut();
           UiUtils.showLoading(context: context);
-          Future.delayed(Duration(seconds: 1),(){
-            context.read<MainLayoutCubit>().changeTab(index : 0);
-            Navigator.pushReplacementNamed(context,AppRoutes.login);
+          Future.delayed(Duration(seconds: 1), () {
+            context.read<MainLayoutCubit>().changeTab(index: 0);
+            Navigator.pushReplacementNamed(context, AppRoutes.login);
           });
         },
         child: Row(

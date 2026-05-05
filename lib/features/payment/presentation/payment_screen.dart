@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/models/order_model.dart';
@@ -38,7 +38,7 @@ class PaymentScreen extends StatelessWidget {
             SliverAppBar(
               backgroundColor: Colors.transparent,
 
-              ///pinned: true,
+              
               expandedHeight: 70.h,
               leading: IconButton(
                 onPressed: () {
@@ -59,7 +59,7 @@ class PaymentScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Container(
-                ///height: 800.h,
+                
                 width: double.infinity,
                 margin: REdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
@@ -242,23 +242,23 @@ class PaymentScreen extends StatelessWidget {
                             double currentSubtotal = orders.fold(
                                 0, (sum, item) => sum + item.totalPrice);
 
-                            // 2. حساب المصاريف الإضافية بناءً على نوع الاستلام
+                            
                             double deliveryFees =
                                 cubit.currentIndex == 1 ? 0.0 : 15;
                             double vat = currentSubtotal * 0.14;
                             double total = currentSubtotal + vat + deliveryFees;
 
-                            // 3. التحقق من طريقة الدفع
+                            
                             if (cubit.currentPaymentMethod == 0) {
-                              // دفع بالبطاقة
+                              
                               Navigator.pushNamed(context, AppRoutes.creditCard,
                                   arguments: cubit);
                             } else if (cubit.currentPaymentMethod == 3) {
-                              // دفع بالنقط - نستخدم الـ total الجديد للتحقق
+                              
                               if (cubit.hasEnoughPoints(total)) {
                                 UiUtils.showLoading(context: context);
 
-                                // تنفيذ عملية الخصم وتحديث النقط في Firestore
+                                
                                 await cubit.deductPoints(total);
 
                                 if (context.mounted) {
@@ -278,14 +278,14 @@ class PaymentScreen extends StatelessWidget {
                                     message: "Insufficient points balance!");
                               }
                             } else {
-                              // طرق دفع أخرى (Fawry / Vodafone Cash)
+                              
                               String methodName =
                                   cubit.currentPaymentMethod == 1
                                       ? "Fawry"
                                       : "Vodafone";
                               UiUtils.showLoading(context: context);
 
-                              // تحديث نقط المستخدم بعد الدفع بنجاح (كاش أو فوري)
+                              
                               await cubit.updateUserPoints(totalAmount: total);
 
                               await Future.delayed(const Duration(seconds: 2));
@@ -296,7 +296,7 @@ class PaymentScreen extends StatelessWidget {
                                     builder: (context) => PaymentSuccessScreen(
                                       paymentMethod: methodName,
                                       amount:
-                                          total, // نرسل الـ total الجديد المحسوب بدقة
+                                          total, 
                                     ),
                                   ),
                                 );

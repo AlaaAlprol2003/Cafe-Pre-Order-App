@@ -39,9 +39,9 @@ class ProfileCubit extends Cubit<ProfileStates> {
     });
   }
 
-  // في profile_cubit.dart
+  
 void getUserData() {
-  emit(ProfileLoadingState()); // تأكد من إضافة الحالة دي في الـ States
+  emit(ProfileLoadingState()); 
   
   FirebaseFirestore.instance
       .collection('Users')
@@ -50,7 +50,7 @@ void getUserData() {
       .then((value) {
     if (value.data() != null) {
       UserModel.currentUser = UserModel.fromJson(value.data()!);
-      emit(ProfileUpdateSuccessState()); // دي هتخلي الـ Tab تعمل Rebuild بالداتا الجديدة
+      emit(ProfileUpdateSuccessState()); 
     }
   });
 }

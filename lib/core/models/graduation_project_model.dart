@@ -6,7 +6,6 @@ class Category {
   final String image;
   final Widget icon;
   
-  // الخصائص الجديدة للتحكم في الإضافات بناءً على القسم
   final bool hasMilkOption;
   final bool hasSugarOption;
 
@@ -15,7 +14,7 @@ class Category {
     required this.name,
     required this.image,
     required this.icon,
-    this.hasMilkOption = false, // القيمة الافتراضية "لا يوجد"
+    this.hasMilkOption = false, 
     this.hasSugarOption = false,
   });
 
@@ -31,7 +30,6 @@ class Products {
   final Category category;
   final String description;
   
-  // خصائص إضافية للتصميم (القلب والورقة الخضراء)
   bool isFavorite; 
   final bool isOrganic;
 

@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+
+
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:dash_cup/core/resources/ui_utils.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
-import 'package:dash_cup/features/payment/presentation/payment_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class CardDetailsScreen extends StatelessWidget {
                 bankName: 'Dash Bank',
                 cardBgColor: ColorsManager.darkChocolate,
 
-                ///glassmorphismConfig: Glassmorphism.defaultConfig(),
+                
                 enableFloatingCard: true,
               ),
               Expanded(

@@ -23,7 +23,7 @@ class CartItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          /// Image
+          
           Container(
             width: 70.w,
             height: 70.w,
@@ -38,7 +38,7 @@ class CartItem extends StatelessWidget {
 
           SizedBox(width: 10.w),
 
-          /// Info
+          
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +115,7 @@ class CartItem extends StatelessWidget {
           ),
           SizedBox(width: 16.w),
 
-          /// Quantity + Price
+          
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

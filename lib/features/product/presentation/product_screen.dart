@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors_in_immutables
+
 
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
@@ -249,7 +249,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                                     style: TextStyle(
                                                       color: ColorsManager
                                                           .creamyWhite
-                                                          .withOpacity(0.7),
+                                                          .withValues(alpha: 0.7),
                                                       fontSize: 14.sp,
                                                     ),
                                                   ),
@@ -320,7 +320,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         padding: EdgeInsets.all(16.w),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 132, 97, 55)
-                              .withOpacity(0.1),
+                              .withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(15.r),
                           border: Border.all(
                               color: const Color.fromARGB(255, 132, 97, 55),

@@ -113,13 +113,13 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
   void updateOrderQuantity(
       {required String orderId, required int newQuantity}) async {
-    // 1. تحديث محلي سريع عشان الـ UI ميتأخرش
+    
     final index = orders.indexWhere((e) => e.orderId == orderId);
     if (index != -1) {
       orders[index].quantity = newQuantity;
       emit(GetOrdersSuccess(orders: List.from(orders)));
 
-      // 2. تحديث في Firebase عن طريق الـ UseCase
+      
       final result = await updateOrderQuantityUseCase(
         orderId: orderId,
         newQuantity: newQuantity,
@@ -127,32 +127,32 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
       result.fold(
         ifLeft: (failure) {
-          // لو حصل فشل ممكن ترجع الكمية القديمة أو تطلع error
+          
           emit(GetOrdersFailure(message: failure.message));
         },
         ifRight: (_) {
-          // نجح التحديث في Firebase (الداتا كدة كدة اتحدثت محلياً)
+          
         },
       );
     }
   }
 
   Future<void> clearCart({required String uId}) async {
-    // بنبعت Loading داخلياً لو حبيت تستخدمه مستقبلاً
+    
     emit(DeleteCartLoading());
 
     final result = await deleteCartItemsUseCase.call(uId: uId);
 
     result.fold(
       ifLeft: (failure) {
-        // فشل الحذف (صامت)
+        
         emit(DeleteCartFailure(message: failure.message));
       },
       ifRight: (_) {
-        // نجاح الحذف (صامت)[cite: 3]
+        
         emit(DeleteCartSuccess());
-        // ملحوظة: الـ Stream اللي إنت عامله في الكيوبيت
-        // هيحس إن الـ Firestore فضي وهيحدث الـ UI لوحده[cite: 3]
+        
+        
       },
     );
   }

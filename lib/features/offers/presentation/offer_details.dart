@@ -86,15 +86,15 @@ class _OfferDetailsState extends State<OfferDetails> {
                           "Quick Checkout",style: GoogleFonts.roboto(fontSize: 18.sp,color: ColorsManager.creamyWhite,fontWeight: FontWeight.bold),
                         ))
 
-                    // CustomElevatedButton(
-                    //   onPressed: () {},
-                    //   text: "Add Bundle To Cart",
-                    //   icon: Icon(
-                    //     Icons.shopping_cart_rounded,
-                    //     size: 25,
-                    //     color: ColorsManager.creamyWhite,
-                    //   ),
-                    // )
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     )
               ],
             ),
@@ -152,7 +152,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                 borderRadius: BorderRadius.circular(16.r),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      //border: Border.all(color: ColorsManager.darkOrange.withValues(alpha: .9))
+                                      
                                       ),
                                   child: ZoomIn(
                                     duration: Duration(seconds: 1),
@@ -160,7 +160,7 @@ class _OfferDetailsState extends State<OfferDetails> {
                                       product.image,
                                       fit: BoxFit.fill,
 
-                                      /// width: double.infinity,
+                                      
                                       height: double.infinity,
                                     ),
                                   ),
@@ -282,10 +282,10 @@ class _OfferDetailsState extends State<OfferDetails> {
                               ),
                             ],
                           ),
-                          // SizedBox(
-                          // height: 5.h,
-                          // width: double.infinity,
-                          // child: Divider(color: ColorsManager.darkBrown,thickness: .5,indent: 20.w,endIndent: 20.w,)),
+                          
+                          
+                          
+                          
                         ],
                       ),
                     ),
@@ -298,17 +298,17 @@ class _OfferDetailsState extends State<OfferDetails> {
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                     
-                        /// ColorsManager.darkOrange.withValues(alpha: .8),
+                        
                         borderRadius: BorderRadius.circular(13.r),
                     
-                        ///border: Border.all(color: ColorsManager.darkBrown)
+                        
                       ),
                       child: Padding(
                         padding: REdgeInsets.only(top: 16.0),
                         child: Text(
                           widget.currentOffer.fullDescription,
                                           
-                          ///textAlign: TextAlign.center,
+                          
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium!

@@ -74,15 +74,15 @@ class OrderFirebaseRemoteDataSource implements OrderRemoteDataSource {
   Future<void> deleteCartItems({required String uId}) async {
     try {
       var db = FirebaseFirestore.instance;
-      // بنعمل Query يجيب أوردرات المستخدم ده بس[cite: 5]
+      
       var userOrders =
           await db.collection("Orders").where("userId", isEqualTo: uId).get();
 
-      var batch = db.batch(); // 👈 استخدام Batch أسرع وأفضل في الأداء[cite: 5]
+      var batch = db.batch(); 
       for (var doc in userOrders.docs) {
         batch.delete(doc.reference);
       }
-      await batch.commit(); // تنفيذ الحذف مرة واحدة[cite: 5]
+      await batch.commit(); 
     } catch (exception) {
       throw RemoteException(message: exception.toString());
     }

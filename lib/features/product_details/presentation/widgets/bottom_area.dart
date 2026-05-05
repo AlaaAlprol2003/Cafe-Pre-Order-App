@@ -95,7 +95,8 @@ class _BottomAreaState extends State<BottomArea> {
                               milkType: cubit.milk,
                               quantity: cubit.quantity,
                               uId: "",
-                              totalPrice: totalPrice));
+                              totalPrice: totalPrice,
+                              ));
                     },
                     child: DiamondButton()),
               ],

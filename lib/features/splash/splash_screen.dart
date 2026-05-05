@@ -1,7 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
+
 
 import 'dart:async';
-import 'package:dash_cup/core/resources/assets_manager.dart'; // تأكد من إضافة مسار الصورة هنا
+import 'package:dash_cup/core/resources/assets_manager.dart'; 
+import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,11 +24,10 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // يخلي شريط الساعة شفاف
+      statusBarColor: Colors.transparent, 
       statusBarIconBrightness:
-          Brightness.light, // يخلي الأيقونات بيضاء عشان تبان على الأسود
+          Brightness.light, 
     ));
-    // إعداد الأنيميشن (تدرج ظهور اللوجو)
     _controller = AnimationController(
       vsync: this,
       duration:  Duration(milliseconds: 1500),
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
                   width: 30.w,
                   height: 30.w,
                   child:  CircularProgressIndicator(
-                    color: Color(0xFFC6B410),
+                    color:ColorsManager.darkHoney,
                     strokeWidth: 1.5,
                   ),
                 ),

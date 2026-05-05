@@ -8,6 +8,7 @@ class UserModel {
   String password;
   String phone;
   int points;
+  String? image;
   List<String> favoriteItems;
   UserModel({
     required this.id,
@@ -17,6 +18,7 @@ class UserModel {
     required this.phone,
     required this.favoriteItems,
     required this.points,
+    this.image,
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,7 +28,8 @@ class UserModel {
         "password": password,
         "phone": phone,
         "favoriteItems": favoriteItems,
-        "points":points
+        "points":points,
+        "image": image,
       };
 
   UserModel.fromJson(Map<String, dynamic> json)
@@ -40,5 +43,6 @@ class UserModel {
               .map((item) => item.toString())
               .toList(),
               points: json["points"] ?? 0,
+              image: json["image"],
         );
 }

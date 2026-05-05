@@ -34,17 +34,17 @@ class AboutUsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
         child: Column(
           children: [
-            // 1. App Logo
+            
             _buildAppLogo(),
             SizedBox(height: 30.h),
 
-            // 2. Our Story
+            
             _buildInfoCard(
               "Our Story",
               "Dash Cup started with a simple idea: to make your coffee experience more seamless and rewarding. We believe that every cup tells a story, and we're here to help you write yours.",
             ),
 
-            // 3. Vision & Goal
+            
             Row(
               children: [
                 Expanded(
@@ -59,12 +59,12 @@ class AboutUsScreen extends StatelessWidget {
             
             SizedBox(height: 20.h),
 
-            // 4. Team Section (أسماء الفريق)
+            
             _buildTeamSection(),
             
             SizedBox(height: 30.h),
 
-            // 5. Social Media Icons
+            
             Text(
               "Follow us on",
               style: TextStyle(color: Colors.grey[600], fontSize: 14.sp),
@@ -159,7 +159,7 @@ class AboutUsScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15.h),
-          // عرض أسماء الفريق
+          
           _teamMember("Alaa Ahmed Fathi"),
           SizedBox(height: 5.h,),
           _teamMember("Omar Tamer Abdelkader"),

@@ -74,8 +74,8 @@ class SideBar extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
               child: Image.asset(
                 ImageAssets.logo,
-                // width: 70.w,
-                // height: 100.h,
+                
+                
                 fit: BoxFit.cover,
               ),
             ),

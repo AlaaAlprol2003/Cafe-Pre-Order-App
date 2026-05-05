@@ -8,6 +8,7 @@ import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/core/widgets/product_item.dart';
+import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/category_item.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/mood_sheet.dart';
@@ -49,16 +50,29 @@ class HomeTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
+                        width:
+                            60.w, 
+                        height: 60.h,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 36, 19, 0),
                             borderRadius: BorderRadius.circular(80.r)),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(80.r),
-                          child: Image.asset(
-                            ImageAssets.person,
-                            fit: BoxFit.cover,
-                            height: 80.h,
-                          ),
+                          child: UserModel.currentUser?.image != null &&
+                                  UserModel.currentUser!.image!.isNotEmpty
+                              ? Image.network(
+                                  UserModel.currentUser!.image!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.network(
+                                    "https://ui-avatars.com/api/?name=${UserModel.currentUser?.name ?? 'U'}&background=FF7043&color=fff",
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Image.network(
+                                  "https://ui-avatars.com/api/?name=${UserModel.currentUser?.name ?? 'U'}&background=FF7043&color=fff",
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                       SizedBox(width: 16.w),
@@ -68,7 +82,7 @@ class HomeTab extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Hi, Alaa",
+                              "Hi, ${UserModel.currentUser!.name.split(' ').first}",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium!
@@ -136,15 +150,12 @@ class HomeTab extends StatelessWidget {
                                 labelText: "What are you looking for?",
                                 controller: _searchController,
 
-                                // 1. تغيير شكل زرار الكيبورد لعلامة البحث 🔍
                                 textInputAction: TextInputAction.search,
 
-                                // 2. تنفيذ البحث عند الضغط على الزرار في الكيبورد
                                 onFieldSubmitted: (value) {
                                   if (value.trim().isEmpty)
-                                    return; // لو البحث فاضي ميعملش حاجة
+                                    return;
 
-                                  // فلترة كل المنتجات بناءً على النص المدخل
                                   List<Products> searchResults = Data
                                       .allProducts
                                       .where((product) => product.name
@@ -152,7 +163,6 @@ class HomeTab extends StatelessWidget {
                                           .contains(value.toLowerCase()))
                                       .toList();
 
-                                  // الانتقال لشاشة المنتجات مع تمرير النتائج
                                   Navigator.pushNamed(
                                     context,
                                     AppRoutes.productScreen,

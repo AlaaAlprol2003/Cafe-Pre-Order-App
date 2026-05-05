@@ -1,3 +1,7 @@
+
+
+
+
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ui';
@@ -11,7 +15,7 @@ final Category Tea_Herbal_Drinks = Category(
     categoryid: "C1",
     name: "Botanicals",
     image: "assets/images/teaandherbaldrinks.png",
-    hasMilkOption: true, // الشاي باللبن
+    hasMilkOption: true, 
     hasSugarOption: true,
     icon: FaIcon(FontAwesomeIcons.mugSaucer, color: ColorsManager.darkBrown));
 
@@ -19,7 +23,7 @@ final Category HotCoffee = Category(
     categoryid: "C2",
     name: "Hot Coffee",
     image: "assets/images/hot coffee.png",
-    hasMilkOption: true, // القهوة الساخنة تحتاج لبن
+    hasMilkOption: true, 
     hasSugarOption: true,
     icon: FaIcon(FontAwesomeIcons.mugHot, color: ColorsManager.darkBrown));
 
@@ -27,7 +31,7 @@ final Category IcedCoffee = Category(
     categoryid: "C3",
     name: "IcedCoffee",
     image: "assets/images/iced coffee category.png",
-    hasMilkOption: true, // القهوة الباردة تحتاج لبن
+    hasMilkOption: true, 
     hasSugarOption: true,
     icon: FaIcon(FontAwesomeIcons.glassWater, color: ColorsManager.darkBrown));
 
@@ -35,7 +39,7 @@ final Category Dessert_Snacks = Category(
     categoryid: "C4",
     name: "Dessert&Snacks",
     image: "assets/images/dessert and snacks logo.png",
-    hasMilkOption: false, // الحلويات لا تحتاج لبن أو سكر إضافي
+    hasMilkOption: false, 
     hasSugarOption: false,
     icon: FaIcon(FontAwesomeIcons.cakeCandles, color: ColorsManager.darkBrown));
 
@@ -60,14 +64,14 @@ final Category FreshJuices = Category(
     name: "Fresh Juices",
     image: "assets/images/fresh juice logo.png",
     hasMilkOption: false,
-    hasSugarOption: true, // العصير يحتاج تحديد مستوى السكر فقط
+    hasSugarOption: true, 
     icon: FaIcon(FontAwesomeIcons.wineGlass, color: ColorsManager.darkBrown));
 
 final Category Smoothies_Milkshakes = Category(
     categoryid: "C8",
     name: "Shakes & Co",
     image: "assets/images/smoothie and shakes logo.png",
-    hasMilkOption: false, // هي أصلاً فيها لبن، مفيش خيار تغيير نوع اللبن غالباً
+    hasMilkOption: false, 
     hasSugarOption: true,
     icon: FaIcon(FontAwesomeIcons.blender, color: ColorsManager.darkBrown));
 
@@ -994,7 +998,7 @@ class Data {
       price: 35.0,
       rate: 4.6,
       pretime: "3–5 min",
-      image: 'assets/images/water.png', // تأكد من مراجعة مسار الصورة هنا
+      image: 'assets/images/water.png', 
       category: FreshJuices,
       isOrganic: true,
       isFavorite: true,
