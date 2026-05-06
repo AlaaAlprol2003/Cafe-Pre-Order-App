@@ -13,7 +13,8 @@ class QuickCheckout extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorsManager.warmBeige,
       appBar: AppBar(
-        title: Text("Quick Checkout", style: TextStyle(color: ColorsManager.darkChocolate)),
+        title: Text("Quick Checkout",
+            style: TextStyle(color: ColorsManager.darkChocolate)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -26,7 +27,8 @@ class QuickCheckout extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Order Summary", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+            Text("Order Summary",
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
             SizedBox(height: 20.h),
             _buildOfferCard(),
             const Spacer(),
@@ -41,21 +43,102 @@ class QuickCheckout extends StatelessWidget {
 
   Widget _buildOfferCard() {
     return Container(
-      padding: EdgeInsets.all(15.w),
+      width: double.infinity,
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15.r),
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Image.asset(offer.cardImage, width: 80.w),
+          
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15.r),
+            child: Image.asset(
+              offer.cardImage,
+              width: 90.w,
+              height: 90.h,
+              fit: BoxFit.cover,
+            ),
+          ),
           SizedBox(width: 15.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(offer.title, style: TextStyle(fontWeight: FontWeight.bold)),
-              Text("${offer.offerPrice} EGP", style: TextStyle(color: ColorsManager.darkOrange)),
-            ],
+          
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      offer.title,
+                      style: GoogleFonts.roboto(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                        color: ColorsManager.darkChocolate,
+                      ),
+                    ),
+                    
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                        color: ColorsManager.darkOrange.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: Text(
+                        "Bundle",
+                        style: TextStyle(
+                          color: ColorsManager.darkOrange,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  offer.subTitle, 
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                ),
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${offer.offerPrice} EGP",
+                      style: GoogleFonts.roboto(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w900,
+                        color: ColorsManager.darkChocolate,
+                      ),
+                    ),
+                    
+                    Row(
+                      children: [
+                        Icon(Icons.timer_outlined,
+                            size: 14.sp, color: Colors.grey),
+                        SizedBox(width: 4.w),
+                        Text(
+                          "${offer.estimatedPrepTimeMinutes} min",
+                          style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -67,8 +150,11 @@ class QuickCheckout extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("Total Amount", style: TextStyle(fontSize: 18.sp)),
-        Text("${offer.offerPrice} EGP", 
-          style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: ColorsManager.darkChocolate)),
+        Text("${offer.offerPrice} EGP",
+            style: TextStyle(
+                fontSize: 22.sp,
+                fontWeight: FontWeight.bold,
+                color: ColorsManager.darkChocolate)),
       ],
     );
   }
@@ -80,20 +166,26 @@ class QuickCheckout extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorsManager.darkChocolate,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         ),
         onPressed: () {
-          
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
               title: const Text("Success"),
               content: const Text("Your bundle order has been placed!"),
-              actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("OK"))],
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("OK"))
+              ],
             ),
           );
         },
-        child:  Text("Confirm Order", style: GoogleFonts.roboto(color: Colors.white,fontWeight:FontWeight.bold)),
+        child: Text("Confirm Order",
+            style: GoogleFonts.roboto(
+                color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
   }

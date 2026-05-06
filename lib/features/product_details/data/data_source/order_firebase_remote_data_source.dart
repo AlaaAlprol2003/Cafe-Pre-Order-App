@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_cup/core/errors/app_exceptions.dart';
 import 'package:dash_cup/core/models/order_model.dart';
+import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
 import 'package:dash_cup/features/product_details/data/data_source/order_remote_data_source.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
@@ -74,15 +75,31 @@ class OrderFirebaseRemoteDataSource implements OrderRemoteDataSource {
   Future<void> deleteCartItems({required String uId}) async {
     try {
       var db = FirebaseFirestore.instance;
-      
+
       var userOrders =
           await db.collection("Orders").where("userId", isEqualTo: uId).get();
 
-      var batch = db.batch(); 
+      var batch = db.batch();
       for (var doc in userOrders.docs) {
         batch.delete(doc.reference);
       }
-      await batch.commit(); 
+      await batch.commit();
+    } catch (exception) {
+      throw RemoteException(message: exception.toString());
+    }
+  }
+
+  @override
+  Future<void> addBundleToFirestore({required OfferModel offer}) async {
+    try {
+      FirebaseFirestore db = FirebaseFirestore.instance;
+      CollectionReference<Map<String, dynamic>> bundlesCollection =
+          db.collection("Bundles");
+
+      DocumentReference<Map<String, dynamic>> bundleDocument =
+          bundlesCollection.doc();
+
+      await bundleDocument.set(offer.toJson());
     } catch (exception) {
       throw RemoteException(message: exception.toString());
     }

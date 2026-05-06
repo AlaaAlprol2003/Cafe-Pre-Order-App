@@ -43,6 +43,8 @@ import '../../features/product_details/data/repository_impl/order_repository_imp
     as _i278;
 import '../../features/product_details/domain/repository/order_repository.dart'
     as _i770;
+import '../../features/product_details/domain/use_case/add_bundle_to_firestore.dart'
+    as _i738;
 import '../../features/product_details/domain/use_case/add_order_to_firestore_use_case.dart'
     as _i941;
 import '../../features/product_details/domain/use_case/delete_cart_items_use_case.dart'
@@ -89,6 +91,9 @@ extension GetItInjectableX on _i174.GetIt {
         _i1010.RegisterUseCase(authRepository: gh<_i961.AuthRepository>()));
     gh.singleton<_i169.ResetPasswordUseCase>(() =>
         _i169.ResetPasswordUseCase(authRepository: gh<_i961.AuthRepository>()));
+    gh.lazySingleton<_i738.AddBundleToFirestoreUseCase>(() =>
+        _i738.AddBundleToFirestoreUseCase(
+            orderRepository: gh<_i770.OrderRepository>()));
     gh.lazySingleton<_i941.AddOrderToFirestoreUseCase>(() =>
         _i941.AddOrderToFirestoreUseCase(
             orderRepository: gh<_i770.OrderRepository>()));
@@ -113,8 +118,6 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i1040.BookingRepo>(
         () => _i472.BookingRepositoryImpl(gh<_i569.BookingRemoteDataSource>()));
-    gh.factory<_i329.BookingCubit>(
-        () => _i329.BookingCubit(gh<_i1040.BookingRepo>()));
     gh.factory<_i4.ProductDetailsCubit>(() => _i4.ProductDetailsCubit(
           addOrderToFirestoreUseCase: gh<_i941.AddOrderToFirestoreUseCase>(),
           getOrdersFromFirestoreUseCase:
@@ -123,7 +126,10 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i455.DeleteOrderFromFirestoreUseCase>(),
           updateOrderQuantityUseCase: gh<_i307.UpdateOrderQuantityUseCase>(),
           deleteCartItemsUseCase: gh<_i72.DeleteCartItemsUseCase>(),
+          addBundleToFirestoreUseCase: gh<_i738.AddBundleToFirestoreUseCase>(),
         ));
+    gh.factory<_i329.BookingCubit>(
+        () => _i329.BookingCubit(gh<_i1040.BookingRepo>()));
     return this;
   }
 }

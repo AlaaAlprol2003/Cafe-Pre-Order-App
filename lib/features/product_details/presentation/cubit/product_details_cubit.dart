@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:dash_cup/core/models/order_model.dart';
+import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
+import 'package:dash_cup/features/product_details/domain/use_case/add_bundle_to_firestore.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/add_order_to_firestore_use_case.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/delete_cart_items_use_case.dart';
 import 'package:dash_cup/features/product_details/domain/use_case/delete_order_from_firestore_use_case.dart';
@@ -16,12 +18,14 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   DeleteOrderFromFirestoreUseCase deleteOrderFromFirestoreUseCase;
   UpdateOrderQuantityUseCase updateOrderQuantityUseCase;
   DeleteCartItemsUseCase deleteCartItemsUseCase;
+  AddBundleToFirestoreUseCase addBundleToFirestoreUseCase;
   ProductDetailsCubit({
     required this.addOrderToFirestoreUseCase,
     required this.getOrdersFromFirestoreUseCase,
     required this.deleteOrderFromFirestoreUseCase,
     required this.updateOrderQuantityUseCase,
     required this.deleteCartItemsUseCase,
+    required this.addBundleToFirestoreUseCase,
   }) : super(ProductDetailsInitialState());
 
   int quantity = 1;
@@ -113,13 +117,11 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
   void updateOrderQuantity(
       {required String orderId, required int newQuantity}) async {
-    
     final index = orders.indexWhere((e) => e.orderId == orderId);
     if (index != -1) {
       orders[index].quantity = newQuantity;
       emit(GetOrdersSuccess(orders: List.from(orders)));
 
-      
       final result = await updateOrderQuantityUseCase(
         orderId: orderId,
         newQuantity: newQuantity,
@@ -127,34 +129,41 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
 
       result.fold(
         ifLeft: (failure) {
-          
           emit(GetOrdersFailure(message: failure.message));
         },
-        ifRight: (_) {
-          
-        },
+        ifRight: (_) {},
       );
     }
   }
 
   Future<void> clearCart({required String uId}) async {
-    
     emit(DeleteCartLoading());
 
     final result = await deleteCartItemsUseCase.call(uId: uId);
 
     result.fold(
       ifLeft: (failure) {
-        
         emit(DeleteCartFailure(message: failure.message));
       },
       ifRight: (_) {
-        
         emit(DeleteCartSuccess());
-        
-        
       },
     );
+  }
+
+  void addBundleToFirestore({required OfferModel offer})async{
+emit(AddBundleToFirestoreLoading());
+  
+  final result = await addBundleToFirestoreUseCase(offer: offer); 
+  
+  result.fold(
+    ifLeft: (failure) {
+      emit(AddBundleToFirestoreFailure(message: failure.message));
+    }, 
+    ifRight: (_) {
+      emit(AddBundleToFirestoreSuccess());
+    }
+  );
   }
 }
 
@@ -210,3 +219,12 @@ class DeleteCartFailure extends ProductDetailsState {
   String message;
   DeleteCartFailure({required this.message});
 }
+
+class AddBundleToFirestoreLoading extends ProductDetailsState {}
+
+class AddBundleToFirestoreFailure extends ProductDetailsState {
+  String message;
+  AddBundleToFirestoreFailure({required this.message});
+}
+
+class AddBundleToFirestoreSuccess extends ProductDetailsState {}

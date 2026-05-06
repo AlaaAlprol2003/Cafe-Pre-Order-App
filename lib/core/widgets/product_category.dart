@@ -53,7 +53,7 @@ class _ProductCategoryState extends State<ProductCategory> {
           ),
         ),
 
-        // بيانات المنتج (الاسم، السعر، الوقت)
+        
         Positioned(
           left: 190.w,
           top: 20.h,
@@ -86,7 +86,7 @@ class _ProductCategoryState extends State<ProductCategory> {
           ),
         ),
 
-        // التقييم[cite: 7]
+        
         Positioned(
           bottom: 5.h,
           right: 40.w,
@@ -107,7 +107,7 @@ class _ProductCategoryState extends State<ProductCategory> {
           ),
         ),
 
-        // زر الإضافة للسلة مع حالة الـ Loading[cite: 7]
+        
         Positioned(
           bottom: -10.h,
           right: -5.w,
@@ -143,6 +143,7 @@ class _ProductCategoryState extends State<ProductCategory> {
                               sugarLevel: "Normal",
                               totalPrice: widget.product.price,
                               uId: "",
+                               orderDate: DateTime.now()
                             ),
                           );
                         },
@@ -158,7 +159,7 @@ class _ProductCategoryState extends State<ProductCategory> {
           ),
         ),
 
-        // أيقونة المفضلات[cite: 7]
+       
         Positioned(
           top: -10.h,
           left: 5.w,

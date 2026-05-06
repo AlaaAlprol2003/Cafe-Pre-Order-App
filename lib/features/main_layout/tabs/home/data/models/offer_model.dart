@@ -1,6 +1,7 @@
 import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/assets_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class OfferCustomization {
   final String title;
@@ -204,4 +205,18 @@ class OfferModel {
       ],
     ),
   ];
+
+  Map<String, dynamic> toJson() => {
+      "id": id,
+      "title": title,
+      "subTitle": subTitle,
+      "offerPrice": offerPrice,
+      "estimatedPrepTimeMinutes": estimatedPrepTimeMinutes,
+      "calories": calories,
+      "rating": rating,
+      "reviewCount": reviewCount,
+      "isLimitedTime": isLimitedTime,
+      "includedProductsIds": includedProducts.map((p) => p.productid).toList(),
+      "userId": FirebaseAuth.instance.currentUser?.uid, 
+    };
 }

@@ -11,8 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomArea extends StatefulWidget {
-  const BottomArea({super.key, required this.product});
+  const BottomArea({super.key, required this.product, required this.messageController});
   final Products product;
+  final TextEditingController messageController;
   @override
   State<BottomArea> createState() => _BottomAreaState();
 }
@@ -75,7 +76,7 @@ class _BottomAreaState extends State<BottomArea> {
                 GestureDetector(
                     onTap: () {
                       double unitPrice = widget.product.price;
-
+                      String? message = widget.messageController.text.trim();
                       if (cubit.milk == "Regular (+10)") {
                         unitPrice += 10;
                       } else if (cubit.milk == "Almond (+20)") {
@@ -96,6 +97,8 @@ class _BottomAreaState extends State<BottomArea> {
                               quantity: cubit.quantity,
                               uId: "",
                               totalPrice: totalPrice,
+                              orderDate: DateTime.now(),
+                              cupMessage: message.isEmpty ? null : message,
                               ));
                     },
                     child: DiamondButton()),

@@ -72,19 +72,17 @@ class ProductItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 0, 
+            bottom: 0,
             right: 0,
             child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
               builder: (context, state) {
-                
-                bool isLoading = state is AddOrderToFirestoreLoading && 
-                   cubit.loadingProductId == product.productid;
+                bool isLoading = state is AddOrderToFirestoreLoading &&
+                    cubit.loadingProductId == product.productid;
 
                 return GestureDetector(
                   onTap: isLoading
                       ? null
                       : () {
-                          
                           cubit.addOrderToFirestore(
                             order: OrderModel(
                                 milkType: "No Milk",
@@ -94,7 +92,8 @@ class ProductItem extends StatelessWidget {
                                 size: "S",
                                 sugarLevel: "Normal",
                                 totalPrice: product.price,
-                                uId: ""),
+                                uId: "",
+                                orderDate: DateTime.now()),
                           );
                         },
                   child: Container(
@@ -133,21 +132,21 @@ class ProductItem extends StatelessWidget {
               radius: 14.r,
               child: BlocBuilder<FavouriteCubit, FavouriteState>(
                 builder: (context, state) {
-
                   if (state is FavouriteLoaded) {
                     final isFav = state.ids.contains(product.productid);
 
                     return GestureDetector(
                       onTap: () {
-                        context.read<FavouriteCubit>().toggle(product.productid);
+                        context
+                            .read<FavouriteCubit>()
+                            .toggle(product.productid);
                       },
                       child: CircleAvatar(
                         backgroundColor: ColorsManager.warmBeige,
                         radius: 16.r,
                         child: Icon(
                             isFav ? Icons.favorite : Icons.favorite_border,
-                            color: ColorsManager.darkBrown
-                        ),
+                            color: ColorsManager.darkBrown),
                       ),
                     );
                   }

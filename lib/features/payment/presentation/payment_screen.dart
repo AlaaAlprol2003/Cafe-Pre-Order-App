@@ -156,11 +156,7 @@ class PaymentScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding:
-                          REdgeInsets.symmetric(horizontal: 12.0, vertical: 24),
-                      child: CustomDrinkMessage(),
-                    ),
+                    
                     Padding(
                       padding:
                           REdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
