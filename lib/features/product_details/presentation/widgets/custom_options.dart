@@ -26,7 +26,7 @@ class CustomOptions extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18.sp,
-                color: ColorsManager.darkOrange)),
+                color: ColorsManager.creamyWhite)),
         SizedBox(height: 10.h),
         Wrap(
           spacing: 10.w,

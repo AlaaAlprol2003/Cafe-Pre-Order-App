@@ -1,7 +1,3 @@
-
-
-
-
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ui';
@@ -15,33 +11,37 @@ final Category Tea_Herbal_Drinks = Category(
     categoryid: "C1",
     name: "Botanicals",
     image: "assets/images/teaandherbaldrinks.png",
-    hasMilkOption: true, 
+    hasMilkOption: true,
     hasSugarOption: true,
-    icon: FaIcon(FontAwesomeIcons.mugSaucer, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.mugSaucer,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category HotCoffee = Category(
     categoryid: "C2",
     name: "Hot Coffee",
     image: "assets/images/hot coffee.png",
-    hasMilkOption: true, 
+    hasMilkOption: true,
     hasSugarOption: true,
-    icon: FaIcon(FontAwesomeIcons.mugHot, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.mugHot,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category IcedCoffee = Category(
     categoryid: "C3",
     name: "IcedCoffee",
     image: "assets/images/iced coffee category.png",
-    hasMilkOption: true, 
+    hasMilkOption: true,
     hasSugarOption: true,
-    icon: FaIcon(FontAwesomeIcons.glassWater, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.glassWater,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category Dessert_Snacks = Category(
     categoryid: "C4",
     name: "Dessert&Snacks",
     image: "assets/images/dessert and snacks logo.png",
-    hasMilkOption: false, 
+    hasMilkOption: false,
     hasSugarOption: false,
-    icon: FaIcon(FontAwesomeIcons.cakeCandles, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.cakeCandles,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category LightBites = Category(
     categoryid: "C5",
@@ -49,7 +49,8 @@ final Category LightBites = Category(
     image: "assets/images/chicken panini logo.png",
     hasMilkOption: false,
     hasSugarOption: false,
-    icon: FaIcon(FontAwesomeIcons.breadSlice, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.breadSlice,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category SoftDrinks = Category(
     categoryid: "C6",
@@ -57,23 +58,26 @@ final Category SoftDrinks = Category(
     image: "assets/images/soft drinks logo.png",
     hasMilkOption: false,
     hasSugarOption: false,
-    icon: FaIcon(FontAwesomeIcons.bottleWater, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.bottleWater,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category FreshJuices = Category(
     categoryid: "C7",
     name: "Fresh Juices",
     image: "assets/images/fresh juice logo.png",
     hasMilkOption: false,
-    hasSugarOption: true, 
-    icon: FaIcon(FontAwesomeIcons.wineGlass, color: ColorsManager.darkBrown));
+    hasSugarOption: true,
+    icon: FaIcon(FontAwesomeIcons.wineGlass,
+        size: 30, color: ColorsManager.darkChocolate));
 
 final Category Smoothies_Milkshakes = Category(
     categoryid: "C8",
     name: "Shakes & Co",
     image: "assets/images/smoothie and shakes logo.png",
-    hasMilkOption: false, 
+    hasMilkOption: false,
     hasSugarOption: true,
-    icon: FaIcon(FontAwesomeIcons.blender, color: ColorsManager.darkBrown));
+    icon: FaIcon(FontAwesomeIcons.blender,
+        size: 35, color: ColorsManager.darkChocolate));
 
 class Data {
   static List<Category> categories = [
@@ -998,7 +1002,7 @@ class Data {
       price: 35.0,
       rate: 4.6,
       pretime: "3–5 min",
-      image: 'assets/images/water.png', 
+      image: 'assets/images/water.png',
       category: FreshJuices,
       isOrganic: true,
       isFavorite: true,

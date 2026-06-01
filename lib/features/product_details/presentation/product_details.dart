@@ -3,7 +3,6 @@
 import 'package:dash_cup/core/models/graduation_project_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/resources/ui_utils.dart';
-import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/payment/presentation/widgets/custom_drink_message.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/widgets/bottom_area.dart';
@@ -28,13 +27,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     var cubit = BlocProvider.of<ProductDetailsCubit>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsManager.creamyWhite,
       body: Stack(
         children: [
           ClipPath(
             clipper: MyClipper(),
             child: Container(
-              color: ColorsManager.deepBurntBrown,
+              color: Color(0XFF5D3A1A),
               height: 1.sh,
               width: 1.sw,
             ),
@@ -64,7 +63,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -72,7 +73,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                     style: TextStyle(
                                         fontSize: 30.sp,
                                         fontWeight: FontWeight.bold,
-                                        color: ColorsManager.white)),
+                                        color: const Color.fromARGB(255, 255, 231, 175))),
                                 SizedBox(height: 10.h),
                                 Text(
                                   widget.product.description,
@@ -107,8 +108,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                               cubit.chooseSugerLevel(
                                                   selectedSugarLevel: sugar);
                                             }),
-                                        if (widget
-                                            .product.category.hasMilkOption) ...[
+                                        if (widget.product.category
+                                            .hasMilkOption) ...[
                                           SizedBox(height: 25.h),
                                           CustomOptions(
                                             title: "Milk Options",

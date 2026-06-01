@@ -11,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomArea extends StatefulWidget {
-  const BottomArea({super.key, required this.product, required this.messageController});
+  const BottomArea(
+      {super.key, required this.product, required this.messageController});
   final Products product;
   final TextEditingController messageController;
   @override
@@ -30,7 +31,7 @@ class _BottomAreaState extends State<BottomArea> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
         decoration: BoxDecoration(
-          color: ColorsManager.white,
+          color: ColorsManager.creamyWhite,
           borderRadius: BorderRadius.circular(30.r),
           boxShadow: [
             BoxShadow(color: Colors.black12, blurRadius: 10, spreadRadius: 2)
@@ -69,7 +70,7 @@ class _BottomAreaState extends State<BottomArea> {
                     child: Text(
                   "Add to cart",
                   style: GoogleFonts.roboto(
-                      fontSize: 20.sp,
+                      fontSize: 18.sp,
                       color: ColorsManager.darkChocolate,
                       fontWeight: FontWeight.bold),
                 )),
@@ -89,17 +90,17 @@ class _BottomAreaState extends State<BottomArea> {
 
                       cubit.addOrderToFirestore(
                           order: OrderModel(
-                              orderId: "",
-                              product: widget.product,
-                              size: cubit.size,
-                              sugarLevel: cubit.sugar,
-                              milkType: cubit.milk,
-                              quantity: cubit.quantity,
-                              uId: "",
-                              totalPrice: totalPrice,
-                              orderDate: DateTime.now(),
-                              cupMessage: message.isEmpty ? null : message,
-                              ));
+                        orderId: "",
+                        product: widget.product,
+                        size: cubit.size,
+                        sugarLevel: cubit.sugar,
+                        milkType: cubit.milk,
+                        quantity: cubit.quantity,
+                        uId: "",
+                        totalPrice: totalPrice,
+                        orderDate: DateTime.now(),
+                        cupMessage: message.isEmpty ? null : message,
+                      ));
                     },
                     child: DiamondButton()),
               ],

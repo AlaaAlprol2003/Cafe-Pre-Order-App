@@ -10,7 +10,7 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorsManager.deepBrown,
+      color: Color(0XFF5D3A1A),
       width: 85.w,
       child: Column(
         children: [
@@ -50,7 +50,7 @@ class SideBar extends StatelessWidget {
           SizedBox(height: 80.h),
           Text(product.rate.toString(),
               style: TextStyle(
-                  color: Colors.white,
+                  color: ColorsManager.creamyWhite,
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold)),
           Icon(Icons.star, color: Colors.amber, size: 20.sp),
@@ -61,7 +61,7 @@ class SideBar extends StatelessWidget {
             quarterTurns: 3,
             child: Text("${product.price} EGP",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsManager.creamyWhite,
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold)),
           ),

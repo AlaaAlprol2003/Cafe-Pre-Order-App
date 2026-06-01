@@ -167,7 +167,7 @@ class ProfileTab extends StatelessWidget {
         Text(value,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
         Text(label,
-            style: GoogleFonts.roboto(fontSize: 14.sp, color: Colors.grey)),
+            style: GoogleFonts.roboto(fontSize: 14.sp, color: ColorsManager.darkBrown)),
       ],
     );
   }

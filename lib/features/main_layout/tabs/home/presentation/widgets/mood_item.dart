@@ -52,7 +52,7 @@ Widget buildMoodItem(BuildContext context, String emoji, String label) {
       children: [
         CircleAvatar(
           radius: 30.r,
-          backgroundColor: ColorsManager.blueGrey,
+          backgroundColor: const Color.fromRGBO(255, 241, 190, 1),
           child: Text(emoji, style: TextStyle(fontSize: 25.sp)),
         ),
         SizedBox(height: 8.h),
@@ -60,7 +60,7 @@ Widget buildMoodItem(BuildContext context, String emoji, String label) {
           label,
           style: GoogleFonts.roboto(
             fontSize: 14.sp,
-            color: ColorsManager.burntOrange,
+            color: ColorsManager.creamyWhite,
           ),
         ),
       ],

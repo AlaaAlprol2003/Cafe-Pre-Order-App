@@ -3,10 +3,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/models/Graduation_Project_Data.dart';
 import 'package:dash_cup/core/models/graduation_project_model.dart';
-import 'package:dash_cup/core/resources/assets_manager.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
 import 'package:dash_cup/core/routes_manager/app_routes.dart';
-import 'package:dash_cup/core/widgets/custom_text_form_field.dart';
 import 'package:dash_cup/core/widgets/product_item.dart';
 import 'package:dash_cup/features/auth/data/models/user.dart';
 import 'package:dash_cup/features/main_layout/tabs/home/data/models/offer_model.dart';
@@ -16,6 +14,7 @@ import 'package:dash_cup/features/main_layout/tabs/home/presentation/widgets/off
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeTab extends StatelessWidget {
   HomeTab({super.key});
@@ -50,8 +49,7 @@ class HomeTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width:
-                            60.w, 
+                        width: 60.w,
                         height: 60.h,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 36, 19, 0),
@@ -106,7 +104,7 @@ class HomeTab extends StatelessWidget {
                         ),
                       ),
                       CircleAvatar(
-                        backgroundColor: const Color.fromARGB(255, 168, 101, 8),
+                        backgroundColor: ColorsManager.darkHoney,
                         child: IconButton(
                           onPressed: () {
                             Navigator.pushNamed(context, AppRoutes.cart);
@@ -121,7 +119,7 @@ class HomeTab extends StatelessWidget {
                         width: 12.w,
                       ),
                       CircleAvatar(
-                        backgroundColor: const Color.fromARGB(255, 168, 101, 8),
+                        backgroundColor: ColorsManager.darkHoney,
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -146,42 +144,63 @@ class HomeTab extends StatelessWidget {
                             padding: REdgeInsets.symmetric(horizontal: 16),
                             child: SizedBox(
                               height: 50.h,
-                              child: CustomTextFormField(
-                                labelText: "What are you looking for?",
-                                controller: _searchController,
-
-                                textInputAction: TextInputAction.search,
-
-                                onFieldSubmitted: (value) {
-                                  if (value.trim().isEmpty)
-                                    return;
-
-                                  List<Products> searchResults = Data
-                                      .allProducts
-                                      .where((product) => product.name
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()))
-                                      .toList();
-
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.productScreen,
-                                    arguments: searchResults,
-                                  );
-                                },
-
-                                preIcon: Icon(
-                                  Icons.search,
-                                  color: ColorsManager.darkOrange,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorsManager.darkBrown
+                                          .withValues(alpha: .5),
+                                      blurRadius: 10,
+                                      spreadRadius: -4,
+                                      offset: Offset(0, 2),
+                                    )
+                                  ],
                                 ),
-                                postIcon: IconButton(
-                                  onPressed: () => showMoodSheet(context),
-                                  icon: Icon(
-                                    Icons.auto_fix_high,
-                                    color:
-                                        const Color.fromARGB(255, 149, 92, 11),
-                                    size: 25,
-                                  ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      hintText: "What are you looking for?",
+                                      hintStyle: GoogleFonts.roboto(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: ColorsManager.mediumBrown
+                                            .withValues(alpha: .5),
+                                      ),
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: ColorsManager.darkOrange,
+                                      ),
+                                      suffixIcon: IconButton(
+                                        onPressed: () => showMoodSheet(context),
+                                        icon: Icon(
+                                          Icons.auto_fix_high,
+                                          color: const Color.fromARGB(
+                                              255, 149, 92, 11),
+                                          size: 25,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: ColorsManager.warmBeige),
+                                          borderRadius:
+                                              BorderRadius.circular(16.r))),
+                                  controller: _searchController,
+                                  textInputAction: TextInputAction.search,
+                                  onFieldSubmitted: (value) {
+                                    if (value.trim().isEmpty) return;
+
+                                    List<Products> searchResults = Data
+                                        .allProducts
+                                        .where((product) => product.name
+                                            .toLowerCase()
+                                            .contains(value.toLowerCase()))
+                                        .toList();
+
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.productScreen,
+                                      arguments: searchResults,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -216,8 +235,9 @@ class HomeTab extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Text(
                     "Categories",
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: const Color.fromARGB(255, 64, 25, 1),
+                    style: GoogleFonts.inter(
+                        color:ColorsManager.darkHoney,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 35.h),
@@ -312,7 +332,8 @@ class HomeTab extends StatelessWidget {
                   Text(
                     "Popular Items",
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: ColorsManager.darkNavyBlue,
+                        color: const Color.fromARGB(255, 64, 25, 1),
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold),
                   ),
                   GridView.builder(

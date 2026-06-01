@@ -12,7 +12,7 @@ class CustomDrinkMessage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Add a Message on Your Drink",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20.sp,color: ColorsManager.darkOrange),),
+        Text("Add a Message on Your Drink :",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize:16.sp,color: const Color.fromARGB(255, 255, 231, 175))),
         SizedBox(height: 10.h,),
         Stack(
           clipBehavior: Clip.none,
@@ -38,7 +38,7 @@ class CustomDrinkMessage extends StatelessWidget {
             Positioned(
               right: -50.w,
               top: -4.h,
-              child: Image.asset(ImageAssets.gotThis,height: 200.h,))
+              child: Image.asset(ImageAssets.gotThis,height: 220.h,))
           ],
         ),
       ],

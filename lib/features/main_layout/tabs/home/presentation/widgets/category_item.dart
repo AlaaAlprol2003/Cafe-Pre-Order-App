@@ -32,13 +32,13 @@ class CategoryItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: RadialGradient(colors: [
                     const Color.fromARGB(255, 254, 243, 203),
-                      const Color.fromARGB(255, 216, 171, 108),
+                      const Color.fromARGB(44, 183, 115, 19),
 
                   ]),
-                  border: Border.all(
-                    color: Color.fromARGB(255, 216, 171, 108),
-                    width: 3,
-                  ),
+                  // border: Border.all(
+                  //   color: Color.fromARGB(79, 241, 187, 111),
+                  //   width: 3,
+                  // ),
                   borderRadius: BorderRadius.circular(50.r)
                 ),
                  child: icon

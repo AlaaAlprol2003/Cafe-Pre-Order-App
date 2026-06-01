@@ -67,11 +67,11 @@ class OfferModel {
     OfferModel(
       id: "OFF_1",
       title: "THE CLASSIC DUO",
-      cardImage: ImageAssets.classicDuo,
+      cardImage: "assets/images/bundle1 (2).png",
       subTitle: "Latte + Turkey Cheese Croissant",
       fullDescription:
           "Experience the ultimate Parisian morning. Our smooth, velvety Latte crafted with premium Arabica beans, paired perfectly with a golden, flaky croissant stuffed with melted turkey cheese. A balance of warmth and crunch in every bite.",
-      offerPrice: 110.0,
+      offerPrice: 170.0,
       estimatedPrepTimeMinutes: 8,
       calories: 420,
       rating: 4.8,
@@ -88,7 +88,7 @@ class OfferModel {
     OfferModel(
       id: "OFF_2",
       title: "SWEET ESCAPE",
-      cardImage: ImageAssets.sweetEscape,
+      cardImage: "assets/images/bundle2.png",
       subTitle: "Iced Coffee + Donut",
       fullDescription:
           "Cool down and treat yourself. Enjoy our signature cold-brewed iced coffee, served over crystal clear ice, alongside a soft, cloud-like donut dipped in rich sugar glaze. The perfect sugary spark to brighten up your afternoon.",
@@ -112,7 +112,7 @@ class OfferModel {
     OfferModel(
       id: "OFF_3",
       title: "ENERGY PACK",
-      cardImage: ImageAssets.energyPack,
+      cardImage: "assets/images/bundle3.png",
       subTitle: "Double Espresso + Cinnamon Roll",
       fullDescription:
           "For those who need to conquer the day. A double shot of our strongest espresso to jumpstart your brain, complemented by a warm cinnamon roll dripping with cream cheese frosting and aromatic spices. Energy never tasted this good.",

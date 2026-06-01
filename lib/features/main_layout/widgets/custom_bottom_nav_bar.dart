@@ -24,13 +24,13 @@ class CustomBottomNavBar extends StatelessWidget {
           color: ColorsManager.darkBrown,
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.4),
-            blurRadius: 15, 
-            spreadRadius: 1, 
-            offset:  Offset(0, 1), 
-          ),
-        ],
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.4),
+              blurRadius: 15,
+              spreadRadius: 1,
+              offset: Offset(0, 1),
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -47,8 +47,8 @@ class CustomBottomNavBar extends StatelessWidget {
                   children: [
                     Icon(BottomNavBarItem.items[index].icon,
                         color: cubit.selectedTab == index
-                            ? const Color.fromARGB(255, 198, 180, 16)
-                            : const Color.fromARGB(255, 219, 193, 127),
+                            ? const Color.fromARGB(255, 219, 193, 127)
+                            : ColorsManager.warmBeige,
                         size: 35),
                     SizedBox(
                       height: 8.h,
@@ -56,7 +56,9 @@ class CustomBottomNavBar extends StatelessWidget {
                     Text(
                       BottomNavBarItem.items[index].title,
                       style: GoogleFonts.roboto(
-                          color: ColorsManager.creamyWhite, fontSize: 12.sp),
+                          color: cubit.selectedTab == index
+                              ?  const Color.fromARGB(255, 219, 193, 127)                              : ColorsManager.warmBeige,
+                          fontSize: 12.sp),
                     )
                   ],
                 ),

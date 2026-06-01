@@ -26,13 +26,11 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-
         BlocProvider(create: (context) => serviceLocator.get<AuthCubit>()),
         BlocProvider(
             create: (context) => serviceLocator.get<ProductDetailsCubit>()),
         BlocProvider(create: (context) => MainLayoutCubit()),
         BlocProvider(create: (context) => ProfileCubit()),
-
         BlocProvider(create: (context) => FavouriteCubit()),
         BlocProvider(
           create: (context) => BookingCubit(
@@ -58,7 +56,7 @@ class DashCupApp extends StatelessWidget {
           Size(430, 932),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (context, _) => MaterialApp(
+      builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.splashScreen,
         onGenerateRoute: AppRouter.router,

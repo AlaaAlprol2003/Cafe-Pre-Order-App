@@ -4,18 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    required this.labelText,
-    this.preIcon,
-    this.postIcon,
-    this.keyboardType = TextInputType.text,
-    required this.controller,
-    this.validator,
-    this.isSecured = false,
-    this.textInputAction,
-    this.onFieldSubmitted
-  });
+  const CustomTextFormField(
+      {super.key,
+      required this.labelText,
+      this.preIcon,
+      this.postIcon,
+      this.keyboardType = TextInputType.text,
+      required this.controller,
+      this.validator,
+      this.isSecured = false,
+      this.textInputAction,
+      this.onFieldSubmitted});
   final String labelText;
   final Widget? preIcon;
   final Widget? postIcon;
@@ -32,11 +31,9 @@ class CustomTextFormField extends StatelessWidget {
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         color: ColorsManager.darkHoney,
-
       ),
       cursorColor: ColorsManager.darkOrange,
       obscuringCharacter: "*",
-      
       onFieldSubmitted: onFieldSubmitted,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

@@ -30,7 +30,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<ProductDetailsCubit>(context);
     return Scaffold(
-      backgroundColor: ColorsManager.warmBeige, 
+      backgroundColor: ColorsManager.warmBeige,
       body: BlocListener<ProductDetailsCubit, ProductDetailsState>(
         listener: (context, state) {
           if (state is GetOrdersFailure) {
@@ -50,7 +50,6 @@ class _CartScreenState extends State<CartScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
                 child: Row(
@@ -80,8 +79,6 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
               ),
-
-              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Container(
@@ -105,10 +102,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-
               SizedBox(height: 20.h),
-
-              
               BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
                 builder: (context, state) {
                   if (state is GetOrdersLoading) {
@@ -162,9 +156,10 @@ class _CartScreenState extends State<CartScreen> {
                   }
 
                   return Expanded(
-                      child: Center(child: ZoomIn(
-                        duration: Duration(seconds: 2),
-                        child: Text("Your Cart is Empty"))));
+                      child: Center(
+                          child: ZoomIn(
+                              duration: Duration(seconds: 2),
+                              child: Text("Your Cart is Empty"))));
                 },
               ),
             ],
@@ -187,7 +182,6 @@ class _CartScreenState extends State<CartScreen> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -195,12 +189,10 @@ class _CartScreenState extends State<CartScreen> {
                     Text("EGP  ${total.toStringAsFixed(0)}",
                         style: TextStyle(
                             color: ColorsManager.white,
-                            fontSize: 22.sp,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold)),
                   ],
                 ),
-
-                
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.darkOrange,
