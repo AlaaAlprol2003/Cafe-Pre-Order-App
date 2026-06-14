@@ -1,8 +1,6 @@
 import 'package:dash_cup/core/resources/assets_manager.dart';
-import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:dash_cup/features/payment/presentation/widgets/order_time_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
@@ -11,12 +9,25 @@ import 'package:lottie/lottie.dart';
 class PaymentSuccessScreen extends StatelessWidget {
   final String paymentMethod;
   final double amount;
+  final String? selectedTable;
+  final String? cardNumber;
+  final double? remainingPoints;
+  final double? pointExchangeRate;
 
-  const PaymentSuccessScreen(
-      {super.key, required this.paymentMethod, required this.amount});
+  const PaymentSuccessScreen({
+    super.key,
+    required this.paymentMethod,
+    required this.amount,
+    this.selectedTable,
+    this.cardNumber,
+    this.remainingPoints,
+    this.pointExchangeRate,
+  });
 
   @override
   Widget build(BuildContext context) {
+   
+
     return Scaffold(
       backgroundColor: ColorsManager.warmBeige,
       body: SingleChildScrollView(
@@ -35,9 +46,11 @@ class PaymentSuccessScreen extends StatelessWidget {
               SizedBox(height: 30.h),
               if (paymentMethod == "Fawry") _buildFawryDetails(),
               if (paymentMethod == "Vodafone") _buildVodafoneDetails(),
-              if (paymentMethod == "Visa") _buildVisaDetails(context),
-              if (paymentMethod == "Points") _buildPointsDetails(context),
-              OrderTimerWidget(durationInMinutes: 7,),
+              if (paymentMethod == "Visa") _buildVisaDetails(),
+              if (paymentMethod == "Points") _buildPointsDetails(),
+              const OrderTimerWidget(
+                durationInMinutes: 7,
+              ),
               SizedBox(height: 50.h),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -65,21 +78,27 @@ class PaymentSuccessScreen extends StatelessWidget {
     return _buildContainer(
       child: Column(
         children: [
-          Text("Fawry Payment Code", style: TextStyle(color: const Color.fromARGB(255, 130, 129, 129))),
-          SizedBox(
-            height: 8.h,
-          ),
+          const Text("Fawry Payment Code",
+              style: TextStyle(color: Color.fromARGB(255, 130, 129, 129))),
+          SizedBox(height: 8.h),
           Text("928374651",
               style: TextStyle(
                   fontSize: 26.sp,
                   fontWeight: FontWeight.bold,
                   color: ColorsManager.darkOrange)),
-          SizedBox(
-            height: 8.h,
-          ),
-          Text("Pay at any Fawry outlet",
-              style: TextStyle(fontWeight: FontWeight.bold,color:   const Color.fromARGB(255, 130, 129, 129))),
-          Divider(),
+          SizedBox(height: 8.h),
+          const Text("Pay at any Fawry outlet",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 130, 129, 129))),
+
+          if (selectedTable != null) ...[
+            const Divider(),
+            _buildRow("Table Number", selectedTable!,
+                valueColor: ColorsManager.darkOrange, isBold: true),
+          ],
+
+          const Divider(),
           _buildRow("Total Amount", "${amount.toStringAsFixed(2)} EGP"),
         ],
       ),
@@ -91,7 +110,7 @@ class PaymentSuccessScreen extends StatelessWidget {
       child: Column(
         children: [
           _buildRow("Reference ID", "#VFC-10293"),
-          Row(
+          const Row(
             children: [
               Icon(Icons.access_time, color: Colors.orange, size: 18),
               SizedBox(width: 5),
@@ -102,20 +121,26 @@ class PaymentSuccessScreen extends StatelessWidget {
           SizedBox(height: 15.h),
           OutlinedButton.icon(
             onPressed: () {},
-            icon: Icon(Icons.upload_file, color: ColorsManager.darkBrown),
+            icon: const Icon(Icons.upload_file, color: ColorsManager.darkBrown),
             label: Text("Upload Receipt",
                 style: GoogleFonts.roboto(color: ColorsManager.darkBrown)),
           ),
-          Divider(),
+
+          if (selectedTable != null) ...[
+            const Divider(),
+            _buildRow("Table Number", selectedTable!,
+                valueColor: ColorsManager.darkOrange, isBold: true),
+          ],
+
+          const Divider(),
           _buildRow("Total Amount", "${amount.toStringAsFixed(2)} EGP"),
         ],
       ),
     );
   }
 
-  Widget _buildVisaDetails(BuildContext context) {
-    final cubit = BlocProvider.of<PaymentCubit>(context);
-    String lastFourDigits = _formatCardNumber(cubit.cardNumber);
+  Widget _buildVisaDetails() {
+    String lastFourDigits = _formatCardNumber(cardNumber ?? "");
 
     return _buildContainer(
       child: Column(
@@ -133,6 +158,13 @@ class PaymentSuccessScreen extends StatelessWidget {
             ),
           ),
           _buildRow("Status", "Confirmed", valueColor: Colors.green),
+
+          if (selectedTable != null) ...[
+            const Divider(),
+            _buildRow("Table Number", selectedTable!,
+                valueColor: ColorsManager.darkOrange, isBold: true),
+          ],
+
           const Divider(),
           _buildRow("Total Paid", "${amount.toStringAsFixed(2)} EGP",
               isBold: true),
@@ -141,28 +173,15 @@ class PaymentSuccessScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContainer({required Widget child}) {
-    return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: ColorsManager.eggshell,
-        borderRadius: BorderRadius.circular(15.r),
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
-      ),
-      child: child,
-    );
-  }
-
-  Widget _buildPointsDetails(BuildContext context) {
-    final cubit = BlocProvider.of<PaymentCubit>(context);
-
+  Widget _buildPointsDetails() {
+    double currentRate = pointExchangeRate ?? 1.0;
     return _buildContainer(
       child: Column(
         children: [
           _buildRow("Payment Method", "Loyalty Points"),
-          Divider(),
+          const Divider(),
           _buildRow("Points Redeemed",
-              "-${(amount / cubit.pointExchangeRate).toStringAsFixed(0)} pts"),
+              "-${(amount / currentRate).toStringAsFixed(0)} pts"),
           Container(
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
@@ -177,18 +196,38 @@ class PaymentSuccessScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 20.sp,
                         color: ColorsManager.darkBrown)),
-                Text("${cubit.remainingPoints.toStringAsFixed(0)} Points",
+                Text("${(remainingPoints ?? 0.0).toStringAsFixed(0)} Points",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: ColorsManager.darkHoney)),
               ],
             ),
           ),
+
+          if (selectedTable != null) ...[
+            SizedBox(height: 10.h),
+            _buildRow("Table Number", selectedTable!,
+                valueColor: ColorsManager.darkOrange, isBold: true),
+          ],
+
           SizedBox(height: 10.h),
           _buildRow("Total Value", "${amount.toStringAsFixed(2)} EGP",
               isBold: true),
         ],
       ),
+    );
+  }
+
+  Widget _buildContainer({required Widget child}) {
+    return Container(
+      padding: EdgeInsets.all(16.r),
+      margin: EdgeInsets.only(bottom: 20.h),
+      decoration: BoxDecoration(
+        color: ColorsManager.eggshell,
+        borderRadius: BorderRadius.circular(15.r),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+      ),
+      child: child,
     );
   }
 
@@ -199,7 +238,11 @@ class PaymentSuccessScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color:  const Color.fromARGB(255, 130, 129, 129),fontWeight: FontWeight.w300,fontSize: 20.sp)),
+          Text(label,
+              style: TextStyle(
+                  color: const Color.fromARGB(255, 130, 129, 129),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20.sp)),
           Text(value,
               style: TextStyle(
                   fontWeight: isBold ? FontWeight.bold : FontWeight.w500,

@@ -18,4 +18,5 @@ class AppRoutes {
   static const String aboutUsScreen = "aboutUsScreen";
   static const String notificationsScreen = "notificationsScreen";
   static const String splashScreen = "splash_screen";
+  static const String tableScannerScreen = "table_scanner";
 }

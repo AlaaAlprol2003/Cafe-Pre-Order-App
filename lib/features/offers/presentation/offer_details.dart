@@ -329,53 +329,69 @@ class _OfferDetailsState extends State<OfferDetails> {
                               .copyWith(color: ColorsManager.darkBrown),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ...List.generate(
-                              widget.currentOffer.includedProducts.length,
-                              (index) => Column(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor: Colors.transparent,
-                                        radius: 60.r,
-                                        child: Image.asset(
-                                          widget.currentOffer
-                                              .includedProducts[index].image,
-                                          fit: BoxFit.cover,
-                                        ),
+                      Padding(
+                        padding: REdgeInsets.symmetric(horizontal: 14.0),
+                        child: Wrap(
+                          spacing: 20.w, 
+                          runSpacing: 16.h,
+                          alignment: WrapAlignment.spaceEvenly,
+                          children: List.generate(
+                            widget.currentOffer.includedProducts.length,
+                            (index) => SizedBox(
+                              width: 150
+                                  .w, 
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 50
+                                        .r, 
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.r),
+                                      child: Image.asset(
+                                        widget.currentOffer
+                                            .includedProducts[index].image,
+                                        fit: BoxFit.cover,
+                                        width: 100.w,
+                                        height: 100.h,
                                       ),
-                                      SizedBox(
-                                        height: 8.h,
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        padding: REdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 8),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(13.r),
-                                            color: ColorsManager.darkChocolate,
-                                            border: Border.all(
-                                                color:
-                                                    ColorsManager.darkHoney)),
-                                        child: Text(
-                                          widget.currentOffer
-                                              .includedProducts[index].name,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          softWrap: true,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  color: ColorsManager
-                                                      .creamyWhite),
-                                        ),
-                                      )
-                                    ],
-                                  ))
-                        ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    padding: REdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 6),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(12.r),
+                                        color: ColorsManager.eggshell,
+                                        border: Border.all(
+                                            color: ColorsManager.darkHoney)),
+                                    child: Text(
+                                      widget.currentOffer
+                                          .includedProducts[index].name,
+                                      maxLines:
+                                          1,
+                                      overflow: TextOverflow
+                                          .ellipsis,
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                              color: ColorsManager.darkChocolate,
+                                              fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 24.h,

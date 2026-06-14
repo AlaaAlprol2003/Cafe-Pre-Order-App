@@ -164,7 +164,7 @@ class AboutUsScreen extends StatelessWidget {
           SizedBox(height: 5.h,),
           _teamMember("Omar Tamer Abdelkader"),
           SizedBox(height: 5.h,),
-          _teamMember("Zeinab Youssef Abdelnaeem"),
+          _teamMember("Zainab Youssef Abdelnaeem"),
           SizedBox(height: 5.h,),
           _teamMember("Shaimaa Mohamed El-Gammal"),
           SizedBox(height: 5.h,),

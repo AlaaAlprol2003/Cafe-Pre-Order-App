@@ -67,11 +67,11 @@ class OfferModel {
     OfferModel(
       id: "OFF_1",
       title: "THE CLASSIC DUO",
-      cardImage: "assets/images/bundle1 (2).png",
+      cardImage: "assets/images/croissant.jpg",
       subTitle: "Latte + Turkey Cheese Croissant",
       fullDescription:
           "Experience the ultimate Parisian morning. Our smooth, velvety Latte crafted with premium Arabica beans, paired perfectly with a golden, flaky croissant stuffed with melted turkey cheese. A balance of warmth and crunch in every bite.",
-      offerPrice: 170.0,
+      offerPrice: 150.0,
       estimatedPrepTimeMinutes: 8,
       calories: 420,
       rating: 4.8,
@@ -88,11 +88,11 @@ class OfferModel {
     OfferModel(
       id: "OFF_2",
       title: "SWEET ESCAPE",
-      cardImage: "assets/images/bundle2.png",
-      subTitle: "Iced Coffee + Donut",
+      cardImage: "assets/images/cinnabon.jpg",
+      subTitle: "Iced Coffee + Cinnamon Roll",
       fullDescription:
-          "Cool down and treat yourself. Enjoy our signature cold-brewed iced coffee, served over crystal clear ice, alongside a soft, cloud-like donut dipped in rich sugar glaze. The perfect sugary spark to brighten up your afternoon.",
-      offerPrice: 55.0,
+         "Cool down and treat your taste buds. Enjoy our signature cold-brewed classic iced coffee, served over crystal clear ice, alongside a soft, warm Cinnamon Roll dripping with rich cream cheese frosting. The perfect sugary spark to brighten up your afternoon.",
+      offerPrice: 140.0,
       estimatedPrepTimeMinutes: 5,
       calories: 510,
       rating: 4.9,
@@ -100,7 +100,7 @@ class OfferModel {
       isLimitedTime: true,
       includedProducts: [
         Data.allProducts.firstWhere((p) => p.productid == "IC1"),
-        Data.allProducts.firstWhere((p) => p.productid == "DS21"),
+        Data.allProducts.firstWhere((p) => p.productid == "DS22"),
       ],
       customizations: [
         OfferCustomization(title: "Ice Level", options: iceOpts),
@@ -112,18 +112,18 @@ class OfferModel {
     OfferModel(
       id: "OFF_3",
       title: "ENERGY PACK",
-      cardImage: "assets/images/bundle3.png",
-      subTitle: "Double Espresso + Cinnamon Roll",
+      cardImage: "assets/images/cupcake.jpg",
+      subTitle: "Double Espresso + Cupcake",
       fullDescription:
-          "For those who need to conquer the day. A double shot of our strongest espresso to jumpstart your brain, complemented by a warm cinnamon roll dripping with cream cheese frosting and aromatic spices. Energy never tasted this good.",
-      offerPrice: 65.0,
+         "For those who need to conquer the day. A bold double shot of our strongest espresso to jumpstart your brain, complemented by a freshly baked, delicious cupcake topped with a rich, creamy swirl of buttercream frosting. Energy never tasted this good.",
+      offerPrice: 95.0,
       estimatedPrepTimeMinutes: 6,
       calories: 390,
       rating: 4.7,
       reviewCount: 95,
       includedProducts: [
         Data.allProducts.firstWhere((p) => p.productid == "HC2"),
-        Data.allProducts.firstWhere((p) => p.productid == "DS22"),
+        Data.allProducts.firstWhere((p) => p.productid == "DS26"),
       ],
       customizations: [
         OfferCustomization(title: "Sugar Level", options: sugarOpts),
@@ -135,17 +135,17 @@ class OfferModel {
     OfferModel(
       id: "OFF_4",
       title: "AFTERNOON CHILL",
-      cardImage: ImageAssets.afternoonChili,
+      cardImage: "assets/images/afternoon_chill2.png",
       subTitle: "Espresso + Molten Cake",
       fullDescription:
-          "Indulge in a moment of pure bliss. A bold, hot espresso shot designed to cut through the intense richness of our signature molten lava cake. Break the crust to reveal a gooey, warm chocolate center that melts in your mouth.",
-      offerPrice: 90.0,
+         "Indulge in a moment of pure bliss. A smooth, velvety Latte crafted with premium Arabica beans, designed to perfectly balance the intense richness of our signature molten lava cake. Break the crust to reveal a gooey, warm chocolate center that melts in your mouth.",
+      offerPrice: 180.0,
       estimatedPrepTimeMinutes: 12,
       calories: 680,
       rating: 4.9,
       reviewCount: 340,
       includedProducts: [
-        Data.allProducts.firstWhere((p) => p.productid == "HC1"),
+        Data.allProducts.firstWhere((p) => p.productid == "HC7"),
         Data.allProducts.firstWhere((p) => p.productid == "DS12"),
       ],
       customizations: [
@@ -160,18 +160,20 @@ class OfferModel {
     OfferModel(
       id: "OFF_5",
       title: "DOUBLE DELIGHT",
-      cardImage: ImageAssets.doubleDelight,
-      subTitle: "2 Americano + 2 Chicken Panini",
+      cardImage: "assets/images/double_delight2.jpg",
+      subTitle: "2 Latte + 2 Dounts",
       fullDescription:
-          "Double the taste, double the fun. This shareable bundle features two deep-flavored Americanos and two freshly pressed chicken paninis, loaded with premium cheese and grilled to perfection. Perfect for a lunch date or a meeting.",
-      offerPrice:85.0,
+        "Double the taste, double the fun. Share the perfect sweet break with a friend. This shareable bundle features two of our smooth, velvety Lattes paired with two freshly baked, soft donuts glazed to perfection. Ideal for a cozy coffee date or a meeting.",
+      offerPrice:220.0,
       estimatedPrepTimeMinutes: 15,
       calories: 850,
       rating: 4.6,
       reviewCount: 120,
       includedProducts: [
-        Data.allProducts.firstWhere((p) => p.productid == "HC3"),
-        Data.allProducts.firstWhere((p) => p.productid == "LB1"),
+       Data.allProducts.firstWhere((p) => p.productid == "HC7"), 
+        Data.allProducts.firstWhere((p) => p.productid == "HC7"), 
+        Data.allProducts.firstWhere((p) => p.productid == "DS21"), 
+        Data.allProducts.firstWhere((p) => p.productid == "DS21"), 
       ],
       customizations: [
         OfferCustomization(
@@ -183,19 +185,19 @@ class OfferModel {
     OfferModel(
       id: "OFF_6",
       title: "LATE NIGHT STUDY",
-      cardImage: ImageAssets.lateNight,
-      subTitle: "Cappuccino + Nachos Cheese",
+      cardImage:"assets/images/cookies.jpg",
+      subTitle: "Hazelnut Coffee + Delicious Cookies",
       fullDescription:
-          "Fuel for the midnight achievers. A frothy, comforting Cappuccino to keep you focused, paired with crunchy nachos served with a side of warm, gooey cheddar cheese dip. The ultimate savory-sweet combo for long study sessions.",
-      offerPrice: 75.0,
+         "Fuel for the midnight achievers. A warm, comforting Hazelnut Coffee to keep you focused during long study sessions, paired perfectly with our signature thick cookie stuffed with rich Nutella chocolate. The ultimate sweet companion to keep you going.",
+      offerPrice: 110.0,
       estimatedPrepTimeMinutes: 10,
       calories: 440,
       rating: 4.8,
       reviewCount: 480,
       isLimitedTime: true,
       includedProducts: [
-        Data.allProducts.firstWhere((p) => p.productid == "HC6"),
-        Data.allProducts.firstWhere((p) => p.productid == "DS23"),
+        Data.allProducts.firstWhere((p) => p.productid == "IC10"),
+        Data.allProducts.firstWhere((p) => p.productid == "DS27"),
       ],
       customizations: [
         OfferCustomization(title: "Milk Type", options: milkOpts),

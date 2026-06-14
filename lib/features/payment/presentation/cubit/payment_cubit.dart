@@ -28,6 +28,28 @@ class PaymentCubit extends Cubit<PaymentState> {
   double? distanceInKm;
   final double cafeLat = 30.7876;
   final double cafeLng = 30.9935;
+  
+  // 1. تعديل المتغيرات الخاصة بالـ Pick Up والـ Table
+  String? selectedTable;
+  bool isDineIn = false; // خليناها false كقيمة ابتدائية (Takeaway)
+
+  // 2. دالة تحديث رقم التربيزة بعد الـ Scan
+  void setTableNumber(String table) {
+    selectedTable = table;
+    emit(PaymentTableUpdated());
+  }
+
+  // 3. دالة تغيير نوع الـ Pick Up (Dine-In أو Takeaway)
+  void changePickUpType({required bool isDineIn}) {
+    this.isDineIn = isDineIn;
+    
+    // لو العميل اختار تيك أواي، بنمسح رقم التربيزة فوراً لتجنب الأخطاء في الفاتورة
+    if (!isDineIn) {
+      selectedTable = null;
+    }
+    
+    emit(PickUpTypeChanged());
+  }
 
   void toggle({required int selectedIndex}) {
     currentIndex = selectedIndex;
@@ -67,7 +89,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
   Future<void> deductPoints(double totalAmount) async {
-    emit(UpdatePointsLoading()); 
+    emit(UpdatePointsLoading());
     try {
       if (UserModel.currentUser == null) return;
 
@@ -158,6 +180,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 }
 
+// ==================== Payment States ====================
 class PaymentState {}
 
 class PaymentInitial extends PaymentState {}
@@ -190,6 +213,11 @@ class LocationErrorState extends PaymentState {
 }
 
 class UpdatePointsLoading extends PaymentState {}
+
+class PaymentTableUpdated extends PaymentState {}
+
+// 4. الـ State الجديدة لتحديث نوع الـ Pick Up في الـ UI
+class PickUpTypeChanged extends PaymentState {}
 
 class UpdatePointsSuccess extends PaymentState {}
 

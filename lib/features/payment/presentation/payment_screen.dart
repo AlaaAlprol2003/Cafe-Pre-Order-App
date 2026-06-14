@@ -1,5 +1,3 @@
-
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dash_cup/core/models/order_model.dart';
 import 'package:dash_cup/core/resources/colors_manager.dart';
@@ -8,6 +6,7 @@ import 'package:dash_cup/core/routes_manager/app_routes.dart';
 import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:dash_cup/features/payment/presentation/models/payment_method.dart';
 import 'package:dash_cup/features/payment/presentation/payment_success_screen.dart';
+import 'package:dash_cup/features/payment/presentation/table_scanner_screen.dart';
 import 'package:dash_cup/features/payment/presentation/widgets/custom_address_widget.dart';
 import 'package:dash_cup/features/payment/presentation/widgets/custom_animated_toggle.dart';
 import 'package:dash_cup/features/payment/presentation/widgets/custom_cost_widget.dart';
@@ -19,6 +18,7 @@ import 'package:dash_cup/features/payment/presentation/widgets/payment_elevated_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key, required this.orders});
@@ -37,8 +37,6 @@ class PaymentScreen extends StatelessWidget {
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.transparent,
-
-              
               expandedHeight: 70.h,
               leading: IconButton(
                 onPressed: () {
@@ -53,13 +51,10 @@ class PaymentScreen extends StatelessWidget {
                 "Checkout",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              actions: [
-                CustomDropdown(count: orders.length)
-              ],
+              actions: [CustomDropdown(count: orders.length)],
             ),
             SliverToBoxAdapter(
               child: Container(
-                
                 width: double.infinity,
                 margin: REdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
@@ -109,6 +104,86 @@ class PaymentScreen extends StatelessWidget {
                         return CustomAddressWidget();
                       },
                     ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    BlocBuilder<PaymentCubit, PaymentState>(
+                      builder: (context, state) {
+                        if (cubit.currentIndex == 1) {
+                          return Padding(
+                            padding: REdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 8.0),
+                            child: Container(
+                              padding: EdgeInsets.all(12.w),
+                              decoration: BoxDecoration(
+                                color: ColorsManager.eggshell,
+                                borderRadius: BorderRadius.circular(12.r),
+                                border: Border.all(
+                                  color: ColorsManager.darkChocolate
+                                      .withValues(alpha: 0.2),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.qr_code_scanner,
+                                          color: ColorsManager.darkChocolate),
+                                      SizedBox(width: 8.w),
+                                      Text(
+                                        "Dining at the cafe?",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorsManager.darkChocolate,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      minimumSize: Size(double.infinity, 42.h),
+                                      side: const BorderSide(
+                                          color: ColorsManager.darkOrange),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.r)),
+                                    ),
+                                    onPressed: () async {
+                                      final scannedResult =
+                                          await Navigator.push<String>(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const TableScannerScreen()),
+                                      );
+                                      if (scannedResult != null) {
+                                        cubit.setTableNumber(scannedResult);
+                                        cubit.changePickUpType(isDineIn: true);
+                                      }
+                                    },
+                                    child: Text(
+                                      cubit.selectedTable != null
+                                          ? "Table Linked: ${cubit.selectedTable}"
+                                          : "Scan Table QR Code",
+                                      style: TextStyle(
+                                        color: ColorsManager.darkBrown,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    ),
                     Padding(
                       padding:
                           REdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
@@ -156,7 +231,6 @@ class PaymentScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    
                     Padding(
                       padding:
                           REdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
@@ -238,23 +312,18 @@ class PaymentScreen extends StatelessWidget {
                             double currentSubtotal = orders.fold(
                                 0, (sum, item) => sum + item.totalPrice);
 
-                            
                             double deliveryFees =
                                 cubit.currentIndex == 1 ? 0.0 : 15;
                             double vat = currentSubtotal * 0.14;
                             double total = currentSubtotal + vat + deliveryFees;
 
-                            
                             if (cubit.currentPaymentMethod == 0) {
-                              
                               Navigator.pushNamed(context, AppRoutes.creditCard,
                                   arguments: cubit);
                             } else if (cubit.currentPaymentMethod == 3) {
-                              
                               if (cubit.hasEnoughPoints(total)) {
                                 UiUtils.showLoading(context: context);
 
-                                
                                 await cubit.deductPoints(total);
 
                                 if (context.mounted) {
@@ -274,14 +343,12 @@ class PaymentScreen extends StatelessWidget {
                                     message: "Insufficient points balance!");
                               }
                             } else {
-                              
                               String methodName =
                                   cubit.currentPaymentMethod == 1
                                       ? "Fawry"
                                       : "Vodafone";
                               UiUtils.showLoading(context: context);
 
-                              
                               await cubit.updateUserPoints(totalAmount: total);
 
                               await Future.delayed(const Duration(seconds: 2));
@@ -291,8 +358,8 @@ class PaymentScreen extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) => PaymentSuccessScreen(
                                       paymentMethod: methodName,
-                                      amount:
-                                          total, 
+                                      amount: total,
+                                      selectedTable: cubit.selectedTable,
                                     ),
                                   ),
                                 );

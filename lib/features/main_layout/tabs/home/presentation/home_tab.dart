@@ -332,7 +332,7 @@ class HomeTab extends StatelessWidget {
                   Text(
                     "Popular Items",
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: const Color.fromARGB(255, 64, 25, 1),
+                        color:ColorsManager.darkHoney,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold),
                   ),

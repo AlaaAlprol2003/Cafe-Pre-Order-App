@@ -20,6 +20,7 @@ import 'package:dash_cup/features/payment/presentation/credit_card_screen.dart';
 import 'package:dash_cup/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:dash_cup/features/payment/presentation/payment_screen.dart';
 import 'package:dash_cup/features/payment/presentation/payment_success_screen.dart';
+import 'package:dash_cup/features/payment/presentation/table_scanner_screen.dart';
 import 'package:dash_cup/features/product/presentation/product_screen.dart';
 import 'package:dash_cup/features/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:dash_cup/features/product_details/presentation/product_details.dart';
@@ -145,6 +146,11 @@ class AppRouter {
          case AppRoutes.splashScreen:
         {
           return CupertinoPageRoute(builder: (context) => SplashScreen());
+        }
+
+          case AppRoutes.tableScannerScreen:
+        {
+          return CupertinoPageRoute(builder: (context) => TableScannerScreen());
         }
     }
     return null;

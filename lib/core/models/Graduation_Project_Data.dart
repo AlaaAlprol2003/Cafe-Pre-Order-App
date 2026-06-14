@@ -53,22 +53,24 @@ final Category LightBites = Category(
         size: 30, color: ColorsManager.darkChocolate));
 
 final Category SoftDrinks = Category(
-    categoryid: "C6",
-    name: "Soft Drinks",
-    image: "assets/images/soft drinks logo.png",
-    hasMilkOption: false,
-    hasSugarOption: false,
-    icon: FaIcon(FontAwesomeIcons.bottleWater,
-        size: 30, color: ColorsManager.darkChocolate));
+  categoryid: "C6",
+  name: "Soft Drinks",
+  image: "assets/images/soft drinks logo.png",
+  hasMilkOption: false,
+  hasSugarOption: false,
+  icon: FaIcon(FontAwesomeIcons.bottleWater,
+      size: 30, color: ColorsManager.darkChocolate),
+);
 
 final Category FreshJuices = Category(
-    categoryid: "C7",
-    name: "Fresh Juices",
-    image: "assets/images/fresh juice logo.png",
-    hasMilkOption: false,
-    hasSugarOption: true,
-    icon: FaIcon(FontAwesomeIcons.wineGlass,
-        size: 30, color: ColorsManager.darkChocolate));
+  categoryid: "C7",
+  name: "Fresh Juices",
+  image: "assets/images/fresh juice logo.png",
+  hasMilkOption: false,
+  hasSugarOption: true,
+  icon: FaIcon(FontAwesomeIcons.wineGlass,
+      size: 30, color: ColorsManager.darkChocolate),
+);
 
 final Category Smoothies_Milkshakes = Category(
     categoryid: "C8",
@@ -180,7 +182,7 @@ class Data {
     ),
     Products(
       productid: "THD8",
-      name: "Cinnamon & Milk",
+      name: "Cinnamon",
       price: 22.0,
       rate: 4.7,
       pretime: "6–9 min",
@@ -219,7 +221,7 @@ class Data {
     Products(
       productid: "HC1",
       name: 'Espresso',
-      price: 35.0,
+      price: 60.0,
       rate: 4.6,
       pretime: "3–5 min",
       image: 'assets/images/Espresso Coffee.png',
@@ -232,10 +234,10 @@ class Data {
     Products(
       productid: "HC2",
       name: 'Double Espresso',
-      price: 45.0,
+      price: 55.0,
       rate: 4.7,
       pretime: "4–6 min",
-      image: 'assets/images/double espresso.png',
+      image: 'assets/images/double_espresso.png',
       category: HotCoffee,
       isOrganic: true,
       isFavorite: true,
@@ -294,7 +296,7 @@ class Data {
     Products(
       productid: "HC7",
       name: 'Latte',
-      price: 55.0,
+      price: 75.0,
       rate: 4.7,
       pretime: "6–9 min",
       image: 'assets/images/latte.png',
@@ -345,7 +347,7 @@ class Data {
     Products(
       productid: "IC1",
       name: 'Classic Ice Coffee',
-      price: 40.0,
+      price: 80.0,
       rate: 4.5,
       pretime: "3–5 min",
       image: 'assets/images/Iced Coffee.png',
@@ -406,6 +408,28 @@ class Data {
           'Indulge your sweet tooth with our Iced Mocha. A decadent fusion of rich espresso, premium dark chocolate syrup, and cold milk poured over ice. It’s a refreshing chocolate-coffee treat that’s both energizing and deeply satisfying.',
     ),
     Products(
+      productid: "IC11",
+      name: 'Iced Matcha Latte',
+      price: 65.0,
+      rate: 4.6,
+      pretime: "4–6 min",
+      image: 'assets/images/iced_matcha_latte1.png',
+      category: IcedCoffee,
+      description:
+          'Premium organic green matcha layered with cold fresh milk and ice.',
+    ),
+    Products(
+      productid: "SM12",
+      name: 'Matcha Frappuccino',
+      price: 70.0,
+      rate: 4.8,
+      pretime: "5–7 min",
+      image: 'assets/images/matcha_frappuccino.png',
+      category: Smoothies_Milkshakes,
+      description:
+          'Blended green matcha with milk, topped with a rich layer of whipped cream.',
+    ),
+    Products(
       productid: "IC6",
       name: 'Iced Spanish Latte',
       price: 65.0,
@@ -458,7 +482,7 @@ class Data {
     Products(
       productid: "IC10",
       name: 'Iced Hazelnut Latte',
-      price: 65.0,
+      price: 85.0,
       rate: 4.5,
       pretime: "5–7 min",
       image: 'assets/images/Hazelnut Iced Coffee.png',
@@ -599,7 +623,7 @@ class Data {
     Products(
       productid: "DS12",
       name: 'Chocolate Molten Cake',
-      price: 70.0,
+      price: 130.0,
       rate: 4.8,
       pretime: "7–10 min",
       image: 'assets/images/Molten Chocolate.png',
@@ -705,7 +729,7 @@ class Data {
     Products(
       productid: "DS21",
       name: 'Donut',
-      price: 25.0,
+      price: 50.0,
       rate: 4.5,
       pretime: "2–4 min",
       image: 'assets/images/donut.png',
@@ -716,7 +740,7 @@ class Data {
     Products(
       productid: "DS22",
       name: 'Cinnamon Roll',
-      price: 30.0,
+      price: 70.0,
       rate: 4.5,
       pretime: "3–5 min",
       image: 'assets/images/cinnamon roll.png',
@@ -759,6 +783,30 @@ class Data {
       description:
           'A classic favorite. Our French Fries are cut from premium potatoes and fried until golden and crispy on the outside while remaining soft on the inside. Served hot with a light seasoning of sea salt.',
     ),
+    Products(
+      productid: "DS26",
+      name: 'Cupcake',
+      price: 60.0,
+      rate: 4.6,
+      pretime: "2–4 min",
+      image: 'assets/images/cupcake.png',
+      category: Dessert_Snacks,
+      description:
+          'A delicious, freshly baked vanilla cupcake topped with a rich, creamy swirl of buttercream frosting and colorful sprinkles.',
+    ),
+    Products(
+      productid: "DS27",
+      name: 'Classic Choco-Chip Cookie',
+      price: 50.0,
+      rate: 4.7,
+      pretime: "2–3 min",
+      image: 'assets/images/cookies.png',
+      category: Dessert_Snacks,
+      isOrganic: false,
+      isFavorite: true,
+      description:
+          'A golden-baked, chewy cookie loaded with premium dark and milk chocolate chips. Served warm for that perfect melted chocolate experience in every bite.',
+    ),
   ];
   static List<Products> lightBites = [
     Products(
@@ -787,7 +835,7 @@ class Data {
     Products(
       productid: "LB3",
       name: 'Turkey and Cheese Croissant',
-      price: 80.0,
+      price: 95.0,
       rate: 4.6,
       pretime: "5–8 min",
       image: 'assets/images/turkey and cheese croissant.png',
@@ -1139,7 +1187,7 @@ class Data {
       price: 55.0,
       rate: 4.7,
       pretime: "4–6 min",
-      image: 'assets/images/mango smoothie.png',
+      image: 'assets/images/mango _moothie1.png',
       category: Smoothies_Milkshakes,
       description: 'Rich mango smoothie made from ripe mangoes.',
     ),
@@ -1152,6 +1200,17 @@ class Data {
       image: 'assets/images/banana smoothie.png',
       category: Smoothies_Milkshakes,
       description: 'Smooth and creamy banana blended drink.',
+    ),
+    Products(
+      productid: "SM11",
+      name: 'Blueberry Smoothie',
+      price: 60.0,
+      rate: 4.7,
+      pretime: "4–6 min",
+      image: 'assets/images/blueberry_smoothie.png',
+      category: Smoothies_Milkshakes,
+      description:
+          'A refreshing and icy blueberry smoothie blended to perfection.',
     ),
     Products(
       productid: "SM4",
@@ -1239,45 +1298,46 @@ class Data {
 
   static List<Products> popularProducts = [
     Products(
-      productid: "THD4",
-      name: "Mint Green Tea",
-      price: 22.0,
-      rate: 4.4,
-      pretime: "6–8 min",
-      image: "assets/images/mint green tea.png",
-      category: Tea_Herbal_Drinks,
-      description: "Green tea blended with fresh mint.",
-    ),
-    Products(
-      productid: "SM4",
-      name: 'Mixed Berry Smoothie',
-      price: 60.0,
-      rate: 4.8,
+      productid: "IC11",
+      name: 'Iced Matcha Latte',
+      price: 65.0,
+      rate: 4.6,
       pretime: "4–6 min",
-      image: 'assets/images/mixed berry smoothie.png',
-      category: Smoothies_Milkshakes,
+      image: 'assets/images/iced_matcha_latte1.png',
+      category: IcedCoffee,
       description:
-          'A refreshing blend of strawberries, blueberries, and raspberries.',
+          'Premium organic green matcha layered with cold fresh milk and ice.',
     ),
     Products(
-      productid: "FJ2",
-      name: 'Mango Juice',
-      price: 40.0,
+      productid: "SM2",
+      name: 'Mango Smoothie',
+      price: 55.0,
       rate: 4.7,
-      pretime: "3–5 min",
-      image: 'assets/images/mango.png',
-      category: FreshJuices,
-      description: 'Sweet and refreshing mango juice made from ripe mangoes.',
+      pretime: "4–6 min",
+      image: 'assets/images/mango _moothie1.png',
+      category: Smoothies_Milkshakes,
+      description: 'Rich mango smoothie made from ripe mangoes.',
     ),
     Products(
-      productid: "SD7",
-      name: 'Sprite',
-      price: 25.0,
-      rate: 4.5,
-      pretime: "1–2 min",
-      image: 'assets/images/sprite.png',
-      category: SoftDrinks,
-      description: 'Cool lemon-lime soda served ice cold.',
+      productid: "SM8",
+      name: 'Strawberry Milkshake',
+      price: 60.0,
+      rate: 4.7,
+      pretime: "4–6 min",
+      image: 'assets/images/strawberry milkshake.png',
+      category: Smoothies_Milkshakes,
+      description: 'Sweet strawberry milkshake blended to perfection.',
+    ),
+    Products(
+      productid: "DS8",
+      name: 'Chocolate Pancakes',
+      price: 55.0,
+      rate: 4.6,
+      pretime: "5–7 min",
+      image: 'assets/images/Chocolate Pancakes.png',
+      category: Dessert_Snacks,
+      description:
+          'Take your pancake experience to the next level. A stack of our fluffy pancakes topped with a rich, dark chocolate sauce that seeps into every layer, creating a moist and deeply chocolatey indulgence.',
     ),
   ];
 }
